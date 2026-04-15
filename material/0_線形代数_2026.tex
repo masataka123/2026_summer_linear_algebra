@@ -1,0 +1,4789 @@
+%==================================================
+% 文書クラス
+%==================================================
+
+%\documentclass[dvipdfmx,a4paper,12pt]{amsart} % amsart を使いたい場合はこちら
+\documentclass[dvipdfmx,a4paper,11pt]{article} % 通常はこちら
+
+%==================================================
+% 基本設定
+%==================================================
+
+\setlength{\lineskip}{0pt} % 行送りの余分なずれを抑える
+
+%==================================================
+% 和文フォント・日本語まわり
+%==================================================
+
+\renewcommand{\kanjifamilydefault}{\gtdefault} % 和文既定フォントをゴシック体に
+\usepackage{otf}       % min10 を避けるため
+\usepackage{pxrubrica} % 和文ルビ
+
+%==================================================
+% 図・色・図式
+%==================================================
+
+\usepackage{graphicx}    % 画像挿入
+\usepackage[all]{xy}     % 可換図式
+\usepackage{amscd}       % 可換図式（簡易版）
+\usepackage{wrapfig}     % 回り込み図
+\usepackage{pgfplots}    % グラフ描画
+\usepackage{tikz}        % TikZ
+\usetikzlibrary{positioning,arrows.meta,fit,calc,backgrounds}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\usepackage{tikz-cd}     % TikZ による可換図式
+\usepackage{color}       % 色指定（旧来）
+\usepackage[dvipsnames]{xcolor} % 拡張色指定
+
+%==================================================
+% 数学
+%==================================================
+
+\usepackage{amsmath,amssymb,amsthm,amsfonts,mathtools} % 基本数学パッケージ
+\usepackage{braket,physics}   % 物理・線形代数系で便利
+\usepackage{bm}               % 太字数式
+\usepackage{mathrsfs}         % \mathscr
+\usepackage{dsfont}           % \mathds
+\usepackage{bigdelim}         % 大きい区切り記号
+\allowdisplaybreaks[4]        % 複数行数式の改ページを許可
+
+%==================================================
+% 書式・表・箇条書き
+%==================================================
+
+\usepackage{latexsym}   % 補助記号
+\usepackage{setspace}   % 行間調整
+\usepackage{multirow}   % 表の複数行結合
+\usepackage{enumerate}  % 古い enumerate 環境拡張
+\usepackage{enumitem}   % 箇条書きの細かい調整
+
+%==================================================
+% コメント・取消線など
+%==================================================
+
+\usepackage{comment}          % コメントアウト環境
+\usepackage[normalem]{ulem}   % 取消線など（\emph を下線化しない）
+
+%==================================================
+% URL
+%==================================================
+
+\usepackage{url} % URL 表示
+
+%==================================================
+% 文字コード
+%==================================================
+
+% uplatex を使うなら通常不要
+% pdflatex を使う場合は必要になることがある
+% \usepackage[utf8]{inputenc}
+
+%==================================================
+% レイアウト
+%==================================================
+
+\usepackage[
+  top=25mm,        % 上余白
+  bottom=30mm,     % 下余白
+  left=25mm,       % 左余白
+  right=25mm,      % 右余白
+  headheight=12pt, % ヘッダー高さ
+  headsep=10mm,    % ヘッダーと本文の間
+  footskip=32pt,   % 本文とフッターの間
+  includehead,     % ヘッダー分を本文高さ計算に含める
+  includefoot      % フッター分を本文高さ計算に含める
+]{geometry}
+
+\setstretch{1.1}        % 行間
+\setlength{\parskip}{5pt}   % 段落間の空き
+\setlength{\parindent}{0pt} % 段落頭の字下げをしない
+
+%==================================================
+% 目次
+%==================================================
+
+\usepackage{tocloft} % 目次体裁の調整
+%\renewcommand{\contentsname}{目次} % 目次名を明示的に変えたい場合
+\setlength{\cftbeforesecskip}{0pt}
+\setlength{\cftbeforesubsecskip}{0pt}
+\setlength{\cftbeforesubsubsecskip}{0pt}
+\setcounter{tocdepth}{2} % 目次に出す深さ
+
+%==================================================
+% 箇条書きの詰め方
+%==================================================
+
+\setlist[itemize]{itemsep=3pt,parsep=0pt}
+\setlist[enumerate]{itemsep=3pt,parsep=0pt}
+
+%==================================================
+% 脚注
+%==================================================
+
+\interfootnotelinepenalty=10000 % 脚注がページをまたがるのを防ぐ
+
+%==================================================
+% 定理環境の箱
+%==================================================
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins,theorems}
+\usepackage{etoolbox} % \AtBeginEnvironment を使うため
+
+\tcbset{
+  mybox/.style={
+    colback=white,
+    colframe=green!35!black,
+    fonttitle=\bfseries,
+    breakable=true
+  }
+}
+
+%==================================================
+% showkeys（ラベル表示）
+%==================================================
+
+% 下の真偽を切り替えることで，showkeys の有無を変更できる
+\newif\ifshowkeylabels
+\showkeylabelsfalse
+%\showkeylabelstrue % 校正時にラベルを見たいときはこちらを有効化
+
+\ifshowkeylabels
+  \usepackage{showkeys}
+  \renewcommand*{\showkeyslabelformat}[1]{%
+    \fbox{\parbox{1.6cm}{\normalfont\tiny\sffamily#1\vspace{6mm}}}%
+  }
+\fi
+
+%==================================================
+% hyperref（原則として最後）
+%==================================================
+
+\usepackage[dvipdfmx,colorlinks]{hyperref}
+% 色は用途に応じて blue / red などへ変更可能
+\hypersetup{
+  linkcolor=blue,
+  anchorcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+% 日本語しおりの文字化け対策
+\usepackage{pxjahyper}
+
+%==================================================
+% よく使う記号・演算子
+%==================================================
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\Sin}{\text{Sin}^{-1}}
+\newcommand{\Cos}{\text{Cos}^{-1}}
+\newcommand{\Tan}{\text{Tan}^{-1}}
+\newcommand{\invsin}{\text{Sin}^{-1}}
+\newcommand{\invcos}{\text{Cos}^{-1}}
+\newcommand{\invtan}{\text{Tan}^{-1}}
+
+\newcommand{\Area}{S}
+\newcommand{\vol}{\text{Vol}}
+\newcommand{\maru}[1]{\raise0.2ex\hbox{\textcircled{\tiny{#1}}}}
+\newcommand{\sgn}{{\rm sgn}}
+% \newcommand{\rank}{{\rm rank}} % 必要なら有効化
+
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\Vol}{Vol}
+
+\newcommand{\pdrv}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\drv}[2]{\frac{d #1}{d#2}}
+\newcommand{\ppdrv}[3]{\frac{\partial #1}{\partial #2 \partial #3}}
+
+\newcommand{\xb}[1]{\textcolor{blue}{#1}}
+\newcommand{\xr}[1]{\textcolor{red}{#1}}
+\newcommand{\xm}[1]{\textcolor{magenta}{#1}}
+
+%==================================================
+% 定理環境
+%==================================================
+
+\theoremstyle{definition}
+
+\newtheorem{thm}{定理}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{claim}[thm]{主張}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem{rem}[thm]{補足}
+\newtheorem{exa}[thm]{例}
+\newtheorem{conj}[thm]{予想}
+\newtheorem{prob}[thm]{問題}
+\newtheorem{rema}[thm]{補足}
+\newtheorem{dfnthm}[thm]{定義・定理}
+\newtheorem{ques}[thm]{問題}
+\newtheorem{suma}[thm]{まとめ}
+
+% 元の2本で dfn / defn が食い違っていたので，
+% どちらでも使えるように defn を dfn の別名として用意する
+\newenvironment{defn}{\begin{dfn}}{\end{dfn}}
+
+%==================================================
+% 定理環境を自動で tcolorbox で囲む
+%==================================================
+
+\AtBeginEnvironment{prop}{\begin{tcolorbox}[mybox]}
+\AtEndEnvironment{prop}{\end{tcolorbox}}
+
+\AtBeginEnvironment{lem}{\begin{tcolorbox}[mybox]}
+\AtEndEnvironment{lem}{\end{tcolorbox}}
+
+\AtBeginEnvironment{thm}{\begin{tcolorbox}[mybox]}
+\AtEndEnvironment{thm}{\end{tcolorbox}}
+
+\AtBeginEnvironment{dfn}{\begin{tcolorbox}[mybox]}
+\AtEndEnvironment{dfn}{\end{tcolorbox}}
+
+\AtBeginEnvironment{cor}{\begin{tcolorbox}[mybox]}
+\AtEndEnvironment{cor}{\end{tcolorbox}}
+
+\AtBeginEnvironment{ques}{\begin{tcolorbox}[mybox]}
+\AtEndEnvironment{ques}{\end{tcolorbox}}
+
+\AtBeginEnvironment{conj}{\begin{tcolorbox}[mybox]}
+\AtEndEnvironment{conj}{\end{tcolorbox}}
+
+%==================================================
+% 必要に応じて使うが，普段はコメントアウトしておいてよいもの
+%==================================================
+
+% --- セクション見出しの体裁調整 ---
+% \usepackage{titlesec}
+% \titleformat*{\section}{\Large\bfseries}
+% \titleformat*{\subsection}{\large\bfseries}
+% \titlespacing*{\section}{0pt}{1.5ex plus .2ex minus .2ex}{0.8ex plus .1ex}
+% \titlespacing*{\subsection}{0pt}{1.0ex plus .2ex minus .2ex}{0.5ex plus .1ex}
+
+% --- ヘッダー／フッター ---
+% \usepackage{fancyhdr}
+% \pagestyle{fancy}
+% \fancyhf{}
+% \rhead{岩井 雅崇}
+% \lhead{大阪大学 数学専攻}
+% \cfoot{\thepage}
+
+
+\title{2026年度春夏学期 大阪大学 全学共通教育科目 \\ 線形代数学・同演義Ⅰ (理（数）)}
+\author{岩井雅崇 (大阪大学)}
+\date{\today \, ver 1.01}
+%ここから本文．
+\begin{document}
+
+\maketitle
+\setcounter{tocdepth}{2}
+\tableofcontents
+\newpage
+
+\begin{center}
+\setcounter{section}{-1}
+\section{ガイダンス}
+\label{sec-guide}
+\end{center}
+
+\begin{center}
+{\Large 2026年度春夏学期 \\ 大阪大学 全学共通教育科目 線形代数学・同演義Ⅰ (理（数）)} \\
+木曜2・3限(10:30-12:00, 13:30-15:00) 場所 共C206
+ \end{center}
+\begin{flushright}
+ 岩井雅崇(いわいまさたか) \\
+\end{flushright}
+
+\hspace{-18pt}{\Large \underline{基本的事項}}
+\begin{itemize}
+  \setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm} % 項目間
+\item この授業は\underline{対面授業}です. \underline{木曜2限(10:30-12:00)に共C206}にて授業を行います.
+\item CLEに「授業の資料・授業の板書」などをアップロードしていきます. CLEが使えない場合でも授業ホームページ(\url{https://masataka123.github.io/2026_summer_linear_algebra/})にアップロードしてます.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%
+\begin{comment}
+QRコードは下にあります.
+\begin{figure}[htbp]
+\begin{center}
+ \includegraphics[height=30mm, width=30mm]{linalg.png}
+\end{center}
+\end{figure}
+
+\end{comment}
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+\hspace{-18pt}{\Large \underline{成績に関して}}
+
+\underline{授業も演義もレポート(後述)・中間+期末試験(後述)で成績をつける予定です. } 
+
+\begin{tcolorbox}[mybox]
+\begin{itemize}
+\item レポート2回. 20点. 提出すれば点数を与えるつもりなので, 必ず提出してください. なおレポートは中間と期末の練習も兼ねています.
+\item 中間試験+期末試験 80点(以上). 割合はまだ考えていません.\footnote{成績の平均をある程度に収めないといけない都合上, 試験の点数を今の時点であまり決められないです...} また中間試験ができなかった場合でも期末試験で挽回できるようにするので, 最後まで諦めないでください. 
+%\item 演義の提出(後述)は基本的に成績に影響しません. ただし58点(不合格の点)を取った場合に60点(合格の点)にするなどの考慮をします. 
+\end{itemize}
+\end{tcolorbox}
+
+単位が欲しい方はレポートを必ず提出し, 中間試験と期末試験に必ず出席するようにしてください. 
+なお通常時の授業・演義に出席点はございません. 授業・演義への出席は任意となります. 
+
+\medskip
+\hspace{-18pt}{\Large \underline{1. レポートに関して}}
+
+次の日時にレポートを配布します. (予定)
+
+
+\begin{tcolorbox}[mybox]
+\begin{itemize}
+  \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+\item レポート1配布日時: 2026年5月21日. レポート1締切: 2026年6月4日 23:59:59 (日本標準時刻, GMT+9)
+\item レポート2配布日時: 2026年7月16日. レポート1締切: 2026年7月30日 23:59:59 (日本標準時刻, GMT+9)
+\end{itemize}
+\end{tcolorbox}
+
+
+配布したレポート問題に解答し, CLEにて提出してください. レポートに関しての注意事項は以下の通りです. 
+
+\newpage
+\begin{itemize}
+  \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+\item \underline{レポートで出した問題の何問かを中間試験や期末試験に数値や表現など少し変えて出す予定です.} 
+\item レポートにおいて, 答えのみならず, 答えを導出する過程をきちんと記してください. 
+\item レポートは, \underline{協力してといて良く, 本などなんでも参考して良い}.
+\item レポートにおいて, 答えの丸写しが確認できた場合は加担した人全員の単位を不可にします.\footnote{答えの丸写しとは何も考えずに他人のレポートをコピーする行為です. この行為を厳禁とする理由とは"レポートと演習で出した問題の何問か試験に出すと言う状況下で, そのようなことをやっても意味がなく, 時間の無駄だと思う"からです. 協力して解いた場合でも, 全く同じ解答になることは稀で, 表記など微妙にずれます. }
+\end{itemize}
+\vspace{-12pt}
+要はレポート・演習は試験の練習だと思ってください.
+
+
+\medskip
+\hspace{-18pt}{\Large \underline{2-1. 中間試験に関して}}
+
+現時点での中間試験の予定は次のとおりです. 
+
+
+\begin{tcolorbox}[mybox]
+\begin{itemize}
+  \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+\item 日時: 2026年 6月4日 木曜2限(10:30-12:00) 10:15までには着席してください.
+\item 場所: 共C206 (授業の部屋)
+\item 持ち込みに関して: 無し
+\item 試験内容: (未定. 5/21に詳しい範囲をいいます)
+\end{itemize}
+\end{tcolorbox}
+%\underline{以上は予定であるため, 変更の可能性があります.} もし変更する場合はホームページやCLEで連絡します. なお病気・忌引きなどで欠席する場合は必ず岩井へ連絡してください. 代替措置をいたします. 
+
+\medskip
+\hspace{-18pt}{\Large \underline{2-2. 期末試験に関して}}
+
+現時点での期末試験の予定は次のとおりです.
+
+\begin{tcolorbox}[mybox] 
+\begin{itemize}
+  \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+\item 日時: 2026年 7月30日 木曜2限(10:30-12:00)  (予定) 10:15までには着席してください.
+\item 場所: 共C206 (授業の部屋)
+\item 持ち込みに関して: 無し
+\item 試験内容 : 授業・演習でやった範囲 (7/16に詳しい範囲をいいます) 
+\end{itemize}
+\end{tcolorbox}
+\underline{以上は予定であるため, 変更の可能性があります.} もし変更する場合はホームページやCLEで連絡します. 
+正当な理由(病気・忌引き)などで欠席する場合は必ず岩井(masataka[at]math.sci.osaka-u.ac.jp)へ連絡してください. 代替手段で別途対応いたします.  
+
+\medskip
+\hspace{-18pt}{\Large \underline{2-3. 追試験に関して}}
+
+中間試験・期末試験でよくない成績を取った人が受けることになります. 
+7/30の試験が終了した後に, 岩井からのメールを受け取った人のみがこの試験を受けることになります. 
+詳細はメールを見てください. 
+
+\begin{tcolorbox}[mybox]
+\begin{itemize}
+  \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+\item 日時: 2026年 8月7日 木曜2限(10:30-12:00)  (予定)
+\item 場所: 共C206 (授業の部屋)
+\end{itemize}
+\end{tcolorbox}
+
+
+
+\newpage
+\medskip
+\hspace{-18pt}{\Large \underline{まとめ}}
+\begin{enumerate}
+  \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm} 
+\item \underline{単位が欲しい方はレポートに取り組み, 中間・期末試験で成績が取れるくらいの点を取ること.} 
+\item 単位を認定するくらいの成績が取れていない場合, 容赦無く不合格を出します. ただし
+\begin{tcolorbox}[mybox]
+\begin{center}
+全員が単位を取れるようなレポート・試験を作る予定です. 
+\end{center}
+\end{tcolorbox}
+今回追試験もする予定です. 必ず単位を取ってください. 理由は1年の線形代数でつまづくと今後の数学科の授業もつまづくからです.  
+\item 良い成績が欲しい人は試験で計算ミスをしないように心がけてください. (去年の工学部・経済学部の授業ではほとんど多くの人が解けて成績に差がつかないことがありました.)
+\item 講義への出席は自由です. 授業資料・授業の板書をCLEや授業ホームページにアップロードするので, 自分の好きな方法で線形代数への理解を進めてください.\footnote{理由としては「私は講義をするのが上手くない」のと「もっと効率的な理解の方法があると思う」からです. この授業内容を理解するのに$1.5 \times 14 = 21$時間も本当にかかるのかと思います. (というか今の私は90分じっと講義を受けるのが好きではないです.  14週に分けて講義を聞くのも好きではないです. ) そして世の中には私よりもわかりやすい授業する人もいるので, そちらで理解を進めても良いと思います. 学び方は自由であり, その方法を制限するのは好きではありません. (つまり出席を取るのも好きではないです).}
+\end{enumerate}
+
+\hspace{-18pt}{\Large \underline{その他}}
+\begin{itemize}
+  \setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm} % 項目間
+  %\item 休講情報は授業ホームページ・KOANでお知らせいたします.
+  \item 休講予定: 2026年5月28日(確定), 2025年6月25日(予定) 休講情報はKOAN・ホームページでもお知らせいたします.
+   %\footnote{他にも授業が早く終われば休講にします.} 
+    %\item 演習問題と授業内容が噛み合ってない可能性があります.
+  \item 授業の資料・授業の板書, 休講情報, 資料の修正などのため, こまめにCLE・ホームページを確認してください.
+  \item 教科書は「朝倉政典・落合理・北山貴裕・田口雄一郎『数理情報・工学系のための数学教程 基礎編２　線形代数 』(培風館)を用いる. なお後期の太田 和惟先生の授業でも同じ教科書を用いる(と聞いています.)
+   \item オフィスアワーを月曜16:00-17:00に設けています. この時間に私の研究室に来ても構いません(ただし来る場合は前もって連絡してくれると助かります.)
+   \item 岩井へメールする際は, masataka[at]math.sci.osaka-u.ac.jpにメールしてください. CLEでもメールできますが, すぐに気づかないかもしれないです. 
+    %\item TAさんは演義の時間中に巡回しているので, 自由にご質問して構いません. 
+    %\item $\pi$-base \url{https://topology.jdabbs.com}も活用してください. 
+ \end{itemize}
+\newpage
+
+{\Large \underline{演義の進め方}}
+
+いつもは演習問題を作っていましたが, 今回は作っていません. 
+代わりに演義時に教科書の演習問題を指定するので, その問題を解いていってください. (追加で問題を出すかも)
+協力してといて良く, 本などなんでも参考して良いです. 演習問題を自由に解いてください. レポート問題を解いてもいいです. 
+
+詳細解答は下の培風館の教科書のページに載っております. 教科書iiページにも記載があります.\footnote{著者の落合先生から私にこのリンクを学生に教えて欲しいとメールがありました．}
+わからないことがあれば岩井にどんどん聞いてください. 
+%なお私は全く解いてないので, 皆さんと一緒に解いていきます. 
+
+\begin{figure}[htbp]
+\begin{center}
+ \includegraphics[height=25mm, width=25mm]{homepage.png}
+ \caption{教科書のページ}
+\end{center}
+\end{figure}
+
+\vspace{-12pt}
+{\Large \underline{授業との振替}}
+
+万が一授業の進度が悪い場合は演義の授業に講義を行います. 
+次の日は30分ほど講義を行います.
+
+\begin{tcolorbox}[mybox]
+\begin{itemize}
+  \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+\item 2026年 6月4 or 11日 木曜3限. 中間試験の解説をするため
+\item 2026年 7月30日 木曜3限. 期末試験の解説をするかもしれないです.(未定)
+\end{itemize}
+\end{tcolorbox}
+
+
+{\Large \underline{授業・演義に関して}}
+
+今回は教科書通りに授業・演義をするので, できる人にとっては物足りないかもしれません. 
+なのでできる人はどんどん別のことを勉強していってください. \footnote{逆にできない人は少なくとも演義にはきてください. 13:30開始なので寝過ごすことはないと思います.(たぶん)}
+
+もし何を勉強すればわからない場合とか数学科でどう暮らせばわからない場合などは, 数学科の先輩たちに聞いてみるのもありだと思います. なお私の授業後, 理学部 E棟E404教室木曜4限に"What is ... ?セミナー”が行われます.\footnote{場所がわからない場合は岩井と一緒に行きましょう. }
+ティータイムではコーヒーや(ちょっといい)お菓子があります. そこで先輩たちに聞いてみるのも一つの手だと思います. 
+\begin{figure}[htbp]
+\begin{center}
+ \includegraphics[height=25mm, width=25mm]{What_is.png}
+  \caption{"What is ... ?セミナー” のページ}
+\end{center}
+\end{figure}
+
+
+\newpage
+
+%%%%%%%%%%%%%
+\begin{comment}
+\subsection{この授業の目標}
+
+
+
+この授業を通して以下を理解してください
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{itemize}
+      \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+    \item 行列の定義と足し算・引き算・スカラー倍・掛け算.(\ref{subsec-2.2}節)
+    \item 連立1次方程式を基本変形でとく.
+    \item 正則行列と逆行列の基本変形での求め方.
+    \item 線形独立・基底・次元などの概念. (\ref{subsec-2.1}節, )
+    \item 線形写像の図形的意味(\ref{subsec-1.3}節), 線形写像の像と核.
+    \item 行列式とその計算.
+     \end{itemize}
+ \end{tcolorbox}
+\subsection{教科書と授業について}
+教科書「金子晃著 線形代数講義」(サイエンス社)を今回初めて用いるが, 何点か個人的に不満な点がある.
+    \begin{itemize}
+      \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+    \item 逆行列, 次元, 標準形(簡約行列?), など数学的な用語の定義がなされていない部分がある.
+    \item 一部理論が飛んでいて, 証明になっていないものがある. %特にガウスの消去法の部分は証明になっていない.
+    \item 連立1次方程式の説明の順番が明らかにおかしい. 具体的な物事と抽象的な物事が混ざっていてわかりづらい.
+    \item 行列式の存在を公理的に書いているのに, その後に具体的に定義している. (公理から出発するのなら, そのまま進んだ方が綺麗である. )
+    \item 意味のない文章が多く, 教科書というより本に近い気がする. その割に内容の難易度は高い.
+     \end{itemize}
+ただ悪いところだけではなく, 数学者が喜ぶような内容(ワイルの公理系や行列環)もあるので, この点は良いと思う.
+
+そのため一部教科書以外の内容を扱ったり, 教科書の内容の順番を入れ替えたりして授業を行う.
+要は授業・資料は教科書を解読したものだと思ってほしい. 
+ \end{comment}
+ %%%%%%%%%%%%%%%%%%%%
+ 
+ \setcounter{section}{-1}
+\section{はじめに}
+このノートは岩井が授業する際に用いるメモです. この内容+教科書通りに説明していきます. \xr{\cite[例 2.2.2]{O}を見る.}など書いていますが, これは板書時のメモです. 
+
+なお例に関しては, 前の授業で使った内容を書いております. 教科書の例はあまりフォローしていませんので, 授業の際に教科書を見てフォローしていきます. 
+
+授業と文字が違うかもしれません. また$\alpha, \beta, \gamma, \delta, \lambda, \mu$などのギリシャ文字をしばしば用います. 
+
+\section{平面や空間の線形変換 \cite[1章]{O}}
+
+\subsection{幾何ベクトルと数ベクトル \cite[1.1節]{O}} 
+
+\subsubsection{数ベクトル空間}
+以下\cite[1章]{O}では実数の上で行う.\footnote{実数とは何か?となるのでこれに関しては後で説明を与える.}
+
+    \begin{dfn}[実数・平面・空間・数ベクトル]
+    \text{}
+    \begin{itemize}
+      \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+    \item $\R$で実数の集合を表す. $\lambda \in \R$で\underline{$\lambda$は実数(の元・要素)}であることを表す. \cite[1.2節]{O}で詳しく述べる. 
+    \item  $\R^2$で平面をあらわし, $\R^2$の元を2次元(平面)数ベクトルという.
+    \item $\R^3$で空間を表し, $\R^3$の元を3次元(空間)数ベクトルという. $\R^3$の数ベクトルを以下のように表す. 
+    $$
+    (a_1, a_2, a_3)
+    \quad
+    \text{または}
+    \quad
+     \begin{pmatrix}
+     a_1\\a_2\\a_3
+      \end{pmatrix}
+    $$
+    また$\bm{a} $や$\overset{\to}{a}$のように略記する.
+     \end{itemize}
+         \end{dfn}
+         
+       
+ 
+     \begin{rem}
+     数ベクトルに関して, 横に並べるか縦に並べるかは状況によって異なる. 例えば教科書などの本では$(a_1, a_2, a_3)$のように横に並べる. これは紙の印刷量を減らすためのように思う. 資料や板書ではどちらも用いる.
+     
+     また資料では$\bm{a}$を用いるが, 板書では$\overset{\to}{a}$を用いる.
+     教科書では$[1,2]$のように鍵括弧を用いているが, が授業では$(1,2)$のように丸括弧を用いる. 
+     \end{rem}
+     
+ \begin{rem}
+幾何学的ベクトル\footnote{有向線分( 線分に向きをつけたもの)を並行移動で移り合うものを同一視したもの}は数ベクトルを用いて表すことができる. (これは17世紀のデカルトによる発明らしい.)
+ \end{rem}
+
+
+    \begin{dfn}
+$\bm{a}= (a_1, a_2, a_3)$, $ \bm{b}=(b_1, b_2, b_3)$, $\lambda, \mu \in \R$について和, 差, スカラー倍, 線形結合を次で定める. 
+\begin{itemize}
+
+\item 和 $\bm{a} + \bm{b} = (a_1 + b_1, a_2 + b_2, a_3 + b_3)$.
+\item 差 $\bm{a} - \bm{b} =(a_1 - b_1, a_2 - b_2, a_3 - b_3)$.
+\item スカラー倍 $\lambda \bm{a} = (\lambda a_1, \lambda a_2, \lambda a_3)$.
+\item 線形結合 $\lambda\bm{a} + \mu\bm{b}$. 一般的に$\bm{a}_1, \ldots, \bm{a}_n$と$\lambda_1, \ldots, \lambda_n \in \R$についてその線形結合を$\lambda_1\bm{a}_1 + \cdots + \lambda_n\bm{a}_n $で表す.
+\end{itemize}
+    \end{dfn}
+
+\subsubsection{内積}
+
+    \begin{dfn}[内積]
+$\bm{a}= (a_1, a_2, a_3)$, 
+$ \bm{b}=(b_1, b_2, b_3)$についてその内積を次で定義する. 
+$$
+(\bm{a}, \bm{b})
+=
+a_1 b_1 + a_2 b_2 + a_3 b_3.
+$$
+    \end{dfn}
+\begin{prop}[内積の性質]
+内積について次の性質がなりたつ.
+\begin{itemize}
+\item $(\bm{a} + \bm{a}', \bm{b})=(\bm{a}, \bm{b}) + \bm{a}', \bm{b})$, 
+$(\bm{a}, \bm{b}+ \bm{b}')=(\bm{a}, \bm{b})+(\bm{a}, \bm{b}')$
+\item $(\lambda \bm{a}, \bm{b})=(\bm{a}, \lambda \bm{b})=\lambda (\bm{a}, \bm{b})$
+\item $(\bm{a}, \bm{b})=(\bm{b}, \bm{a})$
+\item  $(\bm{a}, \bm{a}) \ge 0$であり, 等号成立は$\bm{a}=0$に限る
+\end{itemize}
+\end{prop}
+
+\begin{rem}
+数ベクトル空間$\R^3$やその内積$(\bullet, \bullet)$は後期の授業で一般化・抽象化される. 
+その抽象化によって$n$次元ベクトル空間$\R^n$や, 関数の空間, 数列の空間などをベクトル空間として扱うことができる. 
+\end{rem}
+
+    \begin{prop}
+$\bm{a} =(a_1, a_2, a_3), \bm{b}=(b_1, b_2, b_3) \in \R^3$とする.
+\begin{enumerate}
+
+\item (ピタゴラスの定理) $\bm{a}$の長さ(ノルム)$||\bm{a}||$は以下で与えられる.
+$$
+||\bm{a}|| = \sqrt{(\bm{a}, \bm{a})} = \sqrt{a_{1}^{2}+a_{3}^{2}+a_{3}^{2}}
+$$
+\item \cite[問題 1.1.1]{O} $\bm{a}, \bm{b}$がなす角を$\theta$とすると
+$$
+\bm{a} \cdot\bm{b} = ||\bm{a} || || \bm{b}|| \cos \theta.
+$$
+特に$||\bm{a} ||  \neq 0$かつ$|| \bm{b}|| \neq0$のとき, 
+$$
+ \cos \theta  = \frac{\bm{a} \cdot\bm{b}}{||\bm{a} || || \bm{b}||}
+$$
+と表される. 
+そして$\bm{a} \cdot\bm{b} =0$は, $\bm{a}, \bm{b}$が直交していること($\bm{a}\perp\bm{b}$)と同値である.
+%\item (双線形性) $\bm{a}, \bm{b}, \bm{c} \in \R^3$, $\lambda, \mu \in \R$について次が成り立つ.
+%$$(\lambda \bm{a} + \mu \bm{b}, \bm{c})=\lambda( \bm{a} , \bm{c}) + \mu  (\bm{b}, \bm{c}).\quad( \bm{a}, \lambda \bm{b}+ \mu\bm{c})=\lambda ( \bm{a}, \bm{b})+\mu ( \bm{a}, \bm{c})$$
+\end{enumerate}
+よってユークリッド空間においては内積によって角度や長さも決まる. 
+\end{prop}
+
+
+
+ \subsubsection{外積}
+    \begin{dfn}
+$\bm{a}=(a_1, a_2, a_3), \bm{b}=(b_1, b_2, b_3)\in \R^3$について, 外積$\bm{a} \times \bm{b}$を次で定める. 
+\begin{align*}
+\bm{a} \times \bm{b} 
+%&=\left(\begin{vmatrix}
+%a_2&a_3\\b_2&b_3 \\
+%\end{vmatrix},
+%\begin{vmatrix}
+%a_3&a_1\\b_3&b_1 \\
+%\end{vmatrix},
+%\begin{vmatrix}
+%a_1&a_2\\b_1&b_2 \\
+%\end{vmatrix}
+%\right)
+%\\
+%&=
+=
+( a_2b_3 - a_3b_2, a_3b_1-a_1b_3, a_1b_2-a_2b_1)  
+\end{align*}
+\end{dfn}
+
+ 幾何学的には
+$\bm{a}, \bm{b}$
+について外積$\bm{a} \times \bm{b}  \in \R^3$で
+ \begin{itemize}
+ 	\setlength{\parskip}{0cm}
+  	\setlength{\itemsep}{0pt}
+\item 長さは$\bm{x}, \bm{y}$の貼る平行四辺形の面積
+\item 向きは$\bm{x}$から$\bm{y}$に右ネジを回した時に進む向き\footnote{右ネジの部分が"反時計回り"と同じく現代で通じるのか謎である. 現代的に言うと"YouTubeにおける高評価の手の形"ということである. }
+ \end{itemize}
+ として定義する. 
+ 
+ \begin{exa}
+ $\bm{a}=(3, 5, 0), \bm{b}=(6, 1, 0)$とすると
+ $$
+ \bm{a} \times \bm{b}
+ =\left(\begin{vmatrix}
+5&0\\
+1&0 \\
+\end{vmatrix},
+\begin{vmatrix}
+0&3\\
+0&6 \\
+\end{vmatrix},
+\begin{vmatrix}
+3&5\\
+6&1 \\
+\end{vmatrix}
+\right)
+= (0,0,-27)
+\text{, } 
+\bm{b} \times  \bm{a} 
+ =\left(\begin{vmatrix}
+1&0 \\
+5&0\\
+\end{vmatrix},
+\begin{vmatrix}
+0&6 \\
+0&3\\
+\end{vmatrix},
+\begin{vmatrix}
+6&1 \\
+3&5\\
+\end{vmatrix}
+\right)
+= (0,0,27).
+ $$
+ \end{exa}
+ 
+ \begin{prop}\cite[問題 1.1.2]{O}
+\begin{enumerate}[label={(\arabic*)}]
+\item \(\bm{a}\times \bm{b}=-\bm{b}\times \bm{a}\)
+\item \((\lambda \bm{a})\times \bm{b}=\bm{a}\times (\lambda \bm{b})=\lambda(\bm{a}\times \bm{b})\)
+\item \(\bm{a}\times (\bm{b}+\bm{b}')=\bm{a}\times \bm{b}+\bm{a}\times \bm{b}'\)
+\item \(\bm{a}\times \bm{a}=0\)
+\item \(\text{数ベクトル }\bm{a}\text{ と数ベクトル }\bm{b}\text{ がなす角を }\theta\text{ とするとき，} \|\bm{a}\times \bm{b}\|=\|\bm{a}\|\|\bm{b}\||\sin\theta|\)
+\item \((\bm{a}\times \bm{b},\bm{a})=(\bm{a}\times \bm{b},\bm{b})=0\)
+\end{enumerate}
+ \end{prop}
+
+ 
+ 
+ \subsubsection{直線と平面のパラメーター表示}
+
+    \begin{dfn}[直線と平面のパラメーター表示]
+\begin{enumerate}
+
+\item 空間の異なる2点$\bm{a}, \bm{b}$を通る直線はただ一つに定まり, パラメーター(変数)$t \in \R$を用いて以下で表される.
+$$
+\bm{x}
+=
+\bm{a} + (\bm{b} - \bm{a})t
+$$
+\item 空間内の一般の位置にある3点$\bm{a}, \bm{b}, \bm{c}$を通る平面はただ一つに定まり, パラメーター(変数)$s, t \in \R$を用いて以下で表される.
+$$
+\bm{x}
+=
+\bm{a} + (\bm{b} - \bm{a})s +  (\bm{c} - \bm{a})t
+$$
+\end{enumerate}
+\end{dfn}
+
+空間内の一般の位置にある3点とはそれらの3点全てを通過する直線が存在しないこと. 
+これは代数幾何・数論幾何で出てくる"general point"の言い方になぞらえている. (very general pointという表現もある.)
+
+
+ 
+ \begin{exa}
+空間の点$(1,2,3)$を通り, 方向$(0,2,1)$を持つ直線のパラメーター表示は
+$$
+x=1, y=2+2t, z=3+t
+$$
+となる. まとめて書くなら以下のようになる. 
+$$
+\begin{pmatrix} x\\y\\z\end{pmatrix}
+=
+\begin{pmatrix} 1\\2+2t\\3+t\end{pmatrix}
+$$
+他にも\cite[問題 1.1.3-4]{O}を参照. 
+ \end{exa}
+
+
+
+
+
+\subsection{線形写像の定義と例 \cite[1.2節]{O}} 
+\label{subsec-1.3}
+
+
+\subsubsection{線形写像の定義}
+\begin{dfn}
+$S, S', S''$を集合とする. 
+\begin{itemize}
+\item $x \in S$を, \underline{$x$が$S$の元(要素)}であることとして定める.
+\item $x \in S$に対し, $S'$の元をただ一つ対応させる規則のことを\underline{写像}といい, $f : S \to S'$と表す. $x \in S$に対応させる$S'$の元を\underline{$f(x)$}とかく.
+\item 写像$f : S \to S'$, $g : S' \to S''$について, 写像$(g \circ f) : S \to S''$を$(g \circ f)(x):=g (f(x))$で定め, \underline{合成写像}という. 
+\item 写像$f : S \to S$を\underline{変換}ともいう. (これは一般的でないかも) 
+\item 写像$id_S : S \to S$を$id_S(x)=x$で定まる. これを\underline{恒等写像・恒等変換}という. 
+\item 写像$f : S \to S'$, $g : S' \to S$が
+$$
+g \circ f = id_{S} \quad \text{かつ} \quad f \circ g = id_{S'}
+$$ 
+を満たすとき, $g$を$f$の\underline{逆写像}という. ($S'=S$のときは\underline{逆変換}という.) この$g$を$f^{-1}$とかく. 
+\end{itemize}
+\end{dfn}
+$:=$は定義するという意味の記号である. 
+$\underset{\text{def}}{=}$とも使うことがある. 
+
+\begin{rem}
+この授業においては集合の定義はしない. 集合を単に"物の集まり"として定義すると, "集合の集合"は集合ではないことがわかっている(ラッセルのパラドックス). 
+なので集合を公理を満たすものとして定義する公理的集合論というものがある. 
+が, かなり難しいのでこの授業では触れないことにする.\footnote{数学科の教員に公理的集合論に基づく集合の定義を聞いてもほぼ答えることができないと思う.}
+\end{rem}
+
+\begin{exa}
+$f : [0,1] \to [0,1]$を$f(x)=x^2$で定めると写像になる. 
+$g : [0,1] \to [0,1]$を$g(x) = \sqrt{x}$とすると$g$は$f$の逆変換となる.
+
+一方で$\R \to \R$の規則$f$を$f(x)=\pm1$で定めると写像ではない. 
+\end{exa}
+
+
+   \begin{dfn}[1次変換]
+    \label{dfn-plane-linear}
+$$
+\begin{array}{ccccc}
+f: &\R^2& \rightarrow & \R^2& \\
+&
+\bm{x}
+=
+\begin{pmatrix}
+x \\ y
+ \end{pmatrix} & \longmapsto & 
+ \begin{pmatrix}
+a x + by \\ c x +dy
+ \end{pmatrix}
+ &
+\end{array}
+$$
+を\underline{$\R^2$の1次変換}という.
+同様に
+$$
+\begin{array}{ccccc}
+f: &\R^3& \rightarrow & \R^3& \\
+&
+\bm{x}
+=
+\begin{pmatrix}
+x \\ y \\z
+ \end{pmatrix} & \longmapsto & 
+ \begin{pmatrix}
+a x + by + cz \\ dx+ey+fz \\ gx + hy+iz 
+ \end{pmatrix}
+ &
+\end{array}
+$$
+を\underline{$\R^3$の1次変換}という.
+
+\end{dfn}
+
+ \cite[2章]{O}でやる行列を用いれば次のようにかける. 
+   $2 \times 2$行列
+$
+A=\begin{pmatrix}
+a & b\\
+c & d \\
+\end{pmatrix}
+$
+として. 
+$$
+\bm{x}
+=
+\begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+ \longmapsto  
+  A \bm{x}
+  = 
+ \begin{pmatrix}
+a &  b\\ c & d \\
+ \end{pmatrix}
+ \begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+$$
+$\R^3$でも同様. このノートでは行列も使って書いておく. 
+
+
+\begin{prop}
+$f, g$を$\R^2$の1次変換とする. ($\R^3$の1次変換でも同様)
+\begin{enumerate}
+\item \cite[命題 1.2.1]{O} $f (\bm{0})=\bm{0}$
+\item  \cite[命題 1.2.2]{O}  $g \circ f$も1次変換である. (行列の積を用いて, 命題\ref{prop-matrix-comp}のようにかける)
+\end{enumerate}
+\end{prop}
+
+\begin{prop}\cite[命題 1.2.3]{O}
+$f : \R^2 \to \R^2$を1次変換
+$
+f\begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+  = 
+ \begin{pmatrix}
+a &  b\\ c & d \\
+ \end{pmatrix}
+ \begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+$
+とする. 
+
+$f$が逆変換を持つ必要十分条件は$ad - bc \neq 0$であること. 
+このとき
+$$
+f^{-1}\begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+  = 
+  \frac{1}{ad-bc}
+ \begin{pmatrix}
+ dx -by  \\
+ -cx+ ay  \\
+ \end{pmatrix} 
+  =
+ \frac{1}{ad-bc}
+ \begin{pmatrix}
+ d& -b  \\
+ -c& a  \\
+ \end{pmatrix} 
+ \begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+$$
+で与えられる. 特に$f$が1次変換ならば$f^{-1}$も1次変換になる. 
+ \end{prop}
+$A$が$B$の必要十分条件とは「$A$ならば$B$」と「$B$ならば$A$」が成り立つこと.
+「$A$と$B$は同値である」ともいう.
+ 
+ \begin{rem}
+ \cite[2章]{O}でやる行列の言葉を用いると, $A$の逆行列を$A^{-1}$とすると, 
+ $f^{-1}(\bm{x})=A^{-1}\bm{x}$となる.  
+また$ad - bc = \det A$なので, 「$\det A \neq 0$は$A$が逆行列を持つ($A$が正則)であることと同値」の2次の場合である.
+ \end{rem}
+ 
+
+\subsubsection{1次変換の例(2次元の場合)}
+以下1次変換の例をやる. 名前は覚えなくて良い. 
+
+\begin{exa}[恒等変換]
+$E =
+  \begin{pmatrix}
+ 1& 0  \\
+ 0& 1  \\
+ \end{pmatrix} 
+$(単位行列)ならば
+$
+f\begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+ =
+ E
+\begin{pmatrix}
+x \\ y
+ \end{pmatrix}  = 
+ \begin{pmatrix}
+x \\ y
+ \end{pmatrix}
+$
+である. 何も変化しない変換(恒等変換)である.
+逆変換は
+$
+f^{-1}\begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+ =
+\begin{pmatrix}
+x \\ y
+ \end{pmatrix}
+$
+である.
+\end{exa}
+
+ \begin{exa}[引き伸ばし変換]
+$
+A=\begin{pmatrix}
+\lambda& 0 \\
+0& \mu \\
+\end{pmatrix}
+$ならば
+$
+f\begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+ =
+ A
+\begin{pmatrix}
+x \\ y
+ \end{pmatrix}  = 
+ \begin{pmatrix}
+\lambda x \\\mu y
+ \end{pmatrix}
+$
+である.
+これは$x$軸を$\lambda$倍して$y$軸を$\mu$倍するものである.
+特に$\lambda=\mu$ならば普通の相似拡大である．
+例えば$\lambda=\mu=-1$ならば180度回転となる. 
+
+$\lambda, \mu \neq 0$ならば
+逆変換は$
+f^{-1}\begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+ =
+\begin{pmatrix}
+\lambda ^{-1} x \\ \mu^{-1}y
+ \end{pmatrix}
+$である. 
+\end{exa}
+
+
+ \begin{exa}[斜倒変換]
+$
+A=\begin{pmatrix}
+1& b \\
+0& 1\\
+\end{pmatrix}
+$ならば
+$
+f\begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+ =
+ A
+\begin{pmatrix}
+x \\ y
+ \end{pmatrix}  = 
+ \begin{pmatrix}
+x + by \\\ y
+ \end{pmatrix}
+$
+である.
+逆変換は
+$
+f^{-1}\begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+ =
+\begin{pmatrix}
+ x -by \\ y
+ \end{pmatrix}
+$である. 
+\end{exa}
+
+ \begin{exa}[回転]
+   $\theta$を実数とし
+$
+A=\begin{pmatrix}
+\cos \theta & -\sin \theta\\
+\sin \theta& \cos \theta  \\
+\end{pmatrix}
+$ならば
+$
+f\begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+ =
+ A
+\begin{pmatrix}
+x \\ y
+ \end{pmatrix}  = 
+ \begin{pmatrix}
+(\cos \theta ) x - (\sin \theta )y \\
+(\sin \theta ) x + (\cos \theta )y 
+ \end{pmatrix}
+$
+である. これは反時計回りに$\theta$回転する変換である. \footnote{反時計周りとは左回りのこと. 今の時代の時計はデジタル時計なので, この表現はあと20年で廃れると思う. なのでここは阪大らしく「大阪環状線での内回り(京橋から大阪に最短で行く方向」として定義する. なおこの表現は電車が廃れると意味をなさなくなる. }
+
+
+逆変換は
+$
+f^{-1}\begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+ =
+\begin{pmatrix}
+\cos (-\theta ) x - \sin (-\theta )y \\
+\sin (-\theta ) x + \cos (-\theta )y 
+ \end{pmatrix}  
+ =
+ \begin{pmatrix}
+(\cos \theta ) x + (\sin \theta ) y \\
+-(\sin \theta ) x + (\cos \theta ) y 
+ \end{pmatrix}  
+$である.
+\end{exa}
+
+次は教科書では3次元のところに書いてあったが, 2次元の場合でも使うので書いておく. 
+ \begin{exa}[$y$軸に関する鏡映・折り返し]
+$
+A=\begin{pmatrix}
+-1& 0 \\
+0& 1 \\
+\end{pmatrix}
+$ならば
+$
+f\begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+ =
+ A
+\begin{pmatrix}
+x \\ y
+ \end{pmatrix}  = 
+ \begin{pmatrix}
+-x \\y
+ \end{pmatrix}
+$
+である. これは$y$軸に関する鏡映と呼ばれる. $y$軸に関して鏡のように反転する変換である. 
+\end{exa}
+
+ \begin{exa}[鏡映・折り返し変換]
+直線$l$の法線ベクトルを$\bm{u} \in \R^2$とする. 
+$l$に関する折り返し変換$f : \R^2 \to \R^2$を
+$$
+f(\bm{x})
+=
+\bm{x} - 2 \frac{(\bm{u}, \bm{x})}{(\bm{u}, \bm{u})} \bm{u}
+$$
+ とする. これは1次変換となる. 
+ 
+ 実際$l : y=mx$となる$m \in \R$がある場合は
+ $\bm{u}=(m, -1)$とすると
+$$A=\begin{pmatrix}
+\frac{1-m^2}{1+m^2}& \frac{2m}{1+m^2} \\
+\frac{2m}{1+m^2}  & -\frac{1-m^2}{1+m^2} \\
+\end{pmatrix}
+$$
+として
+$$
+f\begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+ =
+ A
+\begin{pmatrix}
+x \\ y
+ \end{pmatrix}  
+ =
+\begin{pmatrix}
+\frac{1-m^2}{1+m^2}& \frac{2m}{1+m^2} \\
+\frac{2m}{1+m^2}  & -\frac{1-m^2}{1+m^2} \\
+\end{pmatrix} 
+\begin{pmatrix}
+x \\ y
+ \end{pmatrix}  
+$$
+で与えられる. 
+特に$x$軸に関する鏡映は
+$
+f\begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+ =
+ \begin{pmatrix}
+x \\-y
+ \end{pmatrix}
+$
+である. 
+
+$f \circ f = id_{\R^2}$なので, $f^{-1}=f$である. 
+\end{exa}
+
+
+
+
+
+
+
+\begin{prop}\cite[命題 1.2.4 (岩澤分解)]{O}
+1次変換$f : \R^2 \to \R^2$が逆変換を持つならば, 
+引き伸ばし変換$f_1$, 斜倒変換$f_2$, 回転変換$f_3$を用いて
+$$
+f=\underbrace{f_{3}}_{\text{回転変換}} \circ \underbrace{f_1}_{\text{引き伸ばし変換}} \circ \underbrace{f_2}_{\text{斜倒変換}}
+$$
+\end{prop}
+証明は行列の積を終えたあと, 追加問題で扱う. 
+\begin{rem}
+本当の岩澤分解は, 「任意の正則行列が直交行列, 対角行列, 対角行列が1である上三角行列の積で表せられる」ということ. 
+\footnote{\url{https://tyamada1093.web.fc2.com/math/files/LAKobe2024_Gex.pdf}}
+そのため教科書と順番をちょっと変えた. 
+\end{rem}
+
+\subsubsection{1次変換の例(3次元の場合)}
+    
+   \begin{prop}\cite[命題1.2.5]{O}
+   $$
+\begin{array}{ccccc}
+f: &\R^3& \rightarrow & \R^3& \\
+&
+\bm{x}
+=
+\begin{pmatrix}
+x \\ y \\z
+ \end{pmatrix} & \longmapsto & 
+ \begin{pmatrix}
+a x + by + cz \\ dx+ey+fz \\ gx + hy+iz 
+ \end{pmatrix}
+ =
+   \begin{pmatrix}
+ a& b &c \\
+  d& e &f \\
+  g& h &i \\
+ \end{pmatrix} 
+ \begin{pmatrix}
+x \\ y \\z
+ \end{pmatrix} 
+ &
+\end{array}
+$$
+とする. 
+$f$が逆変換を持つ必要十分条件は
+\[
+ aei+bfg+cdh-ceg-afh-bdi \neq 0 \] 
+ が成り立つことである．
+ \end{prop}
+   
+これは
+$A=
+  \begin{pmatrix}
+ a& b &c \\
+  d& e &f \\
+  g& h &i \\
+ \end{pmatrix} 
+$とするとき 
+$$
+\det A = aei+bfg+cdh-ceg-afh-bdi 
+$$
+であるので, 
+$ aei+bfg+cdh-ceg-afh-bdi \neq 0 $という条件は$\det A \neq 0$
+という条件になる. 
+
+実は$\det \begin{pmatrix}
+ a& b \\
+  c& d\\
+ \end{pmatrix} = ad-bc$なので, 
+$ad - bc \neq 0$という条件も$\det A \neq 0$と同じである. 
+
+\begin{exa}
+\( a,e,i \) を0でない実数として，
+\[
+f
+\begin{pmatrix}
+x\\
+y\\
+z
+\end{pmatrix}
+=
+\begin{pmatrix}
+ax\\
+ey\\
+iz
+\end{pmatrix}
+\]
+\( x \) 軸に \( a \) 倍，\( y \) 軸に \( e \) 倍，\( z \) 軸に \( i \) 倍する1次変換
+\end{exa}
+
+\begin{exa}
+
+\[
+f_\alpha
+\begin{pmatrix}
+x\\
+y\\
+z
+\end{pmatrix}
+=
+\begin{pmatrix}
+x\\
+y\cos\alpha-z\sin\alpha\\
+y\sin\alpha+z\cos\alpha
+\end{pmatrix},
+\quad
+g_\beta
+\begin{pmatrix}
+x\\
+y\\
+z
+\end{pmatrix}
+=
+\begin{pmatrix}
+x\cos\beta-z\sin\beta\\
+y\\
+x\sin\beta+z\cos\beta
+\end{pmatrix},\quad
+h_\gamma
+\begin{pmatrix}
+x\\
+y\\
+z
+\end{pmatrix}
+=
+\begin{pmatrix}
+x\cos\gamma-y\sin\gamma\\
+x\sin\gamma+y\cos\gamma\\
+z
+\end{pmatrix}.
+\]
+
+これは各々 \( x \) 軸, $y$軸, $z$軸を回転軸とする回転である. \footnote{教科書には「\( f_{\alpha} \) は \( x \) 軸を回転軸として \( x \) 軸の正の方向から負の方向を向いたときに時計まわりに角度 \( \alpha \) だけ回転させる1次変換である．」と書いてあったがこれ間違ってないですかね？}
+\end{exa}
+
+
+ \begin{exa}[鏡映・折り返し変換]
+平面$H$の法線ベクトルを$\bm{u} \in \R^3$とする. 
+$H$に関する折り返し変換$f : \R^3 \to \R^3$を
+$$
+f(\bm{x})
+=
+\bm{x} - 2 \frac{(\bm{u}, \bm{x})}{(\bm{u}, \bm{u})} \bm{u}
+$$
+ とする. これは1次変換となる. (これは線形変換になるから)
+\end{exa}
+
+\begin{dfn}[固有値・固有ベクトル]
+1次変換$f : \R^3 \to \R^3$について, ある実数$\alpha$があって
+$f(\bm{v})=\alpha \bm{v}$となるとき, 
+$\alpha$を\underline{$f$の固有値}といい, $\bm{v}$を\underline{$f$の固有ベクトル}という. 
+\end{dfn}
+本当は"$\alpha$は複素数"の方がいい. これに関しては後期に詳しく習う. 
+
+\begin{exa}
+(1). 
+$f
+\begin{pmatrix}
+x\\
+y\\
+z
+\end{pmatrix}
+=
+\begin{pmatrix}
+ax\\
+ey\\
+iz
+\end{pmatrix}
+$
+の固有値は$a, e,i$で固有ベクトルはそれぞれ$(1,0,0), (0,1,0), (0,0,1)$である. 
+
+(2). 回転行列に関して. $\R^2$の場合は$\theta=n\pi$を除いて実数の固有値をもたない. (固有値が実数ではない複素数になる. ) $\R^3$の場合は$\theta=n\pi$を除いて固有値1と複素数の固有値2つを持つ. 
+
+(3) 折り返し変換に関して.
+$H$の法線ベクトルが固有値-1, $H$内の点$P$についてベクトル$\bm{p}=\overset{\to}{OP}$に関する固有値は1となる.
+この三つに尽きる. 
+\end{exa}
+
+ \subsubsection{線形変換}
+
+ \begin{dfn}[線形変換]
+変換$f : \R^2 \to \R^2$が\underline{線形変換}であるとは$\bm{a}, \bm{b} \in \R^2$と$\lambda \in \R$について次が成り立つこと
+\begin{enumerate}
+\item $f(\bm{a} + \bm{b}) = f(\bm{a}) + f(\bm{b})$
+\item $f(\lambda \bm{a} ) =\lambda f(\bm{a}) $
+\end{enumerate}
+$f : \R^3 \to \R^3$に関しても同様に定める. 
+\end{dfn}
+
+\begin{thm}\cite[定理 1.2.6]{O}
+変換$f : \R^2 \to \R^2$が線形変換であることは, 1次変換であることと同値である. 
+\end{thm}
+$f : \R^3 \to \R^3$に関しても同様である. 
+
+\newpage
+
+
+\section{行列 \cite[2章]{O}}
+\setcounter{subsection}{-1}
+\subsection{数について}
+\cite[2.1節]{O}で次の記述がある. 
+\begin{tcolorbox}[mybox]
+本書で"数"というときは加減乗除が考えられる集合の元のことをさす. 
+専門用語でいうt, ある一つ決めた体$K$を想定していて, 数とはその体$K$の元を考えている. 
+(中略)本書における定理や証明などの議論は1・7・8章を除き(つまり2-6章)任意の体$K$で成り立つ.
+\end{tcolorbox}
+
+この体$K$についてもう少し深くみていく. 
+なお2-3年の授業で詳しくやるので
+\begin{tcolorbox}[mybox]
+\begin{center}
+現時点でわからなければ$K$は実数(たまに有理数・複素数)と思って良い!
+\end{center}
+\end{tcolorbox}
+
+
+\subsubsection{整数・有理数・実数などの略記に関して}
+
+以下次の略記をする.
+\begin{itemize}
+\item $\N$ 0以上の整数の集合(場合によっては自然数の集合ともいう). 英語のNatural numberから. 
+\item $\Z$  整数の集合. ドイツ語のZahlen(数)から. 
+\item $\Q$ 有理数の集合. Quotient(商)から来ている
+\item $\R$ 実数の集合. 英語のReal numberから. 
+\item $\C$ 複素数の集合. 英語のComplex numberから. 
+\end{itemize}
+
+これらがどのように構成されるかは後で説明を加える. 
+
+\subsubsection{環・体の定義}
+
+
+  \begin{dfn}[環(ring)]
+空でない集合$R$について, 二項演算の加法$+ : R \times R \to R$と乗法$\bullet : R \times R \to R$があって以下の条件を満たすとき, $R$を\underline{環(ring)}という. 
+\begin{enumerate}
+\setlength{\parskip}{0cm}
+ \setlength{\itemsep}{0pt} 
+\item (和の交換法則) $a, b \in R$について, $a+b = b+a$
+\item (和の結合法則) $a, b, c\in R$について, $(a+b) + c = a + (b+c)$
+\item (ゼロ元の存在) ゼロ元と呼ばれる$0 \in R$があって, 任意の$a \in R$について, $a+0=0+a=a$
+\item (和の逆元の存在) 任意の$a \in R$について, ある$b \in R$があって, $a + b = b+a =0$. この$b$を$-a$とかく. 
+\item (積の結合法則) $a, b, c\in R$について, $(a\bullet b) \bullet c = a \bullet (b\bullet c)$
+\item (単位元の存在) 単位元と呼ばれる$1\in R$があって, 任意の$a \in R$について, $a \bullet 1 =1 \bullet a =a$.
+\item (分配法則) $a, b, c\in R$について, $a\bullet (b+c)=a \bullet b + a \bullet c, (a+b) \bullet c = a \bullet c +b \bullet c$
+\end{enumerate}
+
+任意の$a, b \in \R$について$a \bullet b=b \bullet a$となる環を可換環(commutative ring)といい, そうでない環を非可換環(non-commutative ring)という. 
+\end{dfn}
+
+\begin{exa}
+整数$\Z$は可換環である. 
+一方0以上の整数の集合$\N$は環ではない. (モノイドと呼ばれるものになる.)
+\end{exa}
+
+\begin{exa}
+後にやる$n$次正方行列は環の構造を持つ.
+(\ref{prop-2.3} 参照) $n \ge 2$ならば非可換環である. 
+\end{exa}
+
+  \begin{dfn}[体(field)]
+  環$K$が次を満たすとき, \underline{体(field)}という. 
+  \begin{enumerate}
+  \setcounter{enumi}{7}
+\setlength{\parskip}{0cm}
+ \setlength{\itemsep}{0pt} 
+\item (積の交換法則) $a, b \in K$について, $a \bullet b=b \bullet a$
+\item (積の逆元の存在) 0でない任意の$a \in K$について, ある$b \in K$があって, $a \bullet b = b \bullet a =1$. この$b$を$a^{-1}$とかく. 
+ \end{enumerate}
+  \end{dfn}
+  
+  \subsubsection{体の例}
+  
+  \begin{exa}[自明な体]
+  $R=\{0\}$として$+, \bullet$を
+  $$
+  0 + 0 = 0\bullet 0=0
+  $$
+  とすれば体となる. (が面白くないのでこれは考えないことが多い)
+  \end{exa}
+  
+  \begin{exa}
+  有理数体$\Q$, 実数体$\R$, 複素数体$\C$は体である. 
+  整数の集合$\Z$は体ではない. 
+  \end{exa}
+
+  \begin{exa}
+  $\mathbb{F}_2=\{0,1\}$について, 
+  加法$+ $と乗法$\bullet$を次で定義する.
+  \begin{itemize}
+  \item $a, b \in \mathbb{F}_2$について$a+b:=\text{($a$たす$b$を2で割ったあまり)}$. 
+\item $a, b \in \mathbb{F}_2$について$a\bullet b:=\text{($a$かける$b$を2で割ったあまり)}$. 
+ \end{itemize}
+これによって,   $\mathbb{F}_2=\{0,1\}$は体となる. 
+例えば$1^{-1}=-1=1$である. 
+  \end{exa}
+
+
+  \begin{exa}
+  $\mathbb{F}_5=\{0,1 ,2, 3, 4\}$について, 
+  加法$+ $と乗法$\bullet$を次で定義する.
+  \begin{itemize}
+  \item $a, b \in \mathbb{F}_5$について$a+b:=\text{($a$たす$b$を5で割ったあまり)}$. 
+\item $a, b \in \mathbb{F}_5$について$a\bullet b:=\text{($a$かける $b$を5で割ったあまり)}$. 
+ \end{itemize}
+これによって,   $\mathbb{F}_5$は体となる. 
+
+例えば次がわかる. 
+$$
+-0=0, -1 =4, -2=3, -3=2, -4=1
+$$
+$$
+1^{-1} =1, 2^{-1}=3, 3^{-1}=2, 4^{-1}=4
+$$ 
+  \end{exa}
+  
+  \begin{exa}
+一般に素数$p$について, 
+$\mathbb{F}_p=\{0,1 ,2, \ldots, p-1\}$として, 
+  加法$+ $と乗法$\bullet$を次で定義する.
+  \begin{itemize}
+  \item $a, b \in \mathbb{F}_p$について$a+b:=\text{($a$たす$b$を$p$で割ったあまり)}$. 
+\item $a, b \in \mathbb{F}_p$について$a\bullet b:=\text{($a$かける $b$を$p$で割ったあまり)}$. 
+ \end{itemize}
+これによって,   $\mathbb{F}_p$は体となる. 
+この場合一番非自明なのは, $a^{-1}$の存在であるがそれは次のフェルマーの小定理からわかる.
+\begin{thm}[フェルマーの小定理]
+$p$を素数とする. $1 \le a \le p-1$となる整数について
+$a^{p-1}-1$は$p$で割り切れる.
+特に$a^{p-2}$を$p$で割った余りが$\mathbb{F}_p$における$a$の積の逆元である.
+\end{thm}
+
+  \end{exa}
+
+
+
+  \begin{exa}
+  $\mathbb{F}_4=\{0,1 ,2, 3, 4\}$について, 
+  加法$+ $と乗法$\bullet$を次で定義する.
+  \begin{itemize}
+  \item $a, b \in \mathbb{F}_4$について$a+b:=\text{($a$足す$b$を4で割ったあまり)}$. 
+\item $a, b \in \mathbb{F}_4$について$a\bullet b:=\text{($a$かける $b$を4で割ったあまり)}$. 
+ \end{itemize}
+しかし  $\mathbb{F}_4$は体にならない. $2$の積の逆元が存在しないためである. 
+  \end{exa}
+  
+\subsubsection{実数の構成方法}
+
+自然数・整数・有理数・実数の構成は難しい. 
+尾畑伸明先生の 2022 年度解析学入門のノート1
+\begin{itemize}
+\item \url{https://www.math.is.tohoku.ac.jp/~obata/student/subject/TaikeiBook/Taikei-Book_15.pdf}
+\item \url{https://www.math.is.tohoku.ac.jp/~obata/student/subject/TaikeiBook/Taikei-Book_16.pdf}
+\end{itemize}
+に詳細があるので気になる人は参照してほしい. (がそこまで重要ではない)
+
+簡潔にまとめると次の通り. 
+\begin{itemize}
+\item $\N$の構成は, 集合論的に行う. ここが一番難しい. (学部でも習わないかも)
+\item $\Z$の構成は, $\N$がモノイドなので, 可換モノイドから群を作る方法(グロタンディークの構成)を用いる. (学部でも習わないかも)
+\item $\Q$の構成は, 環の局所化(localization)を用いる. これは"分数"の一般化である (学部3年に習う)
+\item $\R$の構成は, 距離空間の完備化を用いる. (学部2年に習う) 
+より詳しくいうと$\Q$の距離を
+$$
+d(a, b):=|a-b|
+$$
+と定義したときの完備化として$\R$は特徴づけられる. 
+\item $\C$の構成は, $\R$の代数的閉包をとる. (学部3年に習う) 
+$\R$を含む体$K$で次を満たすものとして特徴づけられる. 
+\begin{itemize}
+\item (代数拡大) 任意の$\alpha \in K$について, $\R$係数の多項式$f(x)$があって, $f(\alpha)=0$
+\item (代数的に閉じている) $K$係数多項式$g(x)$について, ある$\gamma \in K$があって$g(\gamma)=0$
+\end{itemize}
+2個めに関しては代数学の基本定理とも呼ばれる. この証明は2年の複素解析で習う.
+\end{itemize}
+
+この構成から外れた体もいっぱいある. 
+例えば$\Q$の代数的閉包$\overline{\mathbb{Q}}$なども考えられる.(代数的数・超越数はここの話.)
+また$\Q$に$p$進距離$d_p(\bullet, \bullet)$を入れた完備化$ \mathbb{Q}_p$もある. 
+
+\[
+\xymatrix@C=5em@R=2em{
+&\text{環}&&\text{体}& \\
+\mathbb{N} \ar[r] & \mathbb{Z} \ar[r]^{\text{局所化}} & \mathbb{Q}
+  \ar[r]^{\text{完備化}}
+  \ar[ddr]_{\text{$p$進完備化}}
+  \ar[rrd]_{\text{代数閉包}} &
+\mathbb{R} \ar[r]^{\text{代数閉包}} & \mathbb{C} \\
+&&&& \overline{\mathbb{Q}} \\
+&&& \mathbb{Q}_p \ar[r]^{\text{代数閉包}} & \overline{\mathbb{Q}}_p \\
+}
+\]
+
+
+\subsection{行列と数ベクトルの演算 \cite[2.1節]{O}}
+\label{subsec-2.1}
+
+\subsubsection{数ベクトル・数ベクトル空間}
+以下断りがなければ, 体$K$上を考える. 
+    \begin{dfn}
+    \label{dfn-ei}
+$K$を体とし, $n \geqq1$なる自然数について
+$$
+(x_1, \ldots, x_n) 
+$$
+　を\underline{$n$次元の数ベクトル}といい, その集合を
+$$
+K^n  = \{ (x_1, \ldots, x_n) | x_1, \ldots, x_n \in K\}
+$$
+といい数ベクトル空間という. 
+
+また原点に対応するもの$\bm{0}=(0, \ldots, 0)$を\underline{ゼロベクトル}という.
+
+\underline{基本単位ベクトル}$\bm{e}_i$を, $i$番目のみ1で他は0である数ベクトル, つまり
+$$
+\bm{e}_i = (0, \ldots, \underbrace{1}_{i}, \ldots, 0)
+$$
+で定める.ここで$i=1,2,\ldots, n$である.
+    \end{dfn}
+ 例えば$\R^2$は平面をあらわし, $\R^3$は空間を表す.
+また1章と同様, 数ベクトルに関して, 横に並べるか縦に並べるかは状況によって異なる. 板書ではどちらも用いる.
+     
+ 数ベクトル空間に関しては後期の内容だが, 今ここでも触れておく.     
+\begin{dfn}
+$\bm{a}=(a_1, \ldots, a_n), \bm{b}=(b_1, \ldots, b_n)\in K^n$, $\alpha, \beta \in K$について和, 差, スカラー倍,
+\begin{itemize}
+ 	\setlength{\parskip}{0cm}
+  	\setlength{\itemsep}{0pt}
+\item 和 $\bm{a} + \bm{b} = (a_1 + b_1, \ldots, a_n + b_n)$.
+\item 差 $\bm{a} - \bm{b} = (a_1 - b_1, \ldots, a_n - b_n)$.
+\item スカラー倍 $\alpha \bm{a} = (\alpha a_1, \ldots, \alpha a_n)$.
+\item 線形結合 $\alpha \bm{a} + \beta \bm{b}$とする． 一般的に$\bm{a}_1, \ldots, \bm{a}_n$と$\alpha _1, \ldots, \alpha _n \in K$についてその線形結合を$\alpha _1\bm{a}_1 + \cdots + \alpha _n\bm{a}_n $で表す.
+\end{itemize}
+    \end{dfn}
+
+\begin{rem}
+$\bm{x} \in K$は$n$個の基本単位ベクトルの線形結合で表される. 具体的には次であらわされる
+$$
+\bm{x}
+=
+\begin{pmatrix}
+x_1\\x_2\\\vdots\\x_n
+\end{pmatrix}
+=
+x_1 \bm{e}_1 + x_2 \bm{e}_2 + \cdots + x_n\bm{e}_n 
+=
+x_1 \begin{pmatrix}
+1\\0\\\vdots\\0
+\end{pmatrix} + x_2 \begin{pmatrix}
+0\\1\\\vdots\\0
+\end{pmatrix} + \cdots + x_n\begin{pmatrix}
+0\\0\\\vdots\\1
+\end{pmatrix} 
+$$
+\end{rem}
+
+
+\subsubsection{行列の定義}
+
+   \begin{dfn}[行列]
+ $m, n$を正の整数とする.    
+\begin{itemize}
+	\setlength{\parskip}{0cm}
+  	\setlength{\itemsep}{0pt} 
+\item $m \times n$個の数($K$の元)$a_{ij}$ ($i = 1, \ldots, m$, $j = 1, \ldots, n$)を
+$$
+\begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+a_{21}& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{m1}& a_{m2} & \cdots &a_{mn} \\
+\end{pmatrix}
+$$
+のように並べたものを\underline{$m \times n$の行列}, \underline{$(m,n)$型行列}, \underline{$m$行$n$列の行列}という. 
+\item 上の行列を$A$としたとき, $a_{ij}$を行列$A$の$(i,j)$成分という. 行列$A$を\underline{$(a_{ij})$}や\underline{$(a_{ij})_{m \times n}$}と略記することもある.
+\item $\begin{pmatrix} a_{i1} & \cdots & a_{in}\end{pmatrix}$を\underline{$A$の行}といい, 上から第1行, 第2行, $\cdots$, 第$m$行という.
+\item $\begin{pmatrix}a_{1j} \\ \vdots  \\ a_{mj}\end{pmatrix}$を\underline{$A$の列}といい, 上から第1列, 第2列, $\cdots$, 第$n$列という.
+\item $m=n$のとき, \underline{$n$次正方行列}という.
+\item $M_{m, n}(K)$を$m \times n$の行列の集合とする. $M_{n}(K)$を$n$次正方行列の集合とする. 
+\item  $(a_1, \ldots, a_n)$を\underline{行ベクトル}, 
+ $
+ \begin{pmatrix}
+a_{1} \\
+a_{2}\\
+\vdots \\
+a_{n}\\
+\end{pmatrix}
+ $
+ を\underline{列ベクトル}ともいう. 
+\end{itemize}
+    \end{dfn}
+ 最初の添字$i$が行(横のカウンター)を表し, 二つ目の添字$j$が列(縦のカウンター)を表す. 
+ 
+ 
+ 
+ \subsubsection{行列の足し算・引き算}
+    \begin{dfn}[行列の和と差]
+    \text{}
+ 
+$m \times n$行列
+$
+A=\begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+a_{21}& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{m1}& a_{m2} & \cdots &a_{mn} \\
+\end{pmatrix}
+$, 
+$
+B=\begin{pmatrix}
+b_{11}& b_{12} & \cdots &b_{1n} \\
+b_{21}& b_{22} & \cdots &b_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+b_{m1}& b_{m2} & \cdots &b_{mn} \\
+\end{pmatrix}
+$
+とする.
+
+このとき行列の和$A+B$と差$A-B$を次で定める.
+$$
+A+B=
+\begin{pmatrix}
+a_{11}+b_{11}& a_{12}+b_{12}& \cdots &a_{1n} +b_{1n}\\
+a_{21}+b_{21}& a_{22}+b_{22}& \cdots &a_{2n}+b_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{m1}+b_{m1}& a_{m2} +b_{m2}& \cdots &a_{mn} +b_{mn}\\
+\end{pmatrix}.
+$$
+$$
+A-B=
+\begin{pmatrix}
+a_{11}-b_{11}& a_{12}-b_{12}& \cdots &a_{1n} -b_{1n}\\
+a_{21}-b_{21}& a_{22}-b_{22}& \cdots &a_{2n}-b_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{m1}-b_{m1}& a_{m2}-b_{m2}& \cdots &a_{mn}-b_{mn}\\
+\end{pmatrix}.
+$$
+  \end{dfn}
+
+ \begin{exa}
+ $A = 
+ \begin{pmatrix}
+ 1 &-2&8 \\
+ 2&5&-1
+ \end{pmatrix}
+ $, 
+ $
+ B = 
+ \begin{pmatrix}
+ -2&5&1 \\
+ 3&-1&2
+ \end{pmatrix}
+ $
+ とする．
+ 
+ このとき$
+ A+B =
+ \begin{pmatrix}
+ -1 &3&9 \\
+ 5&4&1
+ \end{pmatrix}
+ $, 
+ $
+  A-B =
+ \begin{pmatrix}
+ 3 &-7&7 \\
+ -1&6&-3
+ \end{pmatrix}
+ $である.
+ \end{exa}
+
+\begin{exa}
+ $A = 
+ \begin{pmatrix}
+ 3&1 \\
+ 1&4
+ \end{pmatrix}
+ $, 
+ $
+ B = 
+ \begin{pmatrix}
+ 2&7\\
+ 5&8
+ \end{pmatrix}
+ $
+ とする．
+ 
+ このとき$
+ A+B =
+ \begin{pmatrix}
+ 5&8 \\
+6&12
+ \end{pmatrix}
+ $, 
+ $
+  A-B =
+ \begin{pmatrix}
+ 1&-6 \\
+ -4&-4
+ \end{pmatrix}
+ $である.
+ \end{exa}
+ 
+ \begin{exa}
+ $A = 
+ \begin{pmatrix}
+ 2&1 \\
+ 1&5
+ \end{pmatrix}
+ $,
+$ 
+ B = 
+ \begin{pmatrix}
+ 1&1 &3 \\
+ 4&6 & 7
+ \end{pmatrix}
+ $
+ とする．このとき$A+B$は型が違うため定義されない. 
+ \end{exa}
+ 
+ 
+
+ \subsubsection{行列のスカラー倍}
+
+
+    \begin{dfn}[行列のスカラー倍]
+    \text{}
+    
+ $m \times n$行列
+ $
+A=\begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+a_{21}& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{m1}& a_{m2} & \cdots &a_{mn} \\
+\end{pmatrix}$
+とし, $c$を数とする($c$をスカラーとも呼ぶ).
+
+$A$の$c$倍$cA$を次で定める.
+$$
+cA=
+\begin{pmatrix}
+ca_{11}&c a_{12} & \cdots &ca_{1n} \\
+ca_{21}& ca_{22} & \cdots &ca_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+ca_{m1}& ca_{m2} & \cdots &ca_{mn} \\
+\end{pmatrix}.
+$$
+  \end{dfn}
+
+\begin{exa}
+ $A = 
+ \begin{pmatrix}
+ 1 &-2&8 \\
+ 2&5&-1
+ \end{pmatrix}
+ $,
+ $
+ c =3
+ $
+ とする．
+ このとき$
+ cA =
+ \begin{pmatrix}
+ 3 &-6&24 \\
+ 6&15&-3
+ \end{pmatrix}
+ $である.
+ \end{exa}
+ 
+  \subsubsection{行列の積}
+ 
+\xr{ここ難しいので$2 \times 2$行列の積を最初に定義するかも.}
+    \begin{dfn}[行列の積]
+    
+ $m \times n$行列$A =(a_{ij})_{m \times n}$と$n \times l$行列$B= (b_{jk})_{n \times l}$とする．
+このとき$A$と$B$の積$AB$は$m \times l$行列で, 次の式で定義される.
+
+$$
+AB = (c_{ik})_{m \times l}\text{としたとき, }
+c_{ik} = a_{i1}b_{1k} + a_{i2}b_{2k} + \cdots + a_{in}b_{nk} = \sum_{j=1}^{n} a_{ij}b_{jk}.
+$$
+  \end{dfn}
+
+ 
+  \begin{exa}
+ $ A= 
+ \begin{pmatrix}
+2 & 2\\
+4 & 3
+ \end{pmatrix}
+ $, $
+ B = 
+ \begin{pmatrix}
+5 \\1
+ \end{pmatrix}
+ $
+ とする. 
+ 
+ $A$は$2\times 2$行列で$B$は$2 \times 1$行列なので, 行列の積$AB$が$2 \times 1$行列として定義でき, 
+ $$
+ AB = 
+ \begin{pmatrix}
+2 & 2\\
+4 & 3
+ \end{pmatrix}
+  \begin{pmatrix}
+5 \\1
+ \end{pmatrix}
+ =  
+ \begin{pmatrix}
+2\times 5 + 2\times 1 \\
+4 \times 5 + 3 \times 1
+ \end{pmatrix}
+ = 
+  \begin{pmatrix}
+12 \\
+23
+ \end{pmatrix}.
+ $$
+ 
+ \end{exa}
+ 
+ \begin{exa}
+ $ A= 
+ \begin{pmatrix}
+2 & 3\\
+1 & 4
+ \end{pmatrix}
+ $, $
+ B = 
+ \begin{pmatrix}
+5 & 2\\
+2 & 3
+ \end{pmatrix}
+ $
+ とする. 
+ 
+ $A$は$2\times 2$行列で$B$は$2 \times 2$行列なので, 行列の積$AB$が$2 \times 2$行列として定義でき, 
+ $$
+ AB = 
+ \begin{pmatrix}
+2 & 3\\
+1 & 4
+ \end{pmatrix}
+ \begin{pmatrix}
+5 & 2\\
+2 & 3
+ \end{pmatrix}
+ =  
+ \begin{pmatrix}
+2 \times 5 + 3 \times 2& 2 \times 2 + 3 \times 3\\
+1 \times 5 + 4 \times 2 & 1\times 2 + 4 \times 3
+ \end{pmatrix}
+ = 
+ \begin{pmatrix}
+16 & 13\\
+13 & 14
+ \end{pmatrix}.
+ $$
+ 
+また$B$は$2\times 2$行列で$A$は$2 \times 2$行列なので, 行列の積$BA$が$2 \times 2$行列として定義でき, 
+ $$
+ BA = 
+  \begin{pmatrix}
+5 & 2\\
+2 & 3
+ \end{pmatrix}
+  \begin{pmatrix}
+2 & 3\\
+1 & 4
+ \end{pmatrix}
+ =
+  \begin{pmatrix}
+12 & 23\\
+7 & 18
+ \end{pmatrix}.
+ $$
+
+よって\underline{行列の積に関して$AB=BA$とは限らない($AB \neq BA$となることがある).}
+ \end{exa}
+ 
+ 
+ \begin{exa}
+ $ A=\begin{pmatrix} 1 &2 &3 \end{pmatrix}$, 
+ $ 
+ B = 
+ \begin{pmatrix}
+5 \\7\\2
+ \end{pmatrix}
+ $
+ とする. 
+ 
+ $A$は$1\times 3$行列で$B$は$3 \times 1$行列なので, 行列の積$AB$が$1 \times 1$行列として定義でき, 
+ $$
+ AB = \begin{pmatrix}1 &2&3  \end{pmatrix}
+ \begin{pmatrix}
+5 \\7\\2
+ \end{pmatrix}
+ = \begin{pmatrix}1\times 5 + 2 \times 7 + 3 \times 2  \end{pmatrix}= 
+  \begin{pmatrix}5+14+6 \end{pmatrix}= \begin{pmatrix}25 \end{pmatrix}.
+ $$
+ 
+ \end{exa}
+
+
+  \begin{exa}
+ $ A= 
+ \begin{pmatrix}
+2 & 1&-3\\
+1 & -5 & 2
+ \end{pmatrix}
+ $, $
+ B = 
+  \begin{pmatrix}
+8 & 7&5 & 2
+ \end{pmatrix}
+ $
+ とする. 
+ 
+ $A$は$2 \times 3$行列で$B$は$1 \times 4$行列であるので, 行列の積$AB$は定義されない.
+ \end{exa}
+ 
+ \begin{ques}
+ 次の行列$A,B,C$において, $AB, BA, BC, CB, CA, AC$の6個のうち積が定義される全ての組み合わせを求め, その積を計算せよ.
+ $$
+  A=\begin{pmatrix}
+ 2 \\ 1\\-1
+ \end{pmatrix}, 
+ B=
+  \begin{pmatrix}
+ 2 &0&1 
+ \end{pmatrix}, 
+ C= \begin{pmatrix}
+  1&0\\
+ 2&3\\
+ -1&4
+ \end{pmatrix}
+ $$
+ \end{ques}
+ 
+ 
+ \begin{prop}
+\label{prop-matrix-comp}
+  $2 \times 2$行列
+$
+A=\begin{pmatrix}
+a & b\\
+c & d \\
+\end{pmatrix}
+$
+$B=
+\begin{pmatrix}
+p& q\\
+r & s \\
+\end{pmatrix}
+$
+とする. 
+$\bm{x} = \begin{pmatrix}
+x \\ y
+ \end{pmatrix} $として, 1次変換
+$$
+f
+\begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+  =
+ A \bm{x}
+  = 
+ \begin{pmatrix}
+a x + by\\ cx + dy
+ \end{pmatrix} 
+ \quad
+ g
+\begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+  =
+ B \bm{x}
+  = 
+ \begin{pmatrix}
+p x + qy\\ rx + sy
+ \end{pmatrix} 
+$$
+について$g\circ f : \R^2 \to \R^2$も1次変換で
+$$
+g \circ f
+\begin{pmatrix}
+x \\ y
+ \end{pmatrix} 
+  =
+ (BA) \bm{x}
+ $$
+ で与えられる. 
+ \end{prop}
+
+
+\subsubsection{特別な行列}
+
+\begin{dfn}[転置行列]
+ 行列$A$の行と列を入れ替えた行列を\underline{転置行列}と言い${}^{t}A$とかく.
+ 
+$A$が$m\times n$行列なら${}^{t}A $は$n\times m$行列となり,  $A=[a_{ij}]_{m \times n}$とし, ${}^{t}A=[b_{ij}]_{n \times m}$と成分表示するとき, $b_{ij} =a_{ji}$となる. 
+\end{dfn}
+\begin{exa}
+ $
+ A = 
+ \begin{pmatrix}
+ 2 &5&8 \\
+ 3&2&1
+ \end{pmatrix}
+ \text{ についてその転置行列は}
+{}^{t}A = 
+ \begin{pmatrix}
+ 2 &3 \\
+ 5&2\\
+ 8&1
+ \end{pmatrix}
+  \text{であり, }
+ $
+ $
+{}^{t}({}^{t}A) = 
+ \begin{pmatrix}
+ 2 &5&8 \\
+ 3&2&1
+ \end{pmatrix}
+ =A
+ $
+ である.
+ 
+  $
+ A = 
+ \begin{pmatrix}
+ 3 &1 \\
+ 2&4
+ \end{pmatrix}
+ \text{ についてその転置行列は}
+{}^{t}A = 
+ \begin{pmatrix}
+ 3 &2 \\
+ 1&4\\
+ \end{pmatrix}
+  \text{であり, }
+ $
+  $
+{}^{t}({}^{t}A) = 
+ \begin{pmatrix}
+ 3 &1 \\
+ 2&4
+ \end{pmatrix}
+ =A
+ $
+ である.
+\end{exa}
+
+    \begin{prop}[転置行列の性質]
+    \text{}
+\begin{itemize}
+  \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+\item ${}^{t}({}^{t}A) =A$.
+\item\cite[問題 2.1.10]{O} ${}^{t}(AB) = {}^{t}B {}^{t}A$
+\end{itemize}
+  \end{prop}
+ 
+ \begin{dfn}
+
+\begin{itemize}
+\item  $
+ \begin{pmatrix}
+0 &0&0\\
+0 &0&0
+ \end{pmatrix}, 
+  \begin{pmatrix}
+0 &0\\
+0 &0
+ \end{pmatrix}, 
+   \begin{pmatrix}
+0 
+ \end{pmatrix}, 
+   \begin{pmatrix}
+0 &0\\
+0 &0 \\
+0&0
+ \end{pmatrix}
+ $
+ のように全ての成分が0の行列を\underline{ゼロ行列}という.
+ $m\times n$のゼロ行列を$O_{m, n}$とかく.(たまに$O$ともかく)
+ \item $n$次正方行列
+ $$
+ A =
+ \begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+a_{21}& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{n1}& a_{n2} & \cdots &a_{nn} \\
+\end{pmatrix}
+ $$
+ について, $a_{11}, a_{22}, \ldots, a_{nn}$を\underline{$A$の対角成分}という．
+ \item 対角成分以外0の行列を\underline{対角行列}という. 例えば以下の行列は対角行列である:
+  $$
+ \begin{pmatrix}
+5&0\\
+0 &1
+ \end{pmatrix}, 
+  \begin{pmatrix}
+3
+ \end{pmatrix}, 
+   \begin{pmatrix}
+2&0 &0\\
+0 &1 &0\\
+0&0&5
+ \end{pmatrix}
+ $$
+ \item 対角成分が全て1な$n$次対角行列を\underline{単位行列}と言い, $E_n$とかく. (たまに$E$ともかく)
+ 例えば以下の行列は単位行列である:
+   $$
+   E_2 =
+ \begin{pmatrix}
+1&0\\
+0 &1
+ \end{pmatrix}, 
+ E_1=
+  \begin{pmatrix}
+1
+ \end{pmatrix}, 
+ E_3=
+   \begin{pmatrix}
+1&0 &0\\
+0 &1 &0\\
+0&0&1
+ \end{pmatrix}
+ $$
+ \item  $n$次正方行列で$i>j$なる$i,j$について$a_ij=0$となる行列を\underline{上三角行列}という.
+ $$
+ A =
+ \begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+0& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+0&0  & \cdots &a_{nn} \\
+\end{pmatrix}
+ $$
+同様に$n$次正方行列で$j>i$なる$i,j$について$a_ij=0$となる行列を\underline{下三角行列}という.
+\item $A$を$n$次正方行列とするとき$A^{m} = \underbrace{A \cdots A}_{m \text{ 個}}$とする
+\item $A^{m}=O$となる行列を\underline{べきゼロ行列}(nilpotent)という.
+\item $AB=O$となる行列$A, B$を\underline{ゼロ因子}という. 
+ \end{itemize}
+  \end{dfn}
+
+
+\begin{prop}\cite[問題 2.1.3, 2.1.4]{O}
+行列の演算（和，差，スカラー倍，積）に関しては，行列 \( A, B, C \) と数 \( s, s' \) を任
+意にとるとき，次のような性質が成り立つ. 
+
+\begin{enumerate}
+\setlength{\parskip}{0cm}
+ \setlength{\itemsep}{0pt} 
+\item (和の可換性)\( A, B \) が同じ型をもつとき，\( A+B=B+A \)．
+\item (和の結合律) \( A, B, C \) が同じ型をもつとき，\( (A+B)+C=A+(B+C) \)．
+\item (積の結合律) \( AB, BC \) が定まるとき，\( (AB)C, A(BC) \) も定まり \( (AB)C=A(BC) \).
+\item (スカラー倍の結合律)\( (s's)A=s'(sA) \).
+\item (スカラー倍の結合律) \( AB \) が定まるとき，\( (sA)B=s(AB) \).
+\item (スカラー倍の分配法則) \( (s+s')A=sA+s'A \).
+\item (スカラー倍の分配法則) \( A, B \) が同じ型をもつとき，\( s(A+B)=sA+sB \).
+\item (積の分配法則) \( AB, AC \) が定まるとき，\( A(B+C)=AB+AC \).
+\item (積の分配法則) \( AC, BC \) が定まるとき，\( (A+B)C=AC+BC \).
+\end{enumerate}
+\end{prop}
+これは覚えなくて良い. また\cite[問題 2.1.3, 2.1.4]{O}と演習問題にあるがそこまで重要ではない. 
+
+\begin{rem}
+こちらより下の命題の方が重要な気がする. 
+  \begin{prop}
+    \label{prop-2.3}
+$n$次正方行列の全体は和と積に関して以下の性質を満たす. 
+\begin{enumerate}
+\setlength{\parskip}{0cm}
+ \setlength{\itemsep}{0pt} 
+\item (和の交換法則) $A+B = B+A$
+\item (和の結合法則) $(A+B) + C = A + (B+C)$
+\item (ゼロ元の存在) $A+O = O+A=A$
+\item (和の逆元の存在) $-A$を$(-1)A$で定義するとき, $A + (-A)=O$
+\item (積の結合法則) $(AB) C = A (BC)$
+\item (単位元の存在) $AE =EA=A$
+\item (分配法則) $A(B+C)=AB + AC, (A+B)C = AC + BC$
+\end{enumerate}
+このとき$n$次正方行列の全体は行列環と呼ばれる.
+\end{prop}
+
+ %一般に環(ring)は集合に和と積の演算があって命題\ref{prop-2.3}のような性質を満たすものである. 
+% 例えば整数の集合$\Z$, 有理数の集合$\Q$などがそれに当たる.
+ また行列は一般的に$AB \neq BA$である. このような環を非可換環という. 
+% 一方で$AB=BA$となる環を可換環という. 
+ %私の研究はどちらかというと可換環の方面である.  
+なお上のような法則は暗記する必要はない. 私も忘れていた.
+ \end{rem}
+ 
+ \subsubsection{正則行列・逆行列}
+    \begin{dfn}
+    \label{dfn-regular}
+$A$を$n$次正方行列とする.
+ ある行列$B$があって
+ $$
+ AB =BA =E 
+ $$
+ となるとき\underline{$B$を$A$の逆行列}といい$B=A^{-1}$とかく.
+ 
+ 行列$A$が逆行列$A^{-1}$を持つとき, $A$は\underline{正則行列}という(\underline{$A$は正則である}ともいう).
+  \end{dfn}
+  正則行列の存在の判定法, 逆行列の計算方法は後に出てくる. 
+ 
+ \begin{exa}
+ $A=
+  \begin{pmatrix}
+ 1& -5  \\
+ 0& 1  \\
+ \end{pmatrix} 
+ $
+ の逆行列は
+  $A^{-1}=
+  \begin{pmatrix}
+ 1& 5  \\
+ 0& 1  \\
+ \end{pmatrix} 
+ $
+ である. \\ 
+ 実際
+  $
+  \begin{pmatrix}
+ 1& -5  \\
+ 0& 1  \\
+ \end{pmatrix} 
+  \begin{pmatrix}
+ 1& 5  \\
+ 0& 1  \\
+ \end{pmatrix} 
+=
+  \begin{pmatrix}
+ 1& 5  \\
+ 0& 1  \\
+ \end{pmatrix} 
+   \begin{pmatrix}
+ 1& -5  \\
+ 0& 1  \\
+ \end{pmatrix} 
+ =
+   \begin{pmatrix}
+ 1& 0 \\
+ 0& 1  \\
+ \end{pmatrix} 
+ $
+ である.
+ 特に$A$は正則行列である. 
+ \end{exa}
+
+  \begin{exa}\cite[例 2.1.2]{O}
+  $
+   A=\begin{pmatrix}
+ 1& 1 \\
+ 1& 1  \\
+ \end{pmatrix} 
+ $
+ は逆行列を持たない. 特に$A$は正則行列ではない.
+  \end{exa}
+
+
+ \begin{exa}\cite[例 2.1.4]{O}
+2次正方行列
+ $A=
+  \begin{pmatrix}
+ a& b  \\
+ c& d  \\
+ \end{pmatrix} 
+ $
+ について
+  $ad-bc \neq 0$ならば, $A$は逆行列を持ち
+ $$
+ A^{-1} =   
+ \frac{1}{ad-bc}
+ \begin{pmatrix}
+ d& -b  \\
+ -c& a  \\
+ \end{pmatrix} 
+ \text{\,\,\,である.}
+ $$
+  特に$A$は正則行列である. 
+ \end{exa}
+ 
+ 
+\begin{prop}\cite[命題 2.1.1]{O}
+$A, B, C$を$n$次正方行列とする. 
+$BA=AC=E_n$ならば$B=C$である. 
+特に$A$が正則ならば, 逆行列はただ一つに定まる. 
+\end{prop}
+
+
+
+\subsubsection{行列のブロック分解}
+ 行列をいくつかの行列に分割して書くことがある.
+例えば
+$$
+A = \begin{pmatrix}
+A_{11}& A_{12} & \cdots &A_{1n}\\
+A_{21}& A_{22} & \cdots &A_{2n}\\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+A_{m1}& A_{m2} & \cdots &A_{mn} \\
+\end{pmatrix}
+$$
+と言うふうに書くことである.
+特に行ベクトル, 列ベクトルでこの表記をすることが多い.
+
+
+\begin{exa}
+$
+A=
+  \begin{pmatrix}
+ 1 &3&4&4 \\
+ 2&1&0&-1\\
+ 1&0&5&0
+ \end{pmatrix}
+ = 
+   \begin{pmatrix}
+\bm{a}_1&\bm{a}_2&\bm{a}_3&\bm{a}_4
+ \end{pmatrix}
+$.
+ここで$\bm{a}_1, \bm{a}_2, \bm{a}_3, \bm{a}_4$は次で定義する. 
+$$
+\bm{a}_1 = 
+  \begin{pmatrix}
+ 1 \\2 \\1
+ \end{pmatrix},\quad
+ \bm{a}_2 = 
+  \begin{pmatrix}
+ 3 \\1 \\0
+ \end{pmatrix},\quad
+  \bm{a}_3 = 
+  \begin{pmatrix}
+ 4 \\0 \\5
+ \end{pmatrix},\quad
+  \bm{a}_4 = 
+  \begin{pmatrix}
+ 4 \\-1 \\0
+ \end{pmatrix}.
+$$
+\end{exa}
+\begin{exa}
+$
+A=
+  \begin{pmatrix}
+ 1 &3&4&4 \\
+ 2&1&0&-1\\
+ 1&0&5&0
+ \end{pmatrix}
+ = 
+   \begin{pmatrix}
+\bm{b}_1\\ \bm{b}_2\\ \bm{b}_3
+ \end{pmatrix}
+$.
+ここで$\bm{b}_1, \bm{b}_2, \bm{b}_3$は次で定義する. 
+$$
+\bm{b}_1 = 
+  \begin{pmatrix}
+ 1 &3 &4&4
+ \end{pmatrix},\quad
+\bm{b}_2= 
+  \begin{pmatrix}
+ 2&1 &0&-1
+ \end{pmatrix},\quad
+ \bm{b}_3 = 
+  \begin{pmatrix}
+ 1 &0 &5&0
+ \end{pmatrix}.
+ $$
+\end{exa}
+
+よく使う方法は
+$$
+A   =
+\begin{pmatrix}
+a_{11}& a_{12} &a_{13}& a_{14} & a_{15}  \\
+a_{21}& a_{22} & a_{23}& a_{24} & a_{25}   \\
+a_{31}& a_{32} &a_{33}& a_{34} & a_{35}  \\
+a_{41}& a_{42} &a_{43}& a_{44} & a_{45}  \\
+\end{pmatrix}
+=
+    \begin{pmatrix}
+    \bm{a}_1&\bm{a}_2&\bm{a}_3&\bm{a}_4&\bm{a}_5
+    \end{pmatrix}
+$$
+と書く方法で, これによって
+$$
+BA
+=
+    \begin{pmatrix}
+    B\bm{a}_1&B\bm{a}_2&B\bm{a}_3&B\bm{a}_4&B\bm{a}_5
+    \end{pmatrix}
+$$
+と書くことができる. 
+
+
+
+\subsection{行列の基本変形 \cite[2.2節]{O}}
+以下体$K$上で考える. 
+
+
+ \subsubsection{行基本変形}
+
+
+    \begin{dfn}[{\cite[定義 2.2.1]{O}行基本変形・列基本変形}]
+    \label{dfn-basic-trans}
+ 行列$A$の次の3つの変形を行基本変形という.
+ \begin{enumerate}
+   \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+  \item[(I)] $A$の第$i$行を$\lambda$倍($\lambda\neq 0$)する.
+ \item[(II)] $A$の第$i$行と$A$の第$j$行を入れ替える.
+ \item[(III)] $A$の第$j$行の$\lambda$倍を$A$の第$i$行に加える. 
+ \end{enumerate}
+   同様に列基本変形を, 上の定義において"行"の部分を"列"に変えたものとする. 
+  \end{dfn}
+行列の転置を取れば同じことなので, 基本的には行基本変形を用いる. 
+\xr{\cite[例 2.2.2]{O}を見る.}
+\begin{exa}
+$
+ \begin{pmatrix}
+ 1& 2& -3  \\
+ 1& 1& 1  \\
+ \end{pmatrix}
+ $
+ を基本変形で変形すると次のとおりである.
+ %\footnote{「$\maru{2} + \maru{1}\times(-1)$」は「行列の2行目に1行目の(-1)倍を加える」を意味している.}
+ \begin{align*}
+  \begin{pmatrix}
+ 1& 2& -3  \\
+ 1& 1& 1  \\
+ \end{pmatrix}
+ \longrightarrow %\overset{\text{$\maru{2} + \maru{1}\times(-1)$}}{\longrightarrow} 
+   \begin{pmatrix}
+ 1& 2& -3  \\
+ 0& -1& 4  \\
+ \end{pmatrix}
+ \longrightarrow %\overset{\text{$\maru{2} \times(-1)$}}{\longrightarrow} 
+   \begin{pmatrix}
+ 1& 2& -3  \\
+ 0& 1& -4  \\
+ \end{pmatrix}
+ \longrightarrow %  \overset{\maru{1} + \maru{2}\times(-1)}{\longrightarrow} 
+   \begin{pmatrix}
+ 1& 0& 5  \\
+ 0& 1& -4  \\
+ \end{pmatrix}.
+  \end{align*}
+
+\end{exa}
+
+   \begin{prop}[{\cite[命題2.2.3]{O} 行基本変形の可逆性}]
+    \label{thm-inv-basic}
+3つの行基本変形はそれぞれ逆変換が存在し, その逆変換もまた行基本変形である. 
+より詳しく言うと次が言える. 
+ \begin{enumerate}
+   \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+  \item[(I)] の逆変換は, $A$の第$i$行を$\lambda^{-1}$倍($\lambda\neq 0$)する変換.
+ \item[(II)] の逆変換は, $A$の第$i$行と$A$の第$j$行を入れ替える変換.
+ \item[(III)]の逆変換は, $A$の第$j$行の$-\lambda$倍を$A$の第$i$行に加える変換.
+ \end{enumerate}
+ 
+
+特に$A$に行基本変形を何回か繰り返して$A'$に変換できるとき, $A'$に行基本変形を何回か繰り返して$A$に変換できる. 
+  \end{prop}
+
+  \subsubsection{基本行列}
+  
+ 基本行列の定義に関しては \cite[定義 2.2.4]{O}参照.(ただし基本行列の定義はそこまで重要ではなく次の性質が重要である)
+ \xr{\cite[定義 2.2.4]{O}を見る.}
+ 
+ 
+
+ \begin{prop}[{\cite[命題 2.2.6]{O} 基本行列と基本変形}]
+    \label{thm-basic}
+    $A$を$m \times n$行列, $s\in \R$, $i,j = 1, \ldots, m$とする.  
+  $E_n(i, s), E_{n}(i,j), E_n(i, j,s)$を\cite[定義 2.2.4]{O}にある基本行列とする. 
+  
+ \begin{enumerate}
+   \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+  \item[(I)] 行列$E_n(i, s)$は, $A$の第$i$行を$s$倍した行列である. ただし$s \neq 0$とする. 
+    \item[(II)] 行列$E_{n}(i,j)A$は, $A$の第$i$行と第$j$行を入れ替えた行列である． 
+      \item[(III)] 行列$E_{n}(i,j, s)A$は, $A$の第$j$行の$s$倍を第$i$行に加えた行列である.  \end{enumerate} 
+  \end{prop}
+  命題\ref{thm-inv-basic}から直ちにしたがう.
+\begin{prop}
+\begin{enumerate}
+\item \cite[命題 2.2.7]{O}
+基本行列は正則で逆行列(定義\ref{dfn-regular})を持ち, 逆行列もまた基本行列となる.\xr{詳しい形は\cite[命題 2.2.7]{O}を見る.}
+\item \cite[命題 2.2.8]{O}
+$m \times n$行列$A$に行基本変形を何回か繰り返して$A'$に変換できるとき, ある$m$次正則行列$P$があって
+$A'=PA$となる. 
+\item \cite[命題 2.2.9]{O}$m \times n$行列$A$について$(m, m+n)$型行列を$\widetilde{A}=(A , E_m)$とする. $(m, n)$型行列$A'$と$m$次正方行列$B$があって, $\widetilde{A}$を行基本変形を用いて$(A', B)$となるとする. このとき$B$は上の(2).における$P$に等しく, 特に$A'=PA=BA$となる. 
+\end{enumerate}
+  \end{prop}
+ 
+
+\subsection{行列の簡約化や標準化と行列の階数 \cite[2.3節]{O}}
+
+\subsubsection{行列の簡約化や標準化}
+以下基本変形などは行のみ考える. 列は同様に定義する. 
+
+    \begin{dfn}[先頭項]
+   \label{dfn-main}
+  行列$A$の第$i$行の\underline{先頭項}とは, それぞれの行の最初に現れる0でない成分のことを言う. 
+  \end{dfn}
+\xr{\cite[例 2.3.1]{O}を見る.}
+ 
+ \begin{exa}
+ $$
+  \begin{pmatrix}
+\xr{1} & 2&3\\
+0 & 0&\xr{5}\\
+0 & 0&0\\
+0 & \xr{3}&0\\ 
+ \end{pmatrix}
+ $$
+ の先頭項は赤色のものである. 
+ \end{exa}
+
+
+\begin{dfn}[{\cite[定義 2.3.2 ]{O} 行簡約行列}]
+  行列$A$が次の4つの条件を満たすとき, $A$を\underline{行簡約行列}という.
+  \begin{enumerate}
+  	\setlength{\parskip}{0cm}
+  	\setlength{\itemsep}{0pt} 
+\item \( A \) のある行がゼロベクトルならば，その行より下の行はすべてゼロベクトルである． (全ての成分が0である行は0以外の値を含む行より下側)
+\item ゼロベクトルでないすべての行において先頭項は 1 である. (先頭項は全て1.)
+\item 第 \( i \) 行と第 \( i+1 \) 行がともに先頭項をもつとき，第 \( i+1 \) 行の先頭項は第 \( i \) 行の先頭項より右にある． (右側の列に行くほど, 先頭項は下側.)
+\item すべての行の先頭項に対して，先頭項と同じ列の他の成分はすべ
+て 0 である． (先頭項を持つ列は, その先頭項を除く全てが0.)
+  \end{enumerate}
+  \end{dfn}
+列簡約行列も同様に定める. 
+
+\begin{defn}[{\cite[定義 2.3.2 ]{O} 標準形}]
+$m \times n$行列$A$がある$s$を用いて
+$$
+A=
+\begin{pmatrix}
+E_s & O_{s,n-s}\\
+O_{m-s,s} & O_{m-s,n-s}
+\end{pmatrix}
+$$
+と表せるとき， A は\underline{標準形}であるという．
+これは$A$が行簡約かつ列簡約であることと同値である. 
+\end{defn}
+
+ 
+ \begin{exa}
+以下の行列は全て簡約な行列である.
+$$
+ \begin{pmatrix}
+ 0& 1& 3  & 0&2\\
+ 0& 0& 0  & 1&1\\
+ 0& 0& 0 & 0&0\\
+ \end{pmatrix}
+  \begin{pmatrix}
+ 1& 0& 1  & 4&0&-1\\
+ 0& 1& 7 & -4&0&1\\
+ 0& 0& 0 & 0&1&3\\
+ \end{pmatrix}
+   \begin{pmatrix}
+ 0& 0& 0  & 1&6&0&3&0\\
+ 0& 0& 0 & 0&0&1&2&0\\
+ 0& 0& 0 & 0&0&0&0&0 \\
+ \end{pmatrix}
+$$
+\end{exa}
+ \begin{exa}
+ 次に簡約ではない行列の例を理由とともに挙げる.
+ \begin{itemize}
+\item 
+$ 
+\begin{pmatrix}
+ 1& 0& 1  & 1&0\\
+ 0& 0& 0  & 0&0\\
+ 0& 0& 0 & 0&1\\
+ \end{pmatrix} 
+ $
+ は1番目の条件が満たされていないので簡約ではない.
+ \item 
+$ 
+\begin{pmatrix}
+ 1& 0& 1  & 1&0\\
+ 0& 0& 0  & 0&3\\
+ \end{pmatrix} 
+ $
+ は2番目の条件が満たされていないので簡約ではない.
+ \item 
+$ 
+\begin{pmatrix}
+ 0& 0& 1  & 0&0\\
+ 1& 0& 0  & 0&0\\
+ \end{pmatrix} 
+ $
+ は3番目の条件が満たされていないので簡約ではない.
+ \item 
+$ 
+\begin{pmatrix}
+ 1& 0& 1  & 1&0\\
+ 1& 0& 0  & 0&1\\
+ \end{pmatrix} 
+ $
+ は4番目の条件が満たされていないので簡約ではない.
+ \end{itemize}
+\end{exa}
+\xr{\cite[例 2.3.4]{O}を見る.}
+ 
+
+
+    \begin{thm}\cite[定理 2.3.5]{O}
+    \label{thm-kanyakuka}
+    \begin{enumerate}
+    \item 任意の行列$A$は行基本変形を繰り返して, 行簡約行列に変形できる. この操作を行簡約化と言う. (列も同様)
+\item 任意の行列$A$は行基本変形と列基本変形を繰り返して, 標準形に変形できる. この操作を標準化という. 
+    \end{enumerate}
+   \end{thm}
+
+\begin{thm}\cite[定理 2.3.6]{O}
+    \label{thm-kanyakuka-unique}
+\begin{enumerate}
+\item 行列$A$の行簡約化は(行基本変形のやり方によらず)ただ一つに定まる. (列も同様)
+\item 行列$A$の標準化は(行基本変形・列基本変形のやり方によらず)ただ一つに定まる.
+\item 行列の行簡約化における0でない行の個数, 行列の列簡約化における０でない列の個数, 行列の行標準化における0でない単位行列の次数は全て等しい. 
+\end{enumerate}
+\end{thm}
+
+\xr{2.3.5, 2.3.6の証明は後に回す. 大変なので$3 \times 5$行列で証明する.}
+ 
+ 
+    \begin{dfn}[{\cite[定義 2.3.7]{O} 階数(rank)}]
+   \label{dfn-rank}
+$A$を行列とし, $B$を$A$に基本変形を繰り返して得られた行簡約行列とする. 
+${\rm rank}(A)$を$B$のゼロベクトルでない行の個数とし\underline{$A$の階数(ランク)}と呼ぶ.
+   \end{dfn}
+ \cite[定義 2.3.7]{O}と定義が少し違うが, 定理\ref{thm-kanyakuka-unique}より同じである. 
+ 
+\begin{exa}
+$A=
+ \begin{pmatrix}
+ 0& 1& 3  & 0&2\\
+ 0& 0& 0  & 1&1\\
+ 0& 0& 0 & 0&0\\
+ \end{pmatrix}
+ $
+ とすると, これは簡約な行列でありゼロベクトルでない行の個数は2個である. よって${\rm rank}(A)=2$.
+ 
+ $B= \begin{pmatrix}
+ 1& 0& 1  & 4&0&-1\\
+ 0& 1& 7 & -4&0&1\\
+ 0& 0& 0 & 0&1&3\\
+ \end{pmatrix}
+ $ とすると, これは簡約な行列でありゼロベクトルでない行の個数は3個である. よって${\rm rank}(B)=3$.
+\end{exa}
+
+
+
+ 
+ \subsubsection{行簡約化のやり方}
+ 
+ 
+\url{https://www2.sci.hokudai.ac.jp/dept/math/wp/wp-content/uploads/2020/05/vol1.pdf}の説明がわかりやすかったので参考にした. 
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+        \begin{suma}[行簡約化のやり方]
+\label{suma-gyokanyaku}
+行列の行基本変形を用いた行簡約化は次のように行う.
+\begin{enumerate}[label=\textbf{操作}\arabic*.]
+    \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+ \item 各行の先頭項のうち, 一番左にあるものを含む行の一つをとり, 行基本変形(II)で 1 行目と入れ替える. 
+\item 1 行目の先頭項を行基本変形の(I)で 1 にする.
+\item 1 行目の先頭項を含む列について, その先頭項以外の成分を行基本変形の(III)で 0 にする.
+\item 各行の先頭項のうち, 一番左にあるものを含む行の一つをとり, 行基本変形(II)で 2行目と入れ替える. 
+\item 2 行目の先頭項を行基本変形の(I)で 1 にする.
+\item 2 行目の先頭項を含む列について, その先頭項以外の成分を行基本変形の(III)で 0 にする.
+\item 以下3行目, 4行目と操作4-6が終わるまで繰り返していく. 
+ \end{enumerate}
+\end{suma}
+ \end{tcolorbox}
+
+
+
+\begin{rem}
+%実際に連立1次方程式をプログラミングで解くときも, 掃き出し法・ガウスの消去法によって解きます. 実際にc++で書いたソースコードを以下のホームページで見ることができます.
+実際に行列を簡約化するプログラミングは上の方法を使って作られる.  \url{https://drken1215.hatenablog.com/entry/2019/03/20/202800}
+\end{rem}
+ 
+
+\begin{exa}
+$
+ \begin{pmatrix}
+ 1& 0& 2  &1\\
+ 2& 1& 1  &0\\
+ 0& 1& 1  &0\\
+ \end{pmatrix}
+ $
+ を行基本変形で簡約化すると次のとおりである.
+ 
+ \begin{align*}
+ &\begin{pmatrix}
+ 1& 0& 2  &1\\
+ 2& 1& 1  &0\\
+ 0& 1& 1  &0\\
+ \end{pmatrix}
+\longrightarrow  % \overset{\maru{2} + \maru{1}\times(-2)}{\longrightarrow} 
+\begin{pmatrix}
+ 1& 0& 2  &1\\
+ 0& 1& -3 &-2\\
+ 0& 1& 1  &0\\
+ \end{pmatrix}
+\longrightarrow  %\overset{\maru{3} + \maru{2}\times(-1)}{\longrightarrow} 
+\begin{pmatrix}
+ 1& 0& 2  &1\\
+ 0& 1& -3 &-2\\
+ 0& 0& 4  &2\\
+ \end{pmatrix}
+ \\ %%
+ & \longrightarrow 
+ %\overset{\maru{3}\times \frac{1}{2}}{\longrightarrow} 
+\begin{pmatrix}
+ 1& 0& 2  &1\\
+ 0& 1& -3 &-2\\
+ 0& 0& 2  &1\\
+ \end{pmatrix} 
+ \longrightarrow %\overset{\maru{1} + \maru{3}\times (-1)}{\underset{\maru{2} + \maru{3}\times \frac{3}{2}}{\longrightarrow}}
+ \begin{pmatrix}
+ 1& 0& 0  &0\\
+ 0& 1& 0 &-\frac{1}{2}\\
+ 0& 0& 2  &1\\
+ \end{pmatrix} 
+ \longrightarrow % \overset{\maru{3}\times \frac{1}{2}}{\longrightarrow} 
+  \begin{pmatrix}
+ 1& 0& 0  &0\\
+ 0& 1& 0 &-\frac{1}{2}\\
+ 0& 0& 1 &\frac{1}{2}\\
+ \end{pmatrix}.
+ \end{align*}
+   よってこの行列の階数(ランク)は3である.
+ \end{exa}
+ 
+ \xr{\cite[例 2.3.8]{O}を見る.}
+ 
+
+定理\ref{thm-kanyakuka}から次を得る．
+ \begin{thm}
+    任意の行列は行簡約行列と基本行列(定理\ref{thm-basic})の積で書ける．
+ \end{thm}
+ 
+ \begin{lem}\cite[注意 2.3.9]{O}
+          \label{thm-regular-0}
+ $A$を行列とする. 
+ \begin{itemize}
+ \item $m \times n$行列$A$について$0 \le {\rm rank}A \le \min\{m, n\}$
+ \item ${\rm rank} A=0$であることは, $A=0$と同値
+ \item ${\rm rank} {}^tA={\rm rank}A$
+ \item $n$次正方行列において, 次は同値
+ \begin{enumerate}
+ \item ${\rm rank}A=n$
+ \item $A$の行簡約化が$E_n$
+  \item $A$の列簡約化が$E_n$
+  \item $A$の標準化が$E_n$
+ \end{enumerate}
+
+ \end{itemize}
+
+ \end{lem}
+
+
+ \subsection{行基本変形による連立1次方程式の解法  \cite[2.4節]{O}}
+
+\subsubsection{係数行列・拡大係数行列}
+
+    \begin{dfn}[{\cite[定義 2.4.1]{O} 係数行列, 拡大係数行列}]
+$m$個の式からなる$n$変数連立1次方程式
+\begin{equation*}
+%\label{equation}
+\left\{ 
+\begin{matrix}
+a_{11}x_1&+& a_{12} x_2& +&\cdots &+&a_{1n}x_n &= &b_1 \\
+a_{21}x_1&+& a_{22} x_2& +&\cdots &+&a_{2n}x_n &= &b_2 \\
+\vdots		&& 	\vdots				 && 		& &\vdots&&\vdots	\\
+a_{m1}x_1&+& a_{m2} x_2& +&\cdots &+&a_{mn}x_n &= &b_m \\
+\end{matrix}
+\right.
+\text{に対して}
+\end{equation*}
+$$
+A=\begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+a_{21}& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{m1}& a_{m2} & \cdots &a_{mn} \\
+\end{pmatrix}
+\bm{x} =\begin{pmatrix}
+x_1\\x_2\\\vdots\\x_n
+\end{pmatrix}
+\bm{b} =\begin{pmatrix}
+b_1\\b_2\\\vdots\\b_m
+\end{pmatrix}
+\text{とおく.}
+$$
+行列$A$を連立1次方程式の\underline{係数行列}といい, 
+$$
+\widetilde{A}=
+[A : \bm{b}] = \begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} & b_1\\
+a_{21}& a_{22} & \cdots &a_{2n} &b_2\\
+\vdots& \vdots	&	\ddots   &	\vdots&\vdots \\
+a_{m1}& a_{m2} & \cdots &a_{mn}&b_m \\
+\end{pmatrix}
+\text{を連立1次方程式の\underline{拡大係数行列}という.}
+$$
+
+ これにより上の連立1次方程式は$A\bm{x}=\bm{b}$とかける.
+  \end{dfn}
+  
+  \begin{rem}
+  列基本変形を考えれば次がわかる. 
+  $$
+   {\rm rank}A \le \min\{m, n\}
+   \quad
+ {\rm rank}A \le  {\rm rank} \widetilde{A} \le  {\rm rank}A+1
+  $$
+  
+  \end{rem}
+
+ \begin{exa}
+ 連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+2x&+&3y& = &7 \\
+x&-&4y& = &9 \\
+\end{matrix}
+\right.
+ $
+ について, 係数行列は
+ $A = 
+ \begin{pmatrix}
+ 2 & 3 \\
+ 1 & -4
+ \end{pmatrix}
+ $
+ で, 拡大係数行列は
+ $[A : \bm{b}] = 
+  \begin{pmatrix}
+ 2 & 3  &7\\
+ 1 & -4 &9
+ \end{pmatrix}
+ $
+ である.
+ \end{exa}
+ 
+  \begin{exa}
+ 連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+3x_1&-&2x_2& +& x_3 &+& 4x_4 &=& 7 \\
+x_1 &  & 	   & -& 3x_3 &+& x_4 &=& 5 \\
+2x_1&-& x_2& +& 9x_3 & & 	 &=& 0 \\
+\end{matrix}
+\right.
+ $
+ について, \\
+ 係数行列は
+ $A = 
+ \begin{pmatrix}
+ 3 & -2  & 1&4\\
+ 1 & 0   & -3&1\\
+2 & -1  & 9&0\\
+ \end{pmatrix}
+ $
+ で, 拡大係数行列は
+ $[A : \bm{b}] = 
+ \begin{pmatrix}
+ 3 & -2  & 1&4 & 7\\
+ 1 & 0   & -3&1 &5\\
+2 & -1  & 9&0 & 0\\
+ \end{pmatrix}
+ $
+ である.
+ \end{exa}
+
+\subsubsection{ガウス・ジョルダンの消去法・掃き出し法}
+
+\xr{\cite[定理 2.4.2]{O}の前に連立1次方程式の具体例を扱う. }
+
+    \begin{lem}[{\cite[定義 2.4.3, 補題 2.4.4]{O}行基本変形と連立1次方程式}]
+    \label{lem-gyokihon-renritsu}
+連立1次方程式$A\bm{x}=\bm{b}$とその拡大係数行列$[A:\bm{b}]$について, 次が成り立つ.
+ \begin{enumerate}
+   \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+   \item 「連立1次方程式の$i$番目の方程式を$\lambda$倍($\lambda\neq 0$)する」ことは, 「拡大係数行列$[A:\bm{b}]$の第$i$行を$\lambda$倍($\lambda\neq 0$)する」ことに対応する. 
+ \item 「連立1次方程式の$i$番目の方程式と$j$番目の方程式を入れ替える」ことは, 「拡大係数行列$[A:\bm{b}]$の第$i$行と$A$の第$j$行を入れ替える」ことに対応する. 
+ \item 「連立1次方程式の$j$番目の方程式の$\lambda$倍を$i$番目の方程式に加える」ことは, 「拡大係数行列$[A:\bm{b}]$の第$j$行の$\lambda$倍を$A$の第$i$行に加える」ことに対応する. 
+ \end{enumerate}
+ 
+ 特に$[A: \bm{b}]$の行基本変形によって$[A' : \bm{b}']$が得られたとき, 
+ 連立1次方程式$A\bm{x}=\bm{b}$の解と$A'\bm{x}=\bm{b}'$の解は一致する. 
+  \end{lem}
+  
+行基本変形を用いて連立1次方程式の解を求める方法を\underline{ガウス・ジョルダンの消去法(掃き出し法)}という.
+
+ \begin{exa}
+ 連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+2x&+&3y& = &7 \\
+x&-&4y& = &9 \\
+\end{matrix}
+\right.
+ $
+ はガウスの消去法で解けて, 解は$x = 5, y=-1$である. 
+これは拡大係数行列
+ $[A : \bm{b}] = 
+  \begin{pmatrix}
+ 2 & 3  &7\\
+ 1 & -4 &9
+ \end{pmatrix}
+ $
+の行基本変形(定義\ref{dfn-basic-trans})の変換と対応がある. 
+ \end{exa}
+
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+        \begin{suma}[$A\bm{x} =\bm{b}$の解きかた(掃き出し法・ガウスの消去法)]
+\label{suma-gauss}
+(斉次)連立1次方程式
+\begin{equation*}
+%\label{equation}
+\left\{ 
+\begin{matrix}
+a_{11}x_1&+& a_{12} x_2& +&\cdots &+&a_{1n}x_n &= &b_1\\
+a_{21}x_1&+& a_{22} x_2& +&\cdots &+&a_{2n}x_n &= &b_2 \\
+\vdots		&& 	\vdots				 && 		& &\vdots&&\vdots	\\
+a_{m1}x_1&+& a_{m2} x_2& +&\cdots &+&a_{mn}x_n &= &b_m \\
+\end{matrix}
+\right.
+\end{equation*}
+は以下の手順で解くことができる. 
+     \begin{enumerate}
+    \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+ \item  連立方程式$A\bm{x} =\bm{b}$から拡大係数行列
+ $$
+ [A:\bm{b}]=\begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} &b_1\\
+a_{21}& a_{22} & \cdots &a_{2n} &b_2\\
+\vdots& \vdots	&	\ddots   &	\vdots &\vdots\\
+a_{m1}& a_{m2} & \cdots &a_{mn} &b_m\\
+\end{pmatrix}
+\text{とおく.}
+ $$
+ \item 定理\ref{thm-kanyakuka}のように拡大係数行列$[A:\bm{b}]$に行基本変形を繰り返して標準形(簡約行列)$[C:\bm{d}]$を得る.
+ \item $C \bm{x}=\bm{d}$をとく. 補題\ref{lem-gyokihon-renritsu}より. これが連立方程式$A\bm{x} =\bm{b}$の解になる. 
+ \end{enumerate}
+\end{suma}
+ \end{tcolorbox}
+   \xr{\cite[例 2.4.5]{O}を見る.}
+
+ 
+ \begin{exa}
+連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+x_1&-&2x_2&   &		&+&3x_4& &	&= 2 \\
+x_1&-&2x_2& + &x_3&+&2x_4&+&x_5&= 2 \\
+2x_1&-&4x_2& + &x_3&+&5x_4&+&2x_5&= 5 \\
+\end{matrix}
+\right.
+ $
+ を解け.
+ 
+ (解). 拡大係数行列は 
+ $[A:\bm{b}]=
+  \begin{pmatrix}
+ 1& -2& 0 & 3& 0& 2   \\
+  1& -2& 1& 2& 1& 2   \\
+ 2& -4& 1 & 5& 2& 5   \\
+ \end{pmatrix}
+ $
+ である. これを基本変形で簡約化すると
+ $
+  \begin{pmatrix}
+ 1& -2& 0 & 3& 0& 2   \\
+ 0& 0& 1& -1& 0& 1   \\
+ 0& 0& 0 & 0& 1& 1   \\
+ \end{pmatrix}
+ $
+ となる.
+ これをもう一回式に書き下すと
+ $$
+\left \{
+ \begin{matrix}
+x_1&-&2x_2&   &		&+&3x_4& &	&= 2 \\
+      & &		&   &x_3       &- & x_4& &       &= -1 \\
+      & & &   &    & &		& & x_5&= 1 \\
+\end{matrix}
+\right.
+\text{である.}
+ $$
+ 
+以上より解は
+$
+ \left\{ 
+\begin{matrix}
+x_1&=& 2 +2c_2 -3c_4\\
+x_2&=&c_2 \\
+x_3&=& -1 + c_4\\
+x_4&=&c_4 \\
+x_5&=& 1\\
+\end{matrix}
+\text{\,\, ($c_2, c_4$は任意)}
+\right.
+$
+となる. 
+ 
+解の書き方として
+$
+\begin{pmatrix}
+x_1\\
+x_2 \\
+x_3 \\
+x_4 \\
+x_5 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+2\\
+0 \\
+-1 \\
+0\\
+1 \\
+\end{pmatrix}
++ s
+\begin{pmatrix}
+2\\
+1\\
+0\\
+0\\
+0 \\
+\end{pmatrix}
++ t
+\begin{pmatrix}
+-3\\
+0\\
+1\\
+1\\
+0 \\
+\end{pmatrix}
+(s, t \in \R)
+$
+と書くこともある.
+
+この$s, t$がパラメーターである. この方程式の解は2個である. 
+ \end{exa}
+ 
+     \begin{thm}
+         \label{thm-regular-1}
+    $A$を$m \times n$行列とする. 
+     \begin{enumerate}
+    \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+ \item \cite[定理 2.4.2]{O}
+ 連立1次方程式$A\bm{x} =\bm{b}$が解を持つことは, ${\rm rank}(A)={\rm rank}( [A:\bm{b}])$であることと同値. 
+ \item \cite[定理 2.4.6]{O}
+ $r={\rm rank}(A)={\rm rank}( [A:\bm{b}])$のとき,  連立1次方程式$A\bm{x} =\bm{b}$の解は$n - r$個のパラメーターで表示される. つまりある$\bm{v}_1, \ldots, \bm{v}_{n-r} \in K^n$と$A\bm{w} =\bm{b}$となる$\bm{w} \in K^n$があって, $A\bm{x} =\bm{b}$の解はある$c_1, \ldots, c_{n-r} \in K$があって
+$$
+\bm{x} = \bm{w} + c_1\bm{v}_1 + \cdots + c_{n-r}\bm{v}_{n-r} 
+$$
+とかける. 
+\item
+\cite[系 2.4.8]{O} $A\bm{x} =\bm{0}$の解が$\bm{x}=0$以外の解を持つことは, ${\rm rank}(A) <n$が成り立つことと同値である. 
+ \end{enumerate}
+\end{thm}
+
+ \xr{\cite[例 2.4.7]{O}を見る. また$\mathbb{F}_5$または$\mathbb{F}_7$の場合はどうなる?}
+
+
+\subsection{基本変形による逆行列の計算 \cite[2.5節]{O}}
+
+    \begin{prop}\cite[命題 2.5.3]{O}
+    $A, B$を$n$次正方行列とする. 
+    $BA=E_n$ならば$A, B$は正則であり, $AB=E_n$である. 
+  \end{prop}
+
+ 
+    \begin{thm}\cite[命題 2.5.1, 定理 2.5.4]{O}
+    \label{thm-regular-2}
+$A$を$n$次正方行列とするとき, 以下は同値.
+    \begin{enumerate}
+  \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+\item $\rank (A) =n$
+\item $A$は正則行列.
+\item $A$は基本行列の積として表される. 
+\item $n \times 2n$行列$[A : E_n]$の行簡約化が$[E_n : B]$となる. 
+\end{enumerate}
+また4の$B$が$A$の逆行列となる. 
+   %$A$を$n$次正方行列とし, $n \times 2n$行列$[A : E_n]$の簡約化が$[E_n : B]$となるとする.このとき$A$は正則行列で, $B$は$A$の逆行列である.
+  \end{thm}
+ この定理により掃き出し法を用いて逆行列を得ることができる.
+  \xr{\cite[例 2.5.5]{O}を見る.}
+
+ \begin{exa}
+ $
+  A=\begin{pmatrix}
+ 1& 2&1 \\
+ 2& 3 & 1 \\
+ 1& 2 &  2 \\
+ \end{pmatrix} 
+ $
+ の逆行列を求めよ.
+ 
+ (解).
+ $[A:E_3] = 
+ \begin{pmatrix}
+ 1& 2&1  &1& 0&0 \\
+ 2& 3 & 1 &0& 1&0 \\
+ 1& 2 &  2 &0& 0&1 \\
+ \end{pmatrix} 
+ $
+ を基本変形を用いて簡約化すると, \\
+ $
+ \begin{pmatrix}
+ 1& 0&0  &-4& 2&1 \\
+ 0& 1 & 0 &3& -1&-1 \\
+ 0& 0&  1 &-1& 0&1 \\
+ \end{pmatrix} 
+ $
+ となる. よって$A$の逆行列は
+ $
+ \begin{pmatrix}
+-4& 2&1 \\
+3& -1&-1\\
+1& 0&1 \\
+ \end{pmatrix} 
+ $
+ である.
+ \end{exa}
+
+ 
+定理\ref{thm-regular-0}, \ref{thm-regular-1}, \ref{thm-regular-2}, \ref{thm-regular-3}を次のようになる. 
+ \begin{prop}
+     $A$を$n$次正方行列とするとき, 以下は同値.
+\begin{enumerate}
+  \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+\item $\rank (A) =n$
+\item $A$は正則行列.
+\item $A$は基本行列の積として表される. 
+\item $n \times 2n$行列$[A : E_n]$の行簡約化が$[E_n : B]$となる. 
+\item $A$の簡約化は$E_n$である.
+\item 任意の$n$次列ベクトル$\bm{b}$について, $A \bm{x}=\bm{b}$はただ一つの解をもつ.
+\item $A \bm{x}=0$の解は$\bm{x}=0$に限る.
+\item $A$の行列式$\det(A)$は0ではない(行列式に関しては\ref{sec:det}章にて扱う).
+\end{enumerate}
+ \end{prop}
+
+ 
+ \newpage
+ 
+ \section{行列式 \cite[3 章]{O}}
+  \label{sec:det}
+  
+\subsection{置換, 行列式の定義 \cite[3.1節]{O}}
+
+\subsubsection{置換の定義}
+ \begin{dfn}
+
+    \begin{itemize}
+\item $\{ 1, \ldots, n\}$から$\{ 1, \ldots, n\}$への1対1写像を\underline{置換}と言い$\sigma$で表す．
+つまり置換$\sigma$とは$k_1, \ldots, k_n$を1から$n$の並び替えとして, 
+1を$k_1$に, 2を$k_2$に, $\cdots$, $n$を$k_n$にと変化させる規則のことである.
+\item 上の置換$\sigma$を
+$$
+\sigma =
+  \begin{pmatrix}
+ 1& 2  &\cdots &n\\
+ k_1& k_2  &\cdots &k_n\\
+ \end{pmatrix} 
+$$
+とかき, $\sigma(1) =k_1, \sigma(2) =k_2, \ldots, \sigma(n) =k_n$とする.
+\item $S_n$を$n$文字置換の集合とし, \underline{$n$次対称群}と言う. 個数は$n!$である.   
+    \end{itemize}
+  \end{dfn}
+
+ \begin{exa}
+ 置換$\sigma$を
+$
+\sigma =
+  \begin{pmatrix}
+ 1& 2  &3 &4\\
+ 3& 1  &4 &2\\
+ \end{pmatrix} 
+$
+とする. 
+これは「1を$3$に, 2を$1$に, 3を4に, 4を$2$にと変化させる規則」である.
+ $\sigma(1) =3, \sigma(2) =1, \sigma(3) =4,  \sigma(4) =2$である.
+ \end{exa}
+ 
+ \begin{exa}
+ 置換$\sigma$を
+$
+\sigma =
+  \begin{pmatrix}
+ 1& 2  &3 \\
+ 2& 1  &3 \\
+ \end{pmatrix} 
+$
+とする. 
+これは「1を$2$に, 2を$1$に, 3を3にと変化させる規則」である.
+ $\sigma(1) =2, \sigma(2) =1, \sigma(3) =3$である.
+ 
+ この置換は3に関しては何も変化させていないので
+ $
+\sigma =
+  \begin{pmatrix}
+ 1& 2   \\
+ 2& 1   \\
+ \end{pmatrix} 
+$
+ともかく.
+ \end{exa}
+
+
+    \begin{dfn}
+置換$\sigma, \tau$について, その積$\sigma \tau$を
+$\sigma(\tau(i))$で定める.
+  \end{dfn}
+
+ 
+\begin{exa}\cite[例 3.1.1]{O}
+ 置換$\sigma, \tau$を
+$
+\sigma =
+  \begin{pmatrix}
+ 1& 2  &3 & 4 \\
+ 4& 2  &1  &3 \\
+ \end{pmatrix} 
+\tau=
+  \begin{pmatrix}
+ 1& 2  &3 & 4 \\
+ 1& 4  &2  &3 \\
+ \end{pmatrix} 
+ $
+とすると, 
+$$
+  \begin{matrix}
+ \sigma (\tau (1)) &= &  \sigma (1)  & = & 4  \\
+ \sigma (\tau (2)) &= &  \sigma (4)  & = & 3 \\
+ \sigma (\tau (3)) &= &  \sigma (2)  & = & 2  \\
+ \sigma (\tau (4)) &= &  \sigma (3)  & = & 1  \\
+ \end{matrix} 
+ \text{\,\,\,であるので, }
+ \sigma \tau
+= 
+ \begin{pmatrix}
+ 1& 2  &3 & 4 \\
+ 4& 3  &2  &1 \\
+ \end{pmatrix} 
+ \text{である.}
+$$
+
+\end{exa}
+
+
+
+    \begin{dfn}
+\begin{itemize}
+\item $
+\epsilon =
+  \begin{pmatrix}
+ 1& 2  &\cdots &n\\
+ 1& 2  &\cdots &n\\
+ \end{pmatrix} $を\underline{単位置換・恒等置換}という.
+ \item  
+ $ \sigma =
+  \begin{pmatrix}
+ 1& 2  &\cdots &n\\
+ k_1& k_2  &\cdots &k_n\\
+ \end{pmatrix} 
+$について, 
+$
+  \begin{pmatrix}
+ k_1& k_2  &\cdots &k_n\\
+ 1& 2  &\cdots &n\\
+ \end{pmatrix} 
+$を\underline{$\sigma$の逆置換}と言い$\sigma^{-1}$で表す.
+\end{itemize}
+  \end{dfn}
+
+\begin{exa}\cite[例 3.1.2]{O}
+$\sigma = 
+\begin{pmatrix}
+ 1& 2  &3 & 4 & 5\\
+ 2& 4  &1  &5 &2\\
+ \end{pmatrix} 
+$
+とするとき
+$
+\sigma^{-1}
+=
+\begin{pmatrix}
+ 2& 4  &1  &5 &2\\
+ 1& 2  &3 & 4 & 5\\
+ \end{pmatrix} 
+ =
+ \begin{pmatrix}
+ 1& 2  &3 & 4 & 5\\
+ 3& 1 &5  &2 &4\\
+ \end{pmatrix} 
+ \text{である.}
+$
+\end{exa}
+
+\subsubsection{置換の符号}
+
+\begin{dfn}
+$\sigma$を$n$次の置換とする. 
+\begin{itemize}
+\item $1 \le i < j \le n$となる$(i, j)$が$\sigma(i)>\sigma(j)$を満たすとき, \underline{$(i,j)$は転倒している}という. 
+\item 転倒している$1 \le i < j \le n$となる$(i, j)$の個数を$\sigma$の\underline{転倒数}という.
+\item $(-1)^{\text{($\sigma$の転倒数)}}$を\underline{$\sigma$の符号}といい${\rm sgn}(\sigma)$と表す. $+1$か$-1$のどちらかである.
+\item ${\rm sgn}(\sigma)=1$の置換を\underline{偶置換}, ${\rm sgn}(\sigma)=-1$の置換を\underline{奇置換}という. 
+\end{itemize}
+\end{dfn}
+$\le$は$\leqq$と同じである. (なぜか大学以降は線が1本になる.)
+
+\begin{exa}\cite[例 3.1.3]{O}
+$ \begin{pmatrix}
+ 1& 2  &3 & 4 & 5\\
+ 3& 4 &1  &5 &2\\
+ \end{pmatrix} $の転倒数は5で符号は-1である
+\end{exa}
+\begin{rem}
+$n$次の置換の転倒数の個数を数えるのには$\frac{n(n-1)}{2}$回の計算が必要だが, うまいアルゴリズムを考えると(BIT)
+$n \log n$回の計算で転倒数を数えることができる. 
+\end{rem}
+
+次に関しては\cite[3.5節]{O}で用いるので今定義しておく. (教科書にはこの記述がなかった)
+\begin{dfn}
+$K$を体とする. 
+\begin{itemize}
+\item  $x$を変数とする. 0以上の整数$l$と, $a_0, \ldots, a_l \in K$を用いて(ただし$a_l \neq 0$)
+$$
+f(x)=\sum_{i=0}^{l} a_i x^i =a_l x^{l} + a_{l-1} x^{l-1} +  \cdots + a_1 x^1 + a_0
+$$
+とかけるとき, $f(x)$を\underline{$K$係数の多項式}という. 
+\item 上に置いて$\deg(f(x))=l$とおき\underline{次数}という. 
+\item 
+$$
+K[X]:=\{ f(x)=\sum_{i=0}^{l} a_i x^i \mid \text{$f(x)$は$K$係数の多項式}\}
+$$
+とする. これは(実数係数のときと同様に)以下の和と積の構造によって環になる. 
+\begin{enumerate}
+\item 和 $\sum_{i=0}^{l} a_i x^i  + \sum_{i=0}^{l} b_i x^i =  \sum_{i=0}^{l} (a_i +b_i )x^i $
+\item 積 $(\sum_{i=0}^{l} a_i x^i ) \cdot  (\sum_{j=0}^{m} b_j x^j)
+=  \sum_{0\le i \le l,  0 \le j \le m} (a_{i}b_{j})x^{i+j}$
+\end{enumerate}
+
+\item 
+$K$係数$n$変数多項式$f(x_1, \ldots, x_n)$を, ある正の整数$m$があって, 
+$$
+f(x_1, \ldots, x_n):=\sum_{1 \le i_j \le m} a_{i_1 \ldots i_n}x_{1}^{i_1} \cdots x_{n}^{i_n}
+$$
+とかけるものとする. ここで$a_{i_1, \ldots, i_n} \in K$とする. 
+$K[x_1, \ldots, x_n]$を$K$係数$n$変数多項式$f(x_1, \ldots, x_n)$の集合とする. 上と同様に環の構造を持つ. 
+\end{itemize}
+\end{dfn}
+環という用語や$n$変数多項式の定義がややこしいが, (この定義は今後あまり出てこないので)気にしなくて良い. 
+
+\begin{dfn}
+$K$を体とする. $n$個の変数$x_1, \ldots, x_n$を考える. 
+
+\begin{itemize}
+\item $n$個の変数$x_1, \ldots, x_n$について
+$$
+D(x_1, \ldots, x_n):=\prod_{1 \le i < j \le n} (x_i - x_j)
+$$
+を$x_1, \ldots, x_n$の\underline{差積}という. 
+ここで$\prod_{1 \leqq i < j \leqq n}$は積の記号で, $\prod_{1 \leqq i < j \leqq n} (x_j - x_i)$は「$1 \leqq i < j \leqq n$を満たす$(i,j)$について$ (x_j - x_i)$を全てかけた数」を表している.
+
+\item $\sigma$を$n$次の置換, 
+$f(x_1, \ldots, x_n)$を多項式として
+$$
+f^{\sigma}(x_1, \ldots, x_n) :=f(x_{\sigma(1)}, \ldots, x_{\sigma(n)})
+$$
+と定義する. 
+$n$次対称群$S_n$が$K$係数$n$変数多項式の環$K[x_1, \ldots, x_n]$に作用しているともみれる($S_n \curvearrowright K[x_1, \ldots, x_n]$とも書かれる)
+\end{itemize}
+\end{dfn}
+
+
+\begin{lem}
+$\sigma$を$n$次の置換に関して, 
+%$$D^{\sigma}(x_1, \ldots, x_n):=D(x_{\sigma(1)}, \ldots, x_{\sigma(n)})=\prod_{1 \le i < j \le n} (x_{\sigma(i)} - x_{\sigma(j)})$$とするとき, 
+$D^{\sigma}(x_1, \ldots, x_n)=\sgn(\sigma) \cdot D(x_1, \ldots, x_n)$となる. 
+\end{lem}
+
+ \xr{\cite[例 3.1.5]{O}を見る.}
+
+\begin{thm}\cite[定理 3.1.6]{O}
+置換$\sigma, \tau$について, 
+    $\sgn(\epsilon) = 1$, $\sgn(\sigma \tau) = \sgn(\sigma) \sgn(\tau) $, $\sgn(\sigma^{-1}) = \sgn(\sigma)$, が成り立つ(ただし$\epsilon$は単位置換とする).
+\end{thm}
+
+
+\begin{prop}
+\cite[命題 3.1.7]{O}
+
+\( S_n=\{\sigma_1,\sigma_2,\ldots,\sigma_m\} \) とおく．ただし，\( m=n! \) とする．
+
+\begin{enumerate}
+\item \( i\neq j \) ならば \( \sigma_i^{-1}\neq \sigma_j^{-1} \) である． 
+特に\[ \{\sigma_1^{-1},\sigma_2^{-1},\ldots,\sigma_m^{-1}\}=S_n \] 
+\item 任意の\( \sigma\in S_n \)について, \( i\neq j \) ならば \( \sigma\sigma_i\neq \sigma\sigma_j \)
+かつ \( \sigma_i\sigma\neq \sigma_j\sigma \) である．
+特に
+\[ 
+\{\sigma\sigma_1,\sigma\sigma_2,\ldots,\sigma\sigma_m\}=  \{\sigma_1\sigma,\sigma_2\sigma,\ldots,\sigma_m\sigma\}=S_n \]
+\end{enumerate}
+\end{prop}
+
+\begin{prop}
+\cite[命題 3.1.8]{O}
+\( n\geq 2 \) を整数とし， 
+\begin{itemize}
+\item \( A_n \) を偶置換のなす集合. 
+\item \( B_n \) を奇置換のなす集合. 
+\end{itemize}
+とするとき次が成り立つ. 
+\begin{enumerate}
+\item \( \tau \) を偶置換とするとき，\( A_n=\tau A_n=A_n\tau,\; B_n=\tau B_n=B_n\tau \)
+\item \( \tau \) を奇置換とするとき，\( B_n=\tau A_n=A_n\tau,\; A_n=\tau B_n=B_n\tau \)
+\end{enumerate}
+ただし\( \sigma\in S_n \) と部分集合 \( X\subset S_n \) に対し，
+\(\sigma X :=\{ \sigma x \mid x \in X \} \)
+と定義する. 
+
+\end{prop}
+
+\begin{rem}
+$A_n$は\underline{$n$次交代群}と呼ばれる. 
+上から次がわかる. \footnote{左に書いてある用語は関連していることである. 気になる人は各自調べてみよ.} 
+\begin{itemize}
+\item (部分群) $\sigma, \tau \in A_n$ならば$\sigma \tau \in A_n, \sigma^{-1} \in A_n$.
+\item (正規部分群) 任意の$\sigma \in S_n$
+について$\sigma A_n \sigma^{-1} =A_n$.
+\item (剰余類と指数) $n \ge 2$のとき, $\tau \in S_n \setminus A_n$とすると, $S_n = A_n \cup \tau A_n$かつ$A_n \cap \tau A_n = \varnothing$. 特に$A_n$の個数は$\frac{n!}{2}$個である. 
+\end{itemize}
+
+$A_n$は5次以上の解の公式が存在しない証明に用いられる. 
+専門的にいうと, $n \ge 5$ならば$A_n$が可解(solvable)でないことが用いられる. 
+\end{rem}
+
+
+\subsubsection{互換と符号}
+
+
+    \begin{dfn}\cite[問題 3.1]{O}
+ $ \sigma =
+  \begin{pmatrix}
+ k_1& k_2  &\cdots &k_l\\
+ k_2& k_3  &\cdots &k_1\\
+ \end{pmatrix} 
+$となる置換$\sigma$を\underline{巡回置換}と言い
+$\sigma =
+  \begin{pmatrix}
+ k_1& k_2  &\cdots &k_l\\
+ \end{pmatrix} 
+$と表す.
+
+特に $ \sigma =
+  \begin{pmatrix}
+ k_1& k_2  \\
+ k_2& k_1 \\
+ \end{pmatrix} 
+$となる巡回置換を\underline{互換}と言い$\sigma =
+  \begin{pmatrix}
+ k_1& k_2 \\
+ \end{pmatrix} 
+$と表す.
+  \end{dfn}
+
+    \begin{thm}\cite[定理 3.1.9]{O}
+    互換は奇置換である. 
+ \end{thm}
+ 
+     \begin{thm}\cite[定理 3.1.10]{O}
+任意の置換$\sigma$は互換の積$\tau_1 \cdots \tau_{l}$で表わすことができる.
+%, $l$の偶奇は$\sigma$によってのみ定まる.
+  \end{thm}
+
+
+    \begin{thm}\cite[定理 3.1.11]{O}
+置換$\sigma$が互換の積$\tau_1 \cdots \tau_{r}$となるとき, 
+$\sgn (\sigma) = (-1)^{r}$である. 特に$r$の偶奇は$\sigma$によってのみ定まる.
+ \end{thm}
+ 
+ \begin{exa}
+ $
+ \sigma 
+  =
+ \begin{pmatrix}
+ 1& 2  &3 & 4 & 5 & 6 & 7\\
+ 4& 1  &6  &2 &7 & 5 & 3\\
+ \end{pmatrix} 
+ $を互換の積で表し, その符号を求めよ.
+ 
+ (解). 
+ $1 \overset{\sigma}{\rightarrow} 4 \overset{\sigma}{\rightarrow}2 \overset{\sigma}{\rightarrow}1 $と変化し,  
+  $3 \overset{\sigma}{\rightarrow} 6\overset{\sigma}{\rightarrow}5 \overset{\sigma}{\rightarrow}7 \overset{\sigma}{\rightarrow}3$と変化するので, 
+  $$
+  \sigma = 
+   \begin{pmatrix}
+ 1& 4 &2 
+ \end{pmatrix} 
+    \begin{pmatrix}
+ 3& 6 &5 &7
+ \end{pmatrix} 
+ \text{である.}
+  $$
+  さらに
+  $   \begin{pmatrix}
+ 1& 4 &2 
+ \end{pmatrix} 
+ = 
+ \begin{pmatrix}
+ 1& 4  
+ \end{pmatrix} 
+ \begin{pmatrix}
+ 4 &2 
+ \end{pmatrix},
+\begin{pmatrix}
+ 3& 6 &5 &7
+ \end{pmatrix} 
+ =
+ \begin{pmatrix}
+ 3& 6  
+ \end{pmatrix} 
+  \begin{pmatrix}
+ 6& 5  
+ \end{pmatrix} 
+  \begin{pmatrix}
+ 5& 7  
+ \end{pmatrix} 
+ $
+ であるので, 
+ $$
+\sigma= 
+\begin{pmatrix}
+ 1& 4  
+ \end{pmatrix} 
+ \begin{pmatrix}
+ 4 &2 
+ \end{pmatrix}
+ \begin{pmatrix}
+ 3& 6  
+ \end{pmatrix} 
+  \begin{pmatrix}
+ 6& 5  
+ \end{pmatrix} 
+  \begin{pmatrix}
+ 5& 7  
+ \end{pmatrix} 
+ $$
+ となり, $\sgn(\sigma)= (-1)^{5}=-1$である.
+ 
+ \end{exa}
+
+\subsubsection{行列式の定義}
+
+
+
+    \begin{dfn}
+$n$次正方行列$A = (a_{ij})$について
+$$
+\det(A) =  \sum_{\sigma \in S_n}\sgn(\sigma) 
+a_{1 \sigma(1)} a_{2 \sigma(2)} \cdots a_{n \sigma(n)} 
+\text{を\underline{$A$の行列式}と言う.}
+$$
+ $A$の行列式は$\det(A)$, $|A|$, 
+$
+\begin{vmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+a_{21}& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{n1}& a_{n2} & \cdots &a_{nn} \\
+\end{vmatrix}
+$
+ともかく.
+  \end{dfn}
+
+\begin{exa}\cite[例 3.1.14]{O}
+\label{2jidet}
+$A = 
+  \begin{pmatrix}
+a_{11}& a_{12}\\
+a_{21}& a_{22}\\
+ \end{pmatrix} 
+$
+とすると$\det(A) = a_{11}a_{22} - a_{12}a_{21}$である.
+
+(証).
+$S_2 = \left\{   \begin{pmatrix}
+1& 2\\
+1& 2\\
+ \end{pmatrix} , 
+   \begin{pmatrix}
+1&2\\
+2& 1\\
+ \end{pmatrix} 
+  \right\}$
+  であるので, $A$の行列式は
+  \begin{align*}
+  \det(A) &= 
+  \sgn \begin{pmatrix}
+1& 2\\
+1& 2\\
+ \end{pmatrix} a_{11}a_{22}
+ +
+  \sgn \begin{pmatrix}
+1& 2\\
+2& 1\\
+ \end{pmatrix} a_{12}a_{21}
+ =
+ a_{11}a_{22} - a_{12}a_{21}.
+  \end{align*}
+
+\end{exa}
+
+\begin{exa}\cite[例 3.1.15]{O}
+$A = 
+  \begin{pmatrix}
+a_{11}& a_{12} & a_{13}\\
+a_{21}& a_{22} & a_{23}\\
+a_{31}& a_{32} & a_{33}\\
+ \end{pmatrix} 
+$
+の行列式を求める.
+
+$S_3 = \left\{   
+\begin{pmatrix}
+1& 2 &3\\
+1& 2 &3\\
+ \end{pmatrix} , 
+\begin{pmatrix}
+1& 2 &3\\
+2& 1 &3\\
+ \end{pmatrix} , 
+\begin{pmatrix}
+1& 2 &3\\
+1& 3 &2\\
+ \end{pmatrix} , 
+ \begin{pmatrix}
+1& 2 &3\\
+3& 2 &1\\
+ \end{pmatrix} , 
+ \begin{pmatrix}
+1& 2 &3\\
+2& 3 &1\\
+ \end{pmatrix} , 
+ \begin{pmatrix}
+1& 2 &3\\
+3& 1 &2\\
+ \end{pmatrix}
+  \right\}$
+  であるので, $A$の行列式は
+  
+  \begin{align*}
+  \det(A) 
+  &= 
+  \sgn \begin{pmatrix}
+1& 2 &3\\
+1& 2 &3\\
+ \end{pmatrix}
+ a_{11}a_{22}a_{33}
+ +
+   \sgn \begin{pmatrix}
+1& 2 &3\\
+2& 1 &3\\
+ \end{pmatrix} 
+ a_{12}a_{21}a_{33}
+ +
+\sgn \begin{pmatrix}
+1& 2 &3\\
+1& 3 &2\\
+ \end{pmatrix} 
+ a_{11}a_{23}a_{32} 
+  \\%%%
+  &+
+\sgn  \begin{pmatrix}
+1& 2 &3\\
+3& 2 &1\\
+ \end{pmatrix}
+ a_{13}a_{22}a_{31} 
+ +
+\sgn  \begin{pmatrix}
+1& 2 &3\\
+2& 3 &1\\
+ \end{pmatrix}
+ a_{12}a_{23}a_{31} 
+  +
+\sgn   \begin{pmatrix}
+1& 2 &3\\
+3& 1 &2\\
+ \end{pmatrix}
+ a_{13}a_{21}a_{32} 
+ \\%%
+   &= a_{11}a_{22}a_{33}- a_{12}a_{21}a_{33}- a_{11}a_{23}a_{32} 
+   - a_{13}a_{22}a_{31}  + a_{12}a_{23}a_{31}  +  a_{13}a_{21}a_{32} 
+  \end{align*}
+  以上より
+  $
+ \det(A)= 
+ a_{11}a_{22}a_{33}+ a_{12}a_{23}a_{31}  +  a_{13}a_{21}a_{32} 
+- a_{11}a_{23}a_{32}     - a_{13}a_{22}a_{31}  - a_{12}a_{21}a_{33}
+  $
+  である.
+\end{exa}
+\begin{rema}
+2次正方行列や3次正方行列の行列式は視覚的に綺麗に表わすことができる(サラスの公式と呼ばれる).
+
+4次以上にはこのような暗記法はない
+\end{rema}
+
+\begin{exa}\cite[例 3.1.12]{O}
+ある行がゼロベクトル, またはある列がゼロベクトルである行列の行列式は0.
+\end{exa}
+
+\begin{exa}\cite[例 3.1.13]{O}
+上三角行列の行列式は対角成分の積である.
+$$
+\begin{vmatrix}
+a_{11}& a_{12} & a_{13} &\cdots &a_{1n-1}&a_{1n} \\
+0 	   & a_{22} & a_{23} &\cdots&a_{2n-1} &a_{2n} \\
+0 	   & 0  		& a_{33} &\cdots &a_{3n-1}&a_{3n} \\
+\vdots& \vdots	&  \ddots &\ddots&	\vdots  &	\vdots \\
+0	& 0      		&      	&\ddots	&a_{n-1n-1} &a_{n-1n} \\
+0	& 0      		&     \cdots	&	\cdots&0		&a_{nn} \\
+\end{vmatrix}
+=a_{11}a_{22}\cdots a_{nn}
+$$
+下三角行列も同様である. 
+\end{exa}
+
+\subsection{基本変形と行列式 \cite[3.2節]{O}}
+\subsubsection{行列式の性質}
+
+以下行ベクトル$\bm{a}_1,\ldots, \bm{a}_n$を用いて
+$$
+A
+=
+\begin{vmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+a_{21}& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{n1}& a_{n2} & \cdots &a_{nn} \\
+\end{vmatrix}
+=
+\begin{vmatrix}
+\bm{a}_1 \\
+\bm{a}_2 \\
+\vdots \\
+\bm{a}_n\\
+\end{vmatrix}
+$$
+と略記する. 
+$\bm{a}_i = (a_{i1}, a_{i2}, \ldots, a_{in})$である. 
+
+\begin{thm}\cite[定理 3.2.1]{O}
+$s, t$を数とすると
+$$
+\begin{vmatrix}
+\bm{a}_1 \\
+\vdots \\
+s\bm{a}_i + t \bm{b}_i \\
+\vdots \\
+\bm{a}_n\\
+\end{vmatrix}
+=
+s
+\begin{vmatrix}
+\bm{a}_1 \\
+\vdots \\
+\bm{a}_i \\
+\vdots \\
+\bm{a}_n\\
+\end{vmatrix}
++
+t
+\begin{vmatrix}
+\bm{a}_1 \\
+\vdots \\
+ \bm{b}_i \\
+\vdots \\
+\bm{a}_n\\
+\end{vmatrix}
+$$
+\end{thm}
+
+
+\begin{thm}\cite[定理 3.2.2]{O}
+$\bm{a}_i=\bm{a}_j$ならば$\det (A)=0$.
+\end{thm}
+
+\begin{thm}\cite[定理 3.2.3]{O}
+$i < j$について
+$$
+\begin{vmatrix}
+\bm{a}_1 \\
+\vdots \\
+\bm{a}_j \\
+\vdots \\
+\bm{a}_i \\
+\vdots \\
+\bm{a}_n\\
+\end{vmatrix}
+=
+-
+\begin{vmatrix}
+\bm{a}_1 \\
+\vdots \\
+\bm{a}_i \\
+\vdots \\
+\bm{a}_j\\
+\vdots \\
+\bm{a}_n\\
+\end{vmatrix}
+$$
+\end{thm}
+
+
+\begin{thm}\cite[定理 3.2.4]{O}
+$s$を数として, $i \neq j$について
+$$
+\begin{vmatrix}
+\bm{a}_1 \\
+\vdots \\
+\bm{a}_i + s\bm{a}_j\\
+\vdots \\
+\bm{a}_n\\
+\end{vmatrix}
+=
+\begin{vmatrix}
+\bm{a}_1 \\
+\vdots \\
+\bm{a}_i \\
+\vdots \\
+\bm{a}_n\\
+\end{vmatrix}
+$$
+\end{thm}
+
+\begin{thm}\cite[定理 3.2.8]{O}
+$\det({}^t A)  = \det (A)$
+\end{thm}
+
+以上をまとめると次を得る. 
+\begin{thm}\cite[定理 3.2.5, 3.2.9]{O}
+行基本変形と行列式には以下のように対応する. 
+   \begin{enumerate}
+ \item  ある行を$\lambda$倍すると, 行列式も$\lambda$倍される.
+ \item 二つの行を入れ替えると, 行列式は-1倍になる. 
+ \item ある行のスカラー倍を他の行に加えても行列式は不変である. 
+ \end{enumerate}
+ また"行"の部分を"列"に変えても同様のことが成り立つ. 
+  \end{thm}
+  
+  
+  \subsubsection{行列式の計算方法}
+  
+ \cite[3.3節]{O}の内容だが, 計算に使えるため先に紹介しておく. 
+ (証明は後ほど)
+  \begin{thm}\cite[定理 3.3.2]{O}
+  $A$を$n-1$次正方行列とするとき, $a \in K$について次が成り立つ.
+  $$
+  \begin{vmatrix}
+a & 0\\
+\ast &   A\\
+\end{vmatrix}
+=
+  \begin{vmatrix}
+a & \ast \\
+0 &   A\\
+\end{vmatrix}
+=
+  \begin{vmatrix}
+A & \ast \\
+0 &   a\\
+\end{vmatrix}
+=
+  \begin{vmatrix}
+A & 0 \\
+\ast &   a\\
+\end{vmatrix}
+=a |A|
+$$
+  \end{thm}
+
+
+ \begin{tcolorbox}[mybox]
+    \begin{suma}[行列式の計算方法1.]
+    \text{}
+    
+\begin{enumerate}[label=\textbf{操作}\arabic*.]
+ \item  次の行基本変形を繰り返して操作2の左辺の形にする. 
+\begin{enumerate}
+\item[(I)] ある行を$\lambda$倍すると, 行列式も$\lambda$倍される.
+ \item[(II)] 二つの行を入れ替えると, 行列式は$-1$倍になる. 
+ \item[(III)] ある行のスカラー倍を他の行に加えても行列式は不変である. 
+\end{enumerate}
+ なお列基本変形を用いても良い.
+ \item \cite[定理 3.3.2]{O}を用いる.
+ $$
+\begin{vmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+0 & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & & \vdots \\
+0& a_{n2} & \cdots & a_{nn}
+\end{vmatrix}\\
+=
+a_{11} 
+\begin{vmatrix}
+a_{22} & \cdots & a_{2n} \\
+\vdots & & \vdots \\
+a_{n2} & \cdots & a_{nn}
+\end{vmatrix}
+ $$
+ \item 行列のサイズが2の場合は操作4に, そうでない場合は行列のサイズが2になるまで操作1と2を繰り返す. 
+ \item 行列の2の場合の行列式の公式
+ $\begin{vmatrix}
+a& b\\
+c&d\\
+ \end{vmatrix} 
+=ad-bc$を用いる. 
+ \end{enumerate}
+ \end{suma}
+  \end{tcolorbox}
+  ただし操作4に関しては$3 \times 3$行列の行列式の公式(サラスの公式)を用いても良い. 
+ \xr{\cite[例 3.2.7, 3.2.10, 3.3.3]{O}を見る.}
+ \begin{exa}
+ $
+ \begin{pmatrix}
+ 2&-4&-5&3\\
+ -6&13&14&1\\
+ 1&-2&-2&-8\\
+ 2&-5&0&5\\
+ \end{pmatrix}
+$
+の行列式は次のように求められる. 
+
+\begin{align*}
+ &\begin{vmatrix}
+ 2&-4&-5&3\\
+ -6&13&14&1\\
+ 1&-2&-2&-8\\
+ 2&-5&0&5\\
+ \end{vmatrix}
+ \overset{\text{操作1 (I)}} {=}
+ (-1)
+  \begin{vmatrix}
+   1&-2&-2&-8\\
+ -6&13&14&1\\
+ 2&-4&-5&3\\
+ 2&-5&0&5\\
+ \end{vmatrix}
+  \overset{\text{操作1 (III)}}  {=}
+ (-1)
+  \begin{vmatrix}
+   1&-2&-2&-8\\
+ 0&1 &2  &-47\\
+ 0& 0&-1&19\\
+ 0&-1&4&21\\
+ \end{vmatrix}
+\\ %%%
+& \overset{\text{操作2}} {=}
+ (-1)
+  \begin{vmatrix}
+1 &2  &-47\\
+ 0&-1&19\\
+-1&4&21\\
+ \end{vmatrix}
+  \overset{\text{操作1 (III)}} {=}
+   (-1)
+  \begin{vmatrix}
+1 &2  &-47\\
+ 0&-1&19\\
+ 0&6&-26\\
+ \end{vmatrix}
+ \overset{\text{操作2}} {=}
+  (-1)
+    \begin{vmatrix}
+-1&19\\
+6&-26\\
+ \end{vmatrix}
+ \\ %%
+ & \overset{\text{操作4} } {=}
+ (-1)\left\{(-1)\times (-26) - 6\times 19\right\} = 88.
+\end{align*}
+ \end{exa}
+ 
+ \begin{rem}
+ この計算方法により行列式の計算は定義では$O(n!)$の計算量だが, $O(n^3)$に改善される. 
+ \end{rem}
+
+
+
+\subsection{行列式に関する幾つかの定理 \cite[3.3節]{O}}
+
+\begin{thm}\cite[定理 3.3.1-2]{O}
+$A$を$n$次正方行列, $B$を$m$次正方行列とするとき, 次が成り立つ.
+  $$
+  \begin{vmatrix}
+A & O\\
+\ast &   B\\
+\end{vmatrix}
+=
+  \begin{vmatrix}
+A & \ast \\
+O &   B\\
+\end{vmatrix}
+=|A| |B|
+$$
+
+特に$A$を$n-1$次正方行列とするとき, $a \in K$について次が成り立つ.
+  $$
+  \begin{vmatrix}
+a & 0\\
+\ast &   A\\
+\end{vmatrix}
+=
+  \begin{vmatrix}
+a & \ast \\
+0 &   A\\
+\end{vmatrix}
+=
+  \begin{vmatrix}
+A & \ast \\
+0 &   a\\
+\end{vmatrix}
+=
+  \begin{vmatrix}
+A & 0 \\
+\ast &   a\\
+\end{vmatrix}
+=a |A|
+$$
+  \end{thm}
+
+\begin{thm}\cite[定理 3.3.4]{O}
+$\det(AB)=\det(A) \det(B)$
+\end{thm}
+
+\begin{thm}\cite[定理 3.3.5]{O}
+\label{thm-regular-3}
+$n$次正方行列$A$について次は同値.
+\begin{enumerate}
+\item ${\rm rank}(A)=n$ (これは$A$が正則と同値)
+\item 連立1次方程式$A \bm{x}=\bm{0}$の解は$\bm{x}=\bm{0}$のみ. 
+\item $\det(A)\neq 0$
+\end{enumerate}
+\end{thm}
+
+
+\subsection{余因子展開と余因子行列 \cite[3.4節]{O}}
+
+\subsubsection{余因子展開と余因子展開を用いた行列式の計算}
+    \begin{dfn}
+    $n$次正方行列$A=(a_{ij})$の$i$行と$j$列を取り除いた$n-1$次正方行列を$A_{ij}$とかき, \underline{小行列}という. 
+    つまり
+  $$
+  A_{ij}
+  =
+    \begin{pmatrix}
+a_{11}&   \cdots &a_{1j-1}&a_{1j+1}&\cdots&a_{1n} \\
+\vdots&   		& \vdots &\vdots &   		&\vdots  \\
+a_{i-11}&   \cdots &a_{i-1j-1}&a_{i-1j+1}&\cdots&a_{i-1n} \\
+a_{i+11}&   \cdots &a_{i+1j-1}&a_{i+1j+1}&\cdots&a_{i+1n} \\
+\vdots&   		& \vdots &\vdots &   		&\vdots  \\
+a_{n1}&   \cdots &a_{nj-1}&a_{nj+1}&\cdots&a_{nn} \\
+\end{pmatrix}
+\text{とする.}
+$$
+    \end{dfn}
+
+
+
+
+    \begin{lem}
+ $A$を$n$次正方行列とする.
+任意の$1 \leqq i \leqq n, 1 \leqq j\leqq n$なる$i,j$について, 次が成り立つ.
+ \begin{align*}
+ \det(A) & =(-1)^{1+j}a_{1j}\det(A_{1j}) + \cdots +(-1)^{n+j}a_{nj}\det(A_{nj}) 
+ \\
+ &=(-1)^{i+1}a_{i1}\det(A_{i1}) + \cdots +(-1)^{i+n}a_{in}\det(A_{in}).
+  \end{align*}
+  これを\underline{余因子展開}という.
+\end{lem}
+
+
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{suma}[行列式の計算方法2.]
+    行列に0が多めにある場合は余因子展開を用いても良い.
+    \begin{align*}
+\begin{split}
+&\begin{vmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & & \vdots \\
+a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{vmatrix}\\
+&=
+a_{11} 
+\begin{vmatrix}
+a_{22} & \cdots & a_{2n} \\
+\vdots & & \vdots \\
+a_{n2} & \cdots & a_{nn}
+\end{vmatrix}
+- a_{21}
+\begin{vmatrix}
+a_{12} & \cdots & a_{1n} \\
+a_{32} & \cdots & a_{3n} \\
+\vdots & & \vdots \\
+a_{n2} & \cdots & a_{nn}
+\end{vmatrix}
++ \cdots + (-1)^{n+1} a_{n1}
+\begin{vmatrix}
+a_{12} & \cdots & a_{1n} \\
+a_{22} & \cdots & a_{2n} \\
+\vdots & & \vdots \\
+a_{n-1,2} & \cdots & a_{n-1,n}
+\end{vmatrix}
+\end{split}
+\end{align*}
+\end{suma}
+\end{tcolorbox}
+
+
+
+\begin{exa}行列
+$A=
+\begin{pmatrix}
+2 & 7&13 & 5\\
+5 & 3&8 & 2\\
+0 & 0 & 9  & 4\\
+0 & 0&-2 & 1\\
+\end{pmatrix}
+$の行列式は次のように求められる. 
+
+\begin{align*}
+\det(A) 
+&= 
+(-1)^{1+1}a_{11}\det(A_{11}) + (-1)^{2+1}a_{21}\det(A_{21}) + (-1)^{3+1}a_{31}\det(A_{31}) + (-1)^{4+1}a_{41}\det(A_{41}) 
+\\ %%
+&=
+2 
+\begin{vmatrix}
+ 3&8 & 2\\
+0 & 9  & 4\\
+0&-2 & 1\\
+\end{vmatrix}
+- 5 
+\begin{vmatrix}
+ 7&13 & 5\\
+0 & 9  & 4\\
+0&-2 & 1\\
+\end{vmatrix}
++0
+\begin{vmatrix}
+ 7&13 & 5\\
+ 3&8 & 2\\
+0&-2 & 1\\
+\end{vmatrix}
+-0
+\begin{vmatrix}
+ 7&13 & 5\\
+ 3&8 & 2\\
+0 & 9  & 4\\
+\end{vmatrix}
+\\ %%
+&=2 
+\begin{vmatrix}
+ 3&8 & 2\\
+0 & 9  & 4\\
+0&-2 & 1\\
+\end{vmatrix}
+- 5 
+\begin{vmatrix}
+ 7&13 & 5\\
+0 & 9  & 4\\
+0&-2 & 1\\
+\end{vmatrix}
+\\%%
+&=2 \times 3
+\begin{vmatrix}
+9  & 4\\
+-2 & 1\\
+\end{vmatrix}
+-5 \times 7
+\begin{vmatrix}
+9  & 4\\
+-2 & 1\\
+\end{vmatrix}
+=(2 \times 3 - 5 \times 7) \times (9 \times 1 - 4 \times (-2)) = -493.
+\end{align*}
+\end{exa}
+  \xr{\cite[例 3.4.1]{O}を見る.}
+ \subsubsection{余因子行列}
+
+ 
+\begin{dfn}
+    $n$次正方行列$A=(a_{ij})$について, 
+     \underline{$A$の余因子行列$\widetilde{A}$}を$A$を次で定義する. 
+    $$
+\widetilde{A}
+=
+\begin{pmatrix}
+|A_{11}|& -|A_{21}|& \cdots & (-1)^{n-1} |A_{n1}| \\
+ -|A_{12}| & |A_{22}|  & \cdots &(-1)^{n} |A_{n2}|  \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+ (-1)^{n-1} |A_{1n}|&  (-1)^{n} |A_{2n}| & \cdots &(-1)^{2n-2}|A_{nn}|\\
+\end{pmatrix}
+$$
+     \end{dfn}
+     $+$と$-$が交互に現れることと, $A_{ij}$の場所に注意する. 
+
+\begin{exa}\cite[例 3.4.2]{O}
+\label{inverse_2}
+$
+\begin{pmatrix}
+a_{11} & a_{12} \\
+a_{21} & a_{22}
+\end{pmatrix}
+$
+のときの余因子行列$\widetilde{A}$は
+$\begin{pmatrix}
+a_{22} &- a_{12} \\
+-a_{21} & a_{11}
+\end{pmatrix}$となる.
+\end{exa}
+
+    \begin{thm}\cite[定理 3.4.3-4]{O}
+ $A$を$n$次正方行列とする. このとき
+$$A\widetilde{A} = \widetilde{A}A =(\det A)E$$
+
+特に$A$が正則であることは$\det(A) \neq 0$であることと同値であり, このとき次が成り立つ.
+$$A^{-1} = \frac{1}{\det A} \widetilde{A}.$$
+     \end{thm}
+
+
+\begin{exa}2次正方行列
+ $A=
+  \begin{pmatrix}
+ a& b  \\
+ c& d  \\
+ \end{pmatrix} 
+ $で
+  $\det(A)=ad-bc \neq 0$となるものとする． 
+  このとき上の定理から
+ $$
+ A^{-1} =   
+ \frac{1}{\det A} \widetilde{A}
+ =
+ \frac{1}{ad-bc}
+ \begin{pmatrix}
+ d& -b  \\
+ -c& a  \\
+ \end{pmatrix} 
+ \quad 
+ \text{となる. }
+ $$
+\end{exa}
+ \xr{\cite[例 3.4.5]{O}を見る.}
+
+\subsection{行列式の応用 \cite[3.5節]{O}}
+
+
+\subsubsection{平行多面体の体積と行列式}
+
+線形代数的に$n$次元の体積を定義する.\footnote{面積・体積に関しては1年の後期の解析の授業(リーマン積分)で詳しいことを習う. なお3年の授業でルベーグ積分論の授業もあり, それにはより抽象的(でかなり難しい！)面積・体積の定義を習う. }
+\begin{thm}[{\cite[定理 3.5.1 ]{O} $n$次元体積の定義}]
+実数係数の$n$次正方行列$A$に対して, 次の条件$(V1)-(V4)$を満たす体積が$v(A)$ただ一つ存在し, 
+それは$v(A)=|\det(A)|$となる.
+\begin{enumerate}
+\item[(V1)] $v(E_n)=1$
+\item[(V2)] $c \in \R$について, 
+$v( \bm{a}_1, \cdots, c\bm{a}_i , \cdots, \bm{a}_n) = |c|v( \bm{a}_1, \cdots, \bm{a}_i , \cdots, \bm{a}_n)$
+\item[(V3)] $i \neq j$と$c \in \R$について, 
+$v( \bm{a}_1, \cdots, \underbrace{\bm{a}_i + c\bm{a}_j}_{i}, \cdots, \bm{a}_n) 
+=
+v(
+    \bm{a}_1, \cdots, \underbrace{\bm{a}_i}_{i}, \cdots, \bm{a}_n
+)
+$
+\item[(V4)] 
+$v(
+    \bm{a}_1, \cdots, \underbrace{\bm{a}_j}_{i}, \cdots , \underbrace{\bm{a}_i}_{j}, \cdots, \bm{a}_n
+)
+=
+v(
+    \bm{a}_1, \cdots, \underbrace{\bm{a}_i}_{i}, \cdots , \underbrace{\bm{a}_j}_{j}, \cdots, \bm{a}_n.
+)$
+\end{enumerate}
+ただし$\bm{a}_1, \ldots, \bm{a}_n$を列ベクトルとする. 
+\end{thm}
+
+この証明を真似ると次を得る. 
+    \begin{thm}[行列式の唯一性]
+    \label{thm-det}
+    $n$次正方行列の集合から体$K$への関数
+    $$
+\begin{array}{ccccc}
+f: &\{\text{$n$次正方行列} \}& \rightarrow & K& \\
+&
+A
+=
+    \begin{pmatrix}
+    \bm{a}_1&\bm{a}_2&\cdots&\bm{a}_n
+    \end{pmatrix}
+ & 
+ \longmapsto & 
+ f(A)=f\begin{pmatrix}
+    \bm{a}_1&\bm{a}_2&\cdots&\bm{a}_n
+    \end{pmatrix}
+ &
+\end{array}
+$$
+で次を満たすとする.
+       \begin{enumerate}
+    \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+\item (多重線形性)$\bm{b}_{i} \in K^n$と$\lambda, \mu \in K$について
+\begin{align*}
+\begin{split}
+&f\begin{pmatrix}
+    \bm{a}_1&\cdots&\lambda\bm{a}_i+\mu\bm{b}_i&\cdots&\bm{a}_n
+    \end{pmatrix} \\
+&=
+\lambda f\begin{pmatrix}
+    \bm{a}_1&\cdots&\bm{a}_i&\cdots&\bm{a}_n
+    \end{pmatrix}
++
+\mu f\begin{pmatrix}
+    \bm{a}_1&\cdots&\bm{b_i}&\cdots&\bm{a}_n
+    \end{pmatrix}
+    \end{split}.
+\end{align*}
+\item (交代性) $1\le i< j \le n$なる$i,j$について, $i$番目と$j$番目を入れ替えると符号が変わる. 
+$$
+f(
+    \bm{a}_1, \cdots, \underbrace{\bm{a}_j}_{i}, \cdots , \underbrace{\bm{a}_i}_{j}, \cdots, \bm{a}_n
+)
+=
+-f(
+    \bm{a}_1, \cdots, \underbrace{\bm{a}_i}_{i}, \cdots , \underbrace{\bm{a}_j}_{j}, \cdots, \bm{a}_n.
+)
+$$
+  \end{enumerate}
+ このとき$ f(A) = f(E_n) \det A$
+ となる.
+ 
+ 特に1,2を満たす$f$で$f(E_n)=1$となるものは行列式$\det$のみに限る. 
+     \end{thm}
+ 
+\subsubsection{ヴァンデルモンドの行列式と因数定理}
+
+ \begin{thm}[{\cite[定理 3.5.2]{O} ヴァンデルモンドの行列式}]
+    $$
+\begin{vmatrix}
+1 & a_1 & a_1^2 & \cdots & a_1^{n-1} \\
+1 & a_2 & a_2^2 & \cdots & a_2^{n-1} \\
+\vdots & \vdots & \vdots & & \vdots \\
+1 & a_n & a_n^2 & \cdots & a_n^{n-1}
+\end{vmatrix}
+=
+\prod_{1 \leqq i < j \leqq n} (a_j-a_i).
+$$
+\end{thm}
+
+\begin{thm}[ユークリッド環・因数定理]
+$K$を体とし, $x$を変数とする. 
+$K[x]$を$K$係数多項式がなす環とする.
+
+任意の$f(x), g(x) \in K[x]$について, $g(x) \neq 0$ならば, ある$q(x), r(x) \in K[x]$があって
+\begin{enumerate}
+\item $f(x) = g(x) q(x) + r(x)$
+\item $\deg r (x) < \deg g(x)$
+\end{enumerate}
+ が成り立つ. (つまり$K[x]$はユークリッド環(整域)となる)
+ 
+ 特に因数定理が成り立つ. つまり任意の$a, \in K$と$f(x) \in K[x]$について, $f(a)=0$ならば$f(x)$は$(x-a)$で割り切れる. 
+ (ある$q(x) \in K[x]$があって$f(x)=(x-a)q(x)$となる. )
+\end{thm}
+証明には$K$が体であることが使われる. $A$が環の場合でも, 近しい定理がある.(ヒルベルトの基底定理「$A$がネーター環ならば, $A[x]$もネーター環である.」)
+
+  \begin{thm}[{\cite[例 3.5.3]{O} ヴァンデルモンドの行列式の応用}]
+$a_1, \ldots, a_n \in K$は相異なる数, 
+$b_1, \ldots, b_n \in K$とする. 
+ このとき$K$係数$n-1$次多項式
+ $$
+ f(x) = c_{n-1}x^{n-1} +  c_{n-2} x^{n-2} +  \cdots +  c_{1} x + c_{0}
+ $$
+ があって, 任意の$i = 1, \ldots, n$について$f(a_i) =b_i$となる.
+\end{thm}
+%上の定理はもちろん$K=\Q$でも成り立つ.
+
+\subsubsection{クラメルの公式}
+
+  \begin{thm}\cite[定理 3.5.4]{O}
+$A$を正則な$n$次正方行列とし, 列ベクトル$\bm{a}_1, \ldots, \bm{a}_{n}$を用いて
+$
+A = 
+\begin{pmatrix}
+\bm{a}_1 & \cdots & \bm{a}_{n}
+\end{pmatrix}
+$
+と表されているとする.
+このとき連立1次方程式$A \bm{x} =\bm{b}$の解は次のようになる.
+$$
+\bm{x}= \begin{pmatrix}
+x_1 \\ \vdots \\ x_{n}
+\end{pmatrix}, 
+x_i = \frac{\det
+(\bm{a}_1 \cdots \overbrace{\bm{b}}^{i} \cdots   \bm{a}_{n}
+)
+}{\det A}.
+$$
+    \end{thm}
+
+\begin{exa}
+$
+A = 
+\begin{pmatrix}
+5 &1\\
+3&2 \\ 
+\end{pmatrix}
+$, $
+\bm{b} = 
+\begin{pmatrix}
+3\\
+2 \\ 
+\end{pmatrix}
+$
+とする. 
+連立1次方程式$A \bm{x} =\bm{b}$の解を
+$
+\bm{x}= \begin{pmatrix}
+x_1 \\x_2
+\end{pmatrix} 
+$
+とすると,
+$$
+x_1 = \frac{\det
+\begin{pmatrix}
+ \bm{b}& \bm{a}_{2}
+\end{pmatrix}
+}{\det A}
+= 
+\frac{ 
+\begin{vmatrix}
+3&1\\
+2&2 \\
+\end{vmatrix}
+}
+{
+\begin{vmatrix}
+5&1\\
+3&2 \\
+\end{vmatrix}
+}
+=\frac{4}{7} 
+\text{, }
+x_2 = \frac{\det
+\begin{pmatrix}
+\bm{a}_{1}& \bm{b}
+\end{pmatrix}
+}{\det A}
+= 
+\frac{ 
+\begin{vmatrix}
+5&3\\
+3&2 \\
+\end{vmatrix}
+}
+{
+\begin{vmatrix}
+5&1\\
+3&2 \\
+\end{vmatrix}
+}
+=\frac{1}{7}
+\text{となる.}
+$$
+\end{exa}
+
+
+\begin{thebibliography}{n}
+\bibitem[教科書]{O}
+朝倉政典・落合理・北山貴裕・田口雄一郎『数理情報・工学系のための数学教程 基礎編２　線形代数 』(培風館)
+\url{http://www.baifukan.co.jp/cgi-bin/db/baifu_new_search.pl?ISBN=4-563-00623-8}
+\end{thebibliography}
+ 
+
+\newpage
+
+\section{演習問題}
+演習問題の解答は教科書のホームページ\url{http://www.baifukan.co.jp/cgi-bin/db/baifu_new_search.pl?ISBN=4-563-00623-8}のweb資料にある. 
+
+基本的には教科書の問題をやっていきます. 
+追加問題があるものだけここに書いていきます. 追加問題は黒板に書くか配布します.  
+レポートで重要な問題をまとめて出す予定です.
+
+
+
+\begin{enumerate}[label=\textbf{問題}\arabic*.]
+
+\item 回転や鏡映は内積を変えないことを示せ, 
+つまり$f$を回転や鏡映とするとき, 任意の$\bm{x}, \bm{y} \in \R^2$について以下が成り立つことを示せ. 
+    $$
+    (f(\bm{x}), f(\bm{y})) = (\bm{x}, \bm{y})
+    $$
+ \item $2 \times 2$行列の岩澤分解の証明をあたえる. 
+\begin{prop}\cite[命題 1.2.4 (岩澤分解)]{O}
+1次変換$f : \R^2 \to \R^2$が逆変換を持つならば, 
+引き伸ばし変換$f_1$, 斜倒変換$f_2$, 回転変換$f_3$を用いて
+$$
+f=\underbrace{f_{3}}_{\text{回転変換}} \circ \underbrace{f_1}_{\text{引き伸ばし変換}} \circ \underbrace{f_2}_{\text{斜倒変換}}
+$$
+\end{prop}
+の証明を考える. 
+これは行列の言葉で言うと次を示せば良い. 
+\begin{prop}
+実数係数の$2 \times 2$行列
+$
+A=\begin{pmatrix}
+a & b\\
+c & d \\
+\end{pmatrix}
+$
+が$ad-bc \neq0$ならば, ある実数$\theta, \lambda,\mu, r$があって
+$$
+\begin{pmatrix}
+a & b\\
+c & d \\
+\end{pmatrix}
+=
+\underbrace{
+\begin{pmatrix}
+\cos \theta &  - \sin \theta \\
+\sin \theta &  \cos \theta \\
+\end{pmatrix}
+}_{\text{回転変換}} 
+\underbrace{
+\begin{pmatrix}
+\lambda & 0\\
+0 & \mu \\
+\end{pmatrix}
+}_{\text{引き伸ばし変換}} 
+\underbrace{
+\begin{pmatrix}
+1 & r\\
+0& 1 \\
+\end{pmatrix}
+}_{\text{斜倒変換}}
+$$
+
+\end{prop}
+次の問いに答えよ. 
+\begin{enumerate}
+\item $(a, c)$の極座標変換を考えることで, ある$p, q, s, \theta \in \R$があって
+$$
+A=\begin{pmatrix}
+a & b\\
+c & d \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+\cos (-\theta) &  \sin (-\theta) \\
+\sin (-\theta) &  \cos (-\theta) \\
+\end{pmatrix}
+\begin{pmatrix}
+p & q\\
+0 & s \\
+\end{pmatrix}
+\quad \text{かつ} \quad
+s \neq 0
+$$
+とできることを示せ. (ここに$ad-bc \neq0$を用いる)
+\item 
+$$
+\begin{pmatrix}
+p & q\\
+0 & s \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+\lambda & 0\\
+0 & \mu \\
+\end{pmatrix}
+\begin{pmatrix}
+1 & r\\
+0& 1 \\
+\end{pmatrix}
+$$
+となる$\lambda, \mu, r \in \R$が存在することを示し, 岩澤分解の証明を完成させよ.
+\end{enumerate}
+
+\item (難しめで岩井も答えを知らない) 3次元, それ以上の岩澤分解について調べ, その証明をみよ. リー環・リー代数の勉強の架け橋になるかもしれない.  
+
+\item $\mathbb{F}_7$において$a=1,2, \ldots, 6$について$-a, a^{-1}$をそれぞれ求めよ.
+
+\item
+$$
+(12)(34) = (132)(134) 
+\quad 
+(12)(13) = (132)
+$$
+を示せ. 
+これを用いて$n \ge 3$について, $n$次交代群$A_n$の任意の元は3 cycleの積でかけることを示せ. 
+ここで3個からなる巡回置換$(k_1, k_2, k_3) \in S_n$を3 cycleという. 
+
+ \item 
+ $\sigma, \tau \in S_n$について
+ $$
+ [\sigma, \tau]:=\sigma^{-1}\tau^{-1}\sigma \tau
+ $$
+ と定義する. 以下の式を示せ. 
+ $$
+ (123) = [(12), (134)]
+ \quad (123) = [(124), (135)]
+ $$
+ \item 上の2問を用いて次の問いに答えよ. 
+ \begin{enumerate}
+\item 
+ $$
+ [S_n, S_n]:= \{  [\sigma_1, \tau_1]\cdots [\sigma_l, \tau_l] \mid \sigma_1, \tau_1, \ldots, \sigma_l, \tau_l \in S_n, l \in \N\}
+ $$
+ と定義する. $n \ge 3$について, $[S_n, S_n]=A_{n}$を示せ.
+\item 
+$$
+[A_n, A_n]:= \{  [\sigma_1, \tau_1]\cdots [\sigma_l, \tau_l] \mid \sigma_1, \tau_1, \ldots, \sigma_l, \tau_l \in A_n, l \in \N\}
+$$
+ と定義する. $n \ge 5$について, $[A_n, A_n]=A_{n}$を示せ.
+特にこれから$S_n, A_n$が$n \ge 5$について, 可解でないことがわかる. (詳しいことは学部3年で習う)
+\end{enumerate}
+
+\item $\varepsilon$を恒等置換とする. $[A_3, A_3]=\{\varepsilon\}$であることを示せ. また
+$$
+[A_4, A_4]=\{ \varepsilon, (12)(34), (13)(24), (14)(23)\}
+$$
+であることを示せ. また右辺の集合を$V$として$[V, V]$を上と同様に考えるとき, $[V, V]$を求めよ. 
+これから$S_3, A_3, S_4, A_4$が可解(solvable)であることがわかる (詳しいことは学部3年で習う).
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
+
+\subsection{幾何ベクトルと数ベクトル \cite[1.1節]{O}} 
+\subsection{線形写像の定義と例 \cite[1.2節]{O}} 
+\subsection{数について}
+\subsection{行列と数ベクトルの演算 \cite[2.1節]{O}}
+\subsection{行列の基本変形 \cite[2.2節]{O}}
+\subsection{行列の簡約化や標準化と行列の階数 \cite[2.3節]{O}}
+ \subsection{行基本変形による連立1次方程式の解法  \cite[2.4節]{O}}
+\subsection{基本変形による逆行列の計算 \cite[2.5節]{O}}
+\subsection{置換, 行列式の定義 \cite[3.1節]{O}}
+\subsection{基本変形と行列式 \cite[3.2節]{O}}
+\subsection{行列式に関する幾つかの定理 \cite[3.3節]{O}}
+\subsection{余因子展開と余因子行列 \cite[3.4節]{O}}
+\subsection{行列式の応用 \cite[3.5節]{O}}
+
+\end{comment}
+%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
+
+
