@@ -146,7 +146,7 @@
 # 授業の板書の画像・演習問題のpdf
 授業の板書をアップロードしていきます.  対面授業なので1日に授業をどこまで進められるかわかりません. 授業の進み具合に応じて適宜休講あるいは補講をすることがあるので, こまめにホームページを確認してください. 
 
-- 第1回 (2026/04/16) ガイダンス [第1回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/1_授業板書.pdf)
+- 第1回 (2026/04/16) ガイダンス [第1回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/1_授業板書.pdf) [第1回演義追加問題](https://masataka123.github.io/2026_summer_linear_algebra/material/1_演義板書.pdf)
 - 第2回 (2026/04/23)
 - 第3回 (2026/05/07) 
 - 第4回 (2025/05/12) 
