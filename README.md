@@ -148,7 +148,7 @@
 
 - 第1回 (2026/04/16) ガイダンス [第1回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/1_授業板書.pdf) [第1回演義追加問題](https://masataka123.github.io/2026_summer_linear_algebra/material/1_演義板書.pdf)
 - 第2回 (2026/04/23) [第2回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/2_授業板書.pdf) [第2回演義追加問題](https://masataka123.github.io/2026_summer_linear_algebra/material/2_演義板書.pdf)
-- 第3回 (2026/05/07) 
+- 第3回 (2026/05/07) [第3回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/3_授業板書.pdf) [第3回演義追加問題](https://masataka123.github.io/2026_summer_linear_algebra/material/3_演義板書.pdf)
 - 第4回 (2025/05/14) 
 - 第5回 (2025/05/21) 
 - (2025/05/28) 休講 
