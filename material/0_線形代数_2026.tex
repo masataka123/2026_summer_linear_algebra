@@ -4894,8 +4894,128 @@ $$
 \end{enumerate}
 
 %\item (難しめで岩井も答えを知らない) 3次元, それ以上の岩澤分解について調べ, その証明をみよ. リー環・リー代数の勉強の架け橋になるかもしれない.  
+\end{enumerate}
+\newpage
+
+$\boxed{\text{2026/05/14 第4回 線形代数 演義資料}}$
+
+\underline{行簡約化のやり方}
+ 
+ 
+\url{https://www2.sci.hokudai.ac.jp/dept/math/wp/wp-content/uploads/2020/05/vol1.pdf}の説明がわかりやすかったので参考にした. 
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+        \begin{suma}[行簡約化のやり方]
+\label{suma-gyokanyaku}
+行列の行基本変形を用いた行簡約化は次のように行う.
+\begin{enumerate}[label=\textbf{操作}\arabic*.]
+    \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+ \item 各行の先頭項のうち, 一番左にあるものを含む行の一つをとり, 行基本変形(II)で 1 行目と入れ替える. 
+\item 1 行目の先頭項を行基本変形の(I)で 1 にする.
+\item 1 行目の先頭項を含む列について, その先頭項以外の成分を行基本変形の(III)で 0 にする.
+\item 各行の先頭項のうち, 一番左にあるものを含む行の一つをとり, 行基本変形(II)で 2行目と入れ替える. 
+\item 2 行目の先頭項を行基本変形の(I)で 1 にする.
+\item 2 行目の先頭項を含む列について, その先頭項以外の成分を行基本変形の(III)で 0 にする.
+\item 以下3行目, 4行目と操作4-6が終わるまで繰り返していく. 
+ \end{enumerate}
+\end{suma}
+ \end{tcolorbox}
 
 
+
+\begin{rem}
+%実際に連立1次方程式をプログラミングで解くときも, 掃き出し法・ガウスの消去法によって解きます. 実際にc++で書いたソースコードを以下のホームページで見ることができます.
+実際に行列を簡約化するプログラミングは上の方法を使って作られる.  \url{https://drken1215.hatenablog.com/entry/2019/03/20/202800}
+\end{rem}
+ 
+
+\begin{exa}
+$
+ \begin{pmatrix}
+ 1& 0& 2  &1\\
+ 2& 1& 1  &0\\
+ 0& 1& 1  &0\\
+ \end{pmatrix}
+ $
+ を行基本変形で簡約化すると次のとおりである.
+ 
+ \begin{align*}
+ &\begin{pmatrix}
+ 1& 0& 2  &1\\
+ 2& 1& 1  &0\\
+ 0& 1& 1  &0\\
+ \end{pmatrix}
+\overset{\maru{2} \to \maru{2} + \maru{1}\times(-2)}{\longrightarrow}  \begin{pmatrix}
+ 1& 0& 2  &1\\
+ 0& 1& -3 &-2\\
+ 0& 1& 1  &0\\
+ \end{pmatrix}
+\overset{\maru{3} \to \maru{3} + \maru{2}\times(-1)}{\longrightarrow} 
+\begin{pmatrix}
+ 1& 0& 2  &1\\
+ 0& 1& -3 &-2\\
+ 0& 0& 4  &2\\
+ \end{pmatrix}
+ \\ %%
+ & \overset{\maru{3} \to \maru{3}\times \frac{1}{2}}{\longrightarrow} 
+\begin{pmatrix}
+ 1& 0& 2  &1\\
+ 0& 1& -3 &-2\\
+ 0& 0& 2  &1\\
+ \end{pmatrix} 
+\overset{\maru{1}\to\maru{1} + \maru{3}\times (-1)}{\underset{\maru{2} \to \maru{2} + \maru{3}\times \frac{3}{2}}{\longrightarrow}}
+ \begin{pmatrix}
+ 1& 0& 0  &0\\
+ 0& 1& 0 &-\frac{1}{2}\\
+ 0& 0& 2  &1\\
+ \end{pmatrix} 
+ \overset{\maru{3} \to \maru{3}\times \frac{1}{2}}{\longrightarrow} 
+  \begin{pmatrix}
+ 1& 0& 0  &0\\
+ 0& 1& 0 &-\frac{1}{2}\\
+ 0& 0& 1 &\frac{1}{2}\\
+ \end{pmatrix}.
+ \end{align*}
+   よってこの行列の階数(ランク)は3である.
+ \end{exa}
+ 
+ 
+ \begin{enumerate}[label=\textbf{問題}\arabic*.]
+ \setcounter{enumi}{10}
+ \item 次の行列を簡約化し, その階数を求めよ.
+(1)
+$
+ \begin{pmatrix}
+ 1& 1& 5  & 0&3\\
+ 3& 1& 9  & 1&8\\
+ 2& 0& 4 & 1&5\\
+ 2& 1& 7 & 1&7\\
+ \end{pmatrix}
+ $
+   \quad 
+(2)
+$
+ \begin{pmatrix}
+ 1& 2& 3  & 4&5\\
+ 2& 3& 4  & 5&6\\
+ 3& 4& 5 & 6&7\\
+ 4& 5& 6 & 7&8\\
+ 5& 6& 7 & 8&9\\
+ \end{pmatrix}
+ $
+ \end{enumerate}
+ \newpage
+
+%2026/05/07
+$\boxed{\text{2026/05/21 第5回 線形代数 演義資料}}$
+
+ \begin{enumerate}[label=\textbf{問題}\arabic*.]
+ \setcounter{enumi}{11}
 \item
 $$
 (12)(34) = (132)(134) 
