@@ -36,16 +36,9 @@
 
 詳しくは[ガイダンスの資料]()をご覧ください.
 
+
+
 <!-- 
-
-## 中間レポート1に関して
-次の日時にレポートを配布します.
-- 内容: [中間レポート1](https://masataka123.github.io/2025_summer_linear_algebra/material/0_線形代数レポート1_20250605.pdf)
-- 配布日時: 2025年6月5日 
-- レポート締切: 2025年06月19日 23:59:00 (日本標準時刻, GMT+9)
-- レポート提出方法: 配布したレポート問題に解答し, CLEにて提出する. 
-
-[中間レポート1の解答](https://masataka123.github.io/2025_summer_linear_algebra/material/0_線形代数レポート1_解答_20250605.pdf)
 
 ## 中間レポート2に関して
 次の日時にレポートを配布します.
@@ -77,12 +70,22 @@
 - レポート1配布日時: 2026年5月21日. レポート1締切: 2026年6月4日 23:59:59 (日本標準時刻, GMT+9)
 - レポート2配布日時: 2026年7月16日. レポート1締切: 2026年7月30日 23:59:59 (日本標準時刻, GMT+9)
 
+## 中間レポート1に関して
+次の日時にレポートを配布します.
+- 内容: [中間レポート1](https://masataka123.github.io/2025_summer_linear_algebra/material/0_中間レポート1_2026_0521.pdf)
+- レポート締切: 2025年06月4日 23:59:00 (日本標準時刻, GMT+9)
+- レポート提出方法: 配布したレポート問題に解答し, CLEにて提出する. 
+
+[中間レポート1の解答](https://masataka123.github.io/2025_summer_linear_algebra/material/0_中間レポート1_2026_0521_解答.pdf)
+
 ## 中間試験に関して
 
 - 日時: 2026年 6月4日(予定) 木曜2限(10:30-12:00)  10:15までには着席してください.
 - 場所: 共C206 (授業の部屋)
 - 持ち込みに関して:  無し
 - 試験内容: 授業でやった範囲
+
+詳しくは[こちらのpdf](https://masataka123.github.io/2025_summer_linear_algebra/material/0_中間レポート1_2026_0521.pdf)をご覧ください. 
 
 ## 期末試験に関して
 
@@ -150,7 +153,7 @@
 - 第2回 (2026/04/23) [第2回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/2_授業板書.pdf) [第2回演義追加問題](https://masataka123.github.io/2026_summer_linear_algebra/material/2_演義板書.pdf)
 - 第3回 (2026/05/07) [第3回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/3_授業板書.pdf) [第3回演義追加問題](https://masataka123.github.io/2026_summer_linear_algebra/material/3_演義板書.pdf)
 - 第4回 (2025/05/14)  [第4回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/4_授業板書.pdf) [第4回演義追加問題](https://masataka123.github.io/2026_summer_linear_algebra/material/4_演義板書.pdf)
-- 第5回 (2025/05/21) 
+- 第5回 (2025/05/21) [第5回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/5_授業板書.pdf) [第5回演義追加問題](https://masataka123.github.io/2026_summer_linear_algebra/material/5_演義板書.pdf)
 - (2025/05/28) 休講 
 - 第6回 (2025/06/04) 中間試験(予定)
 - 第7回 (2025/06/11)
