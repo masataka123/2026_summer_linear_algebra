@@ -72,11 +72,11 @@
 
 ## 中間レポート1に関して
 次の日時にレポートを配布します.
-- 内容: [中間レポート1](https://masataka123.github.io/2025_summer_linear_algebra/material/0_中間レポート1_2026_0521.pdf)
+- 内容: [中間レポート1](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間レポート1_2026_0521.pdf)
 - レポート締切: 2025年06月4日 23:59:00 (日本標準時刻, GMT+9)
 - レポート提出方法: 配布したレポート問題に解答し, CLEにて提出する. 
 
-[中間レポート1の解答](https://masataka123.github.io/2025_summer_linear_algebra/material/0_中間レポート1_2026_0521_解答.pdf)
+[中間レポート1の解答](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間レポート1_2026_0521_解答.pdf)
 
 ## 中間試験に関して
 
@@ -85,7 +85,7 @@
 - 持ち込みに関して:  無し
 - 試験内容: 授業でやった範囲
 
-詳しくは[こちらのpdf](https://masataka123.github.io/2025_summer_linear_algebra/material/0_中間レポート1_2026_0521.pdf)をご覧ください. 
+詳しくは[こちらのpdf](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間レポート1_2026_0521.pdf)をご覧ください. 
 
 ## 期末試験に関して
 
