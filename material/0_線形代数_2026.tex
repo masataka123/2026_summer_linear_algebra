@@ -182,6 +182,7 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
 
 \newcommand{\Sin}{\text{Sin}^{-1}}
 \newcommand{\Cos}{\text{Cos}^{-1}}
@@ -206,6 +207,14 @@
 \newcommand{\xb}[1]{\textcolor{blue}{#1}}
 \newcommand{\xr}[1]{\textcolor{red}{#1}}
 \newcommand{\xm}[1]{\textcolor{magenta}{#1}}
+
+
+
+\newcommand{\En}{E_n}
+\newcommand{\On}{O_n}
+\newcommand{\bvec}{\boldsymbol{b}}
+\newcommand{\xvec}{\boldsymbol{x}}
+
 
 %==================================================
 % 定理環境
@@ -5011,11 +5020,1904 @@ $
  \end{enumerate}
  \newpage
 
+ \newpage
 %2026/05/07
 $\boxed{\text{2026/05/21 第5回 線形代数 演義資料}}$
+\begin{proof}[定理2.4.6の具体例]
+例2.4.5を用いる. 行簡約化をして
+\begin{comment}
+$$
+A=
+\begin{pmatrix}
+ 2&  -2&  3 &  9\\
+ 1&  0&  2 &  5\\
+ 0&  -4& -2&  -2\\
+1&  -2&  1 &  4\\
+ \end{pmatrix}
+ \quad
+ \mathbf{x}
+ =
+ \begin{pmatrix}
+x_1 \\
+x_2 \\
+x_3 \\
+x_4 \\
+ \end{pmatrix}
+ \quad
+ \mathbf{b}
+ =
+ \begin{pmatrix}
+7 \\
+2 \\
+6 \\
+5 \\
+ \end{pmatrix}
+$$
+として$A \mathbf{x}=\mathbf{b}$をとく. 
+これは
+\end{comment}
+$$
+A=
+\begin{pmatrix}
+ 1&  0&  2 &  5\\
+ 0&  1&  \frac{1}{2}& \frac{1}{2}\\
+0&  0 &  0& 0\\
+0&  0 &  0& 0\\
+ \end{pmatrix}
+ \quad
+ \mathbf{x}
+ =
+ \begin{pmatrix}
+x_1 \\
+x_2 \\
+x_3 \\
+x_4 \\
+ \end{pmatrix}
+ \quad
+ \mathbf{b}
+ =
+ \begin{pmatrix}
+2 \\
+-\frac{3}{2} \\
+0 \\
+0 \\
+ \end{pmatrix}
+ \quad 
+ \mathbf{w}
+:=
+ \begin{pmatrix}
+2 \\
+-\frac{3}{2} \\
+0 \\
+0 \\
+ \end{pmatrix}
+$$
+とおく. $A\mathbf{x}=\mathbf{b}$をとく. 
+今 
+$A\mathbf{w}
+=\mathbf{b}$
+であるので
+$$
+A\mathbf{x}=\mathbf{b}
+\Leftrightarrow
+A(\mathbf{x}- \mathbf{w})=\mathbf{0}
+$$
+である. $\mathbf{y}=\mathbf{x}- \mathbf{w}$として$A\mathbf{y}=\mathbf{0}$の解を探すと
+$$
+A\mathbf{y}=\mathbf{0}
+\Leftrightarrow
+\left\{ 
+\begin{matrix}
+y_1&  &  &  +& 2y_3& + &5x_4&= & 0\\
+ & &y_2& +&\frac{1}{2}x_3&+&\frac{1}{2}y_4&= & 0\\
+	& & & &&&0&=&0 \\
+	& & & &&&0&=&0 \\
+\end{matrix}
+\right.
+\Leftrightarrow
+ \begin{pmatrix}
+y_1 \\
+y_2 \\
+y_3 \\
+y_4 \\
+ \end{pmatrix}
+ =
+ c_1 
+\underbrace{
+  \begin{pmatrix}
+-2 \\
+-\frac{1}{2} \\
+1\\
+0 \\
+ \end{pmatrix}
+ }_{=:\mathbf{v}_1}
+ +
+ c_2
+ \underbrace{
+  \begin{pmatrix}
+-5 \\
+-\frac{1}{2}\\
+0 \\
+1 \\
+ \end{pmatrix}
+  }_{=:\mathbf{v}_2}
+$$
+となる. 
+よって
+$$
+\mathbf{x}
+=\mathbf{y}+ \mathbf{w}
+=\mathbf{w} + c_1 \mathbf{v}_1 + c_2\mathbf{v}_2
+$$
+となる. この例では$n=4, r=2$である. 
+\end{proof}
+\begin{proof}[定理2.3.5の行簡約化可能の証明の概略]
+$m \times n$行列$A$に関して$n$に関する帰納法
 
+簡単のため$m=2, n=5$とする.また$\ast$で数を表す.
+帰納法の仮定で$n \le 4$までは行簡約化できると仮定する.
+$a \neq 0$として次の3パターンが考えられる. 
+$$
+A=
+ \underbrace{\begin{pmatrix}
+ a&  \ast&  \ast &  \ast& \ast\\
+ \ast &  \ast&  \ast  &  \ast& \ast\\
+ \end{pmatrix}}_{\text{case 1}}
+ \quad\text{or}\quad 
+ \underbrace{\begin{pmatrix}
+ 0&  \ast&  \ast &  \ast& \ast\\
+ a &  \ast&  \ast  &  \ast& \ast\\
+ \end{pmatrix}
+ }_{\text{case 2}}
+ \quad\text{or}\quad 
+ \underbrace{\begin{pmatrix}
+ 0&  \ast&  \ast &  \ast& \ast\\
+ 0&  \ast&  \ast  &  \ast& \ast\\
+ \end{pmatrix}
+  }_{\text{case 3}} 
+$$
+に限られる. 
+あとは3つの場合に簡約化できることを言えば良い. 
+
+[Case 1]の場合
+$$
+\begin{pmatrix}
+ a&  \ast&  \ast &  \ast& \ast\\
+ \ast &  \ast&  \ast  &  \ast& \ast\\
+ \end{pmatrix}
+ \overset{\maru{1} \to \maru{1}\times(\frac{1}{a})}{\longrightarrow}  
+ \begin{pmatrix}
+ 1&  \ast&  \ast &  \ast& \ast\\
+ \ast &  \ast&  \ast  &  \ast& \ast\\
+ \end{pmatrix}
+  \overset{\maru{2} \to \maru{2} - \maru{1}\times(\ast)}{\longrightarrow}  
+   \begin{pmatrix}
+ 1&  \ast&  \ast &  \ast& \ast\\
+0 &  \ast&  \ast  &  \ast& \ast\\
+ \end{pmatrix}
+$$
+とできる. 
+あとは右の$2 \times 4$行列を簡約化すれば良い(帰納法の仮定よりできる.)
+
+
+[Case 2]の場合
+$$
+\begin{pmatrix}
+ 0&  \ast&  \ast &  \ast& \ast\\
+ a &  \ast&  \ast  &  \ast& \ast\\
+ \end{pmatrix}
+ \overset{\maru{1} \leftrightarrow  \maru{2}}{\longrightarrow}  
+ \begin{pmatrix}
+ a &  \ast&  \ast  &  \ast& \ast\\
+ 0&  \ast&  \ast &  \ast& \ast\\
+ \end{pmatrix}
+ \overset{\maru{1} \to \maru{1}\times(\frac{1}{a})}{\longrightarrow}  
+   \begin{pmatrix}
+ 1&  \ast&  \ast &  \ast& \ast\\
+0 &  \ast&  \ast  &  \ast& \ast\\
+ \end{pmatrix}
+$$
+とできる. 
+あとは右の$2 \times 4$行列を簡約化すれば良い(帰納法の仮定よりできる.)
+
+[Case 3]の場合. 
+右の$2 \times 4$行列を簡約化すれば良い(帰納法の仮定よりできる.)
+\end{proof}
+証明をきちんと完成させるには, $n=1$の時と, 一般の$m$について上の議論をやれば良い. 
+
+ \begin{proof}[定理2.3.5の標準化可能の証明の概略]
+行簡約可能性は示した. 
+簡単のため
+ $$
+ A=
+   \begin{pmatrix}
+ 1&  \ast &  0 &  \ast& \ast\\
+0 &  0 &  1&  \ast& \ast\\
+ \end{pmatrix}
+ $$
+ としてどのように操作すればいいかをいう. 
+ \begin{align*}
+  &  \begin{pmatrix}
+ 1&  \ast &  0 &  \ast& \ast\\
+0 &  0 &  1&  \ast& \ast\\
+ \end{pmatrix}
+  \overset{\text{2列目に1列目の$\ast$倍を引く}}{\longrightarrow}  
+   \begin{pmatrix}
+ 1&  0&  0 &  \ast& \ast\\
+0 &  0 &  1&  \ast& \ast\\
+ \end{pmatrix}
+   \overset{\text{4列目, 5列目に1列目の$\ast$倍を引く}}{\longrightarrow}  
+   \begin{pmatrix}
+ 1&  0&  0 &  0& 0\\
+0 &  0 &  1&  \ast& \ast\\
+ \end{pmatrix}
+ \\
+ &   \overset{\text{2列目と3列目を交換}}{\longrightarrow}  
+   \begin{pmatrix}
+ 1&  0&  0 &  0& 0\\
+0 &  1 &  0&  \ast& \ast\\
+ \end{pmatrix}
+  \overset{\text{4列目, 5列目に2列目の$\ast$倍を引く}}{\longrightarrow}  
+   \begin{pmatrix}
+ 1&  0&  0 &  0& 0\\
+0 &  1 &  0&  0& 0\\
+ \end{pmatrix}
+ \end{align*}
+\end{proof}
+証明をきちんと完成させるには, 一般の$m$について上の議論をやれば良い. 
+
+\begin{proof}[定理2.3.6行簡約行列の唯一性の証明]
+$A$の行簡約化が$B, B'$として$B=B'$を示せば良い.
+教科書命題2.2.3より行基本変形は可逆なので
+$$
+ A \overset{\text{行基本変形}}{\longrightarrow} B 
+\Leftrightarrow 
+B  \overset{\text{行基本変形}}{\longrightarrow} A
+$$
+となる. 
+以上より
+$$
+ A \overset{\text{行基本変形}}{\longrightarrow} B 
+  \quad\text{and}\quad 
+   A \overset{\text{行基本変形}}{\longrightarrow} B'
+   \Rightarrow 
+B  \overset{\text{行基本変形}}{\longrightarrow} A   
+  \quad\text{and}\quad 
+     A \overset{\text{行基本変形}}{\longrightarrow} B'
+\Rightarrow 
+B  \overset{\text{行基本変形}}{\longrightarrow} B'   
+$$
+よって$B$から$B'$へ行基本変形で変換できる. 
+命題2.2.8より, ある基本行列の積$P$があって
+$$
+PB=B'
+$$
+となる. 
+こっから後の議論は簡単な掛け算と簡約行列の定義に基づく. 
+以下簡単のため$m=3, n=5$とする. 
+そして
+$$
+B=
+\begin{pmatrix}
+ 1&  0&  \ast &  \ast& \ast\\
+0 &  1 &  \ast&  \ast& \ast\\
+0 &  0 &  0&0 & 0\\
+ \end{pmatrix}
+ \quad
+ B'=
+\begin{pmatrix}
+ 1&  \ast&  0 &  \ast& \ast\\
+0 &  0 &  1&0 & 0\\
+0 &  0 &  0&0 & 0\\
+ \end{pmatrix}
+ P=
+\begin{pmatrix}
+a&  b &c\\
+d&  e &f\\
+g&  h &i\\
+ \end{pmatrix}
+$$
+であった場合にどのような矛盾が起きるか観察する. 
+$PB=B'$より
+$$
+PB
+=
+\begin{pmatrix}
+a&  b &c\\
+d&  e &f\\
+g&  h &i\\
+ \end{pmatrix}
+\begin{pmatrix}
+ 1&  0&  \ast &  \ast& \ast\\
+0 &  1 &  \ast&  \ast& \ast\\
+0 &  0 &  0&0 & 0\\
+ \end{pmatrix}
+ =
+ \begin{pmatrix}
+ a& b& \ast&  \ast& \ast\\
+d &  e &  d\ast + e \ast &  \ast& \ast\\
+g &  h &  0&0 & 0\\
+ \end{pmatrix}
+ =
+ \begin{pmatrix}
+ 1&  \ast&  0 &  \ast& \ast\\
+0 &   0&  1&  \ast& \ast\\
+0 &  0 &  0&0 & 0\\
+ \end{pmatrix}
+ =
+ B'
+$$
+である. 
+第2行をを見比べれば
+$$
+d=0, e=0, d\ast + e\ast = 1 
+$$
+である. よって矛盾する. 
+\end{proof}
+証明をきちんと完成させるには, $B\neq B'$として, $1$の位置が一致していない一番左端の部分をとって上の議論をすれば良い(と思う).
+
+\begin{proof}[定理2.3.6列簡約化と標準化の唯一性の証明]
+これは上から従う, というのも$A$の行基本変形は${}^tA$の列基本変形と授業で触れなかった内容より
+$$
+\text{$A$の列簡約化}
+=
+\text{${}^tA$の行簡約化}
+\quad 
+\text{標準化}
+= 
+\text{行簡約化} + \text{列簡約化} 
+$$
+であるため. 
+\end{proof}
+\begin{proof}[定理2.3.6階数が等しいことの証明. ]
+行列$A$とする. $B$を$A$の行簡約化とする. 
+$A$の行簡約化の0でない行ベクトルの個数が標準形の単位行列の次数であることを示すには, 
+\begin{equation}
+\label{eq-kanyaku-h}
+\underbrace{\text{$B$の0でない行ベクトルの個数}}_{=:s}
+=
+\text{$B$の標準化の$ \begin{pmatrix}
+ E_r&  0\\
+0 &   0\\
+ \end{pmatrix}
+ $の$r$}
+\end{equation}
+を示せば良い. $B$の0でない行ベクトルの個数を$s$とすると, 
+標準化可能の証明を見れば, 
+$$
+B\overset{\text{列基本変形}}{\longrightarrow} 
+\begin{pmatrix}
+ E_s&  0\\
+0 &   0\\
+ \end{pmatrix}
+$$
+とできる. 
+よって
+$$
+A\overset{\text{行基本変形}}{\longrightarrow} 
+B\overset{\text{列基本変形}}{\longrightarrow} 
+\begin{pmatrix}
+ E_s&  0\\
+0 &   0\\
+ \end{pmatrix}
+$$
+となる. $A$の標準化は一意なので
+$s=r$を得る. 
+
+最後に$A$の列簡約化の0でない行ベクトルの個数が標準形の単位行列の次数であることを示す.  
+$A$の行基本変形は${}^tA$の列基本変形なので
+$$
+\text{$A$の標準化}
+=
+\text{${}^tA$の標準化}
+$$
+である. 
+以上より
+\begin{align*}
+&\text{$A$の列簡約化の0でない行ベクトルの個数}
+=
+\text{${}^t A$の行簡約化の0でない行ベクトルの個数}
+\\
+&\underset{\eqref{eq-kanyaku-h}}{=}
+\text{${}^tA$の標準化の$ \begin{pmatrix}
+ E_r&  0\\
+0 &   0\\
+ \end{pmatrix}$の$r$}
+\underset{\text{上の事実}}{=}
+ \text{$A$の標準化の$ \begin{pmatrix}
+ E_r&  0\\
+0 &   0\\
+ \end{pmatrix}$の$r$}
+\end{align*}
+
+\end{proof}
  \begin{enumerate}[label=\textbf{問題}\arabic*.]
  \setcounter{enumi}{11}
+ \item
+ 連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+x_1& +& x_2 &  -& x_3& + &2x_4&= & 2\\
+2x_1&+&3x_2& -&4x_3&-&x_4&= & 1\\
+	& &x_2& - &2x_3&-&5x_4&=&a \\
+\end{matrix}
+\right.
+ $
+ の解が存在するような$a$の値を全て求めよ.
+ \end{enumerate}
+
+\begin{center}
+{\LARGE 中間試験の情報 } \\
+2026年度春夏学期 大阪大学 全学共通教育科目 線形代数学・同演義Ⅰ (理（数）)
+\end{center}
+
+期末試験の情報は次のとおりです. 
+\begin{itemize}
+  \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+\item 日時: 2026年 6月4日 木曜2限 (10:30-12:00) 10:25までには着席してください.
+\item 場所: 共C206 (授業の部屋)
+\item 持ち込みに関して: 無し (ただしあまりにも暑い場合, 飲み物等の持ち込み可)
+\item 試験内容: 第1回$\sim$第5回授業の内容
+\end{itemize}
+以下は注意事項です.
+\begin{itemize}
+  \setlength{\parskip}{0cm} 
+ \setlength{\itemsep}{0cm}
+ \item \underline{解答に関して, 答えのみならず, 答えを導出する過程をきちんと記してください.} きちんと記していない場合は大幅に減点する場合がある.
+ \item レポート問題の何問かを数値や表現など少し変えて出す予定です. 
+% \item 期末試験には「普通の問題」と「おまけの問題」があります. 普通の問題はしっかり勉強すれば解ける問題です. おまけの問題は解けることを想定していない問題です. 面白いので出しました. 
+ %\item \underline{演習問題(11/6と1/8)の何問かを数値や表現など少し変えて出す予定です.} そのため何をやればいいかわからない人は, 最低限として演習問題を解けるようにしてください. また単位を認定するくらいの成績が取れていない場合, 容赦無く不可を出します. 
+% \item 問題は全部で7問です. 第1-4問は基本的な問題,  第5-7問は応用問題です. そして満点は100点とは限りません. また全て解けることを想定していません. 
+\item 途中退出は11:00-11:45までとします. 試験が早く解けたものや諦めたものはこの時間に試験を提出し, その後退出してください. 
+\end{itemize}
+
+演習問題及び授業の資料・板書内容はCLEや授業ページ(\url{https://masataka123.github.io/2026_summer_linear_algebra/})にもあります. 
+
+
+
+\underline{試験の欠席対応について } 
+
+正当な理由での欠席と認められれば別途対応をいたします. ここで正当な理由とはインフルエンザなどの病気または忌引き等です. その場合は岩井に連絡し, 教務課に授業・試験欠席届(下記URL参照)を提出してください.
+\begin{center}
+\url{https://www.celas.osaka-u.ac.jp/education/absence/}
+\end{center}
+
+\newpage
+
+
+  \begin{center}
+ {\Large 中間レポート1 問題}
+% {\Large 演習問題の解答用紙 2024年1月11日(木) } \\
+%\end{center}
+%\vspace{5pt}
+
+{ \large \underline{提出締め切り 2026年6月4日(木) 23時59分59秒 (日本標準時刻)}}
+\end{center}
+
+%\vspace{2pt}
+%\begin{flushleft}
+%{ \large \underline{学籍番号: \hspace{4cm} 名前  \hspace{9cm}   }  }
+%\end{flushleft}
+
+%\vspace{2pt}
+%\begin{flushleft}
+%{ \Large 提出方法}
+%\end{flushleft}
+\begin{itemize}
+ \setlength{\parskip}{0cm}
+  \setlength{\itemsep}{0pt} 
+  \item 2026年6月4日(木) 23時59分59秒までにCLEにて提出してください.  
+  \item \underline{レポート問題に関しては提出すれば点数を与えるつもりなので, 必ず提出してください.} なおレポートは中間と期末の練習も兼ねています. 
+  \item \underline{レポート問題は全て演習で取り扱ったため, 演習での解答を再利用して良い.} 例えば, 演習でといたノートの画像を写真で撮り, それを組み合わせてpdfファイルを作って提出しても良い. その場合多少字が汚くても良い. 
+\item 解答に関しては答えのみならず, 答えを導出する過程をきちんと記すこと. 
+\item レポート問題に関しては, 演習で取り扱ったため, CLEや教科書に解答が全てあります. 
+%\item レポート問題に関してはCLEに解答があるのでそれを活用してよい. ただし意味もなく丸写ししても時間の無駄なので, 使う際はなぜその解答になるのか考えながら活用すること. 
+%\item 定義に関しては原則的に"松本先生の講義"および"松本幸夫著 多様体の基礎 (東京大学出版会)"のものを採用する. 
+%\item レポート問題の解答を5月日前後にCLEに公開する予定です. 
+\end{itemize}
+
+%\vspace{5pt}
+%\begin{flushleft}
+%{\Large レポート問題}
+%\end{flushleft}
+\begin{enumerate}[label=\textbf{問題}\arabic*.]
+\item(第2回演習追加問題 1) 「$x$軸に関しての鏡映(折り返し)を行い, $\frac{3}{4}\pi$(=135度)反時計回りに回転する」1次変換求めよ.
+  \item(第2回演習追加問題 2) 「$x$軸に関しての鏡映(折り返し)を行い, $\frac{3}{4}\pi$(=135度)反時計回りに回転し, さらに$x$軸に関しての鏡映(反転)を行う」1次変換を求めよ .またその変換は$\theta$反時計回りの変換に等しいが, その$\theta$を求めよ. 
+  ただし$0 \le \theta <2\pi$とする. 
+\item (第2回演習追加問題 5) $\mathbb{F}_7=\{0,1 ,2, \ldots, 6\}$として, 
+  加法$+ $と乗法$\bullet$を次で定義する.
+  \begin{itemize}
+  \item $a, b \in \mathbb{F}_7$について$a+b:=\text{($a$たす$b$を$7$で割ったあまり)}$. 
+\item $a, b \in \mathbb{F}_7$について$a\bullet b:=\text{($a$かける $b$を$7$で割ったあまり)}$. 
+ \end{itemize}
+(これによって$\mathbb{F}_7$は体となる)
+$a=1,2, \ldots, 6$について$\mathbb{F}_7$での$-a, a^{-1}$をそれぞれ求めよ.
+\item (第3回演習 教科書2.1.2)
+\[
+A=
+\begin{bmatrix}
+1 & 2 & 0\\
+1 & -1 & 3
+\end{bmatrix},
+\quad
+B=
+\begin{bmatrix}
+-1 & 3\\
+0 & 2\\
+1 & 1
+\end{bmatrix},
+\quad
+C=
+\begin{bmatrix}
+1 & 2\\
+3 & 4
+\end{bmatrix}
+\]
+とする.
+
+(1) \(AB, BA, BC, CB, CA, AC\) の \(6\) 個のうち, 行列の積として定まらない
+ものをすべてあげよ.
+
+(2) \(AB, BA, BC, CB, CA, AC\) の \(6\) 個のうち, 行列の積として定まるもの
+すべてに対して積を計算せよ.
+%\item  \(A=[a_{ij}]\) を型 \((l,m)\) の行列, \(B=[b_{jk}]\) が型 \((m,n)\) の行列とする. このとき, 積 \({}^tB{}^tA\) が定まること, および\[{}^t(AB)={}^tB{}^tA\]であることを示せ.
+\item (第3回演習 教科書2.1.11) \(n\) 次正方行列 \(A=[a_{ij}]\) に対して, 対角成分の和
+\(
+a_{11}+a_{22}+\cdots+a_{nn}
+\)
+を \(A\) のトレースとよび, \(\operatorname{tr}(A)\) で記す. 任意の \(n\) 次正方行列 \(A,B\) に対して,
+\(
+\operatorname{tr}(AB)=\operatorname{tr}(BA)
+\)
+が成り立つことを示せ.
+ %\item (第3回演習追加問題 7)$2 \times 2$行列
+%$A=\begin{pmatrix}
+%a & b\\
+%c & d \\
+%\end{pmatrix}
+%$
+%について$ad - bc \neq0$であると仮定する.
+%この時
+%$
+%B=\frac{1}{ad-bc}
+%\begin{pmatrix}
+%d & -b\\
+%-c & a \\
+%\end{pmatrix}
+%$
+%について
+%$
+%AB=BA=E_2
+%$
+%を示せ. \footnote{$E_2$は単位行列で$E_2:=\begin{pmatrix}
+%1 & 0\\
+%0 & 1 \\
+%\end{pmatrix}$とする. }
+%よって$A$は正則で$B$は$A$の逆行列$A^{-1}$である.
+\item (第3回演習追加問題 8) $n$次正方行列$A$が正則行列であるとする.
+この時$n$次正方行列$B$について, 
+$AB=O_{n}$ならば$B=O_n$であることを示せ.
+(ヒント: 教科書p.23の(3)とp.22の$AE_n=E_nA=A$を使う.)
+%\item (第3回演習 追加問題 9)$2 \times 2$行列
+%$A=\begin{pmatrix}
+%a & b\\
+%c & d \\
+%\end{pmatrix}
+%$
+%について$ad - bc =0$であると仮定する.
+%この時$A$は正則でないことを示せ.
+%(ヒント: ゼロ行列でない$B$で$AB=O_2$となるものを構成し, 前の問題を使う.)
+\item (第4回演習 教科書2.2.3) 正方行列 \(A\) に何回かの行基本変形を施して
+\[
+\begin{bmatrix}
+A'\\
+0 \ \cdots \ 0
+\end{bmatrix}
+\]
+という最後の行が
+すべて \(0\) であるような行列に変換できるとする. このとき, \(A\) は逆行列をもたな
+いことを証明せよ.
+\item (第4回演習 教科書2.3.2)
+$
+C=
+\begin{bmatrix}
+4 & -7 & 6 & 1\\
+1 & 0 & 5 & 2\\
+-1 & 5 & 5 & 3\\
+0 & 1 & 2 & 1
+\end{bmatrix}
+ $
+ の行簡約化, 階数, 標準化を求めよ. 
+\item (第5回演習 教科書2.4.1(3))連立方程式を解け. 
+\[
+\left\{
+\begin{matrix}
+     &  & 3x_2 & + & 6x_3 & + & 3x_4 & = & 3\\
+-x_1 & + & x_2 & + & 3x_3 & + & 2x_4 & = & 2\\
+ x_1 & + & 2x_2 & + & 3x_3 & + & x_4 & = & 1\\
+-2x_1 & - & x_2 &  &  & + & x_4 & = & 1
+\end{matrix}
+\right.
+\]
+ \item (第5回演習 教科書2.5.2(2))
+  次で与えられた \(n\) 次正方行列 \(A\) に対して,
+\(
+\widetilde{A}=
+\begin{bmatrix}
+A & E_n
+\end{bmatrix}
+\)
+の行簡約化を計算
+することによって, \(A\) の逆行列 \(A^{-1}\) を求めよ.
+\[
+A=
+\begin{bmatrix}
+1 & 3 & 2\\
+-1 & 0 & 1\\
+2 & 1 & -2
+\end{bmatrix}
+\]
+ \item (第5回演習 教科書2.5.3)
+\(A\) を$n$次正方行列とするとき, \(A\) が正則であるための必要十分条件は \(A\) が零因子で
+ないことである. このことを証明せよ.
+ここで$A$が零因子であるとは, あるゼロ行列でない$n$次正方行列$B$があって$AB$または$BA$がゼロ行列となることとする. 
+\item (第5回演習 追加問題12)
+ 連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+x_1& +& x_2 &  -& x_3& + &2x_4&= & 2\\
+2x_1&+&3x_2& -&4x_3&-&x_4&= & 1\\
+	& &x_2& - &2x_3&-&5x_4&=&a \\
+\end{matrix}
+\right.
+ $
+ の解が存在するような$a$の値を全て求めよ.
+\end{enumerate}
+\newpage
+
+%2026/05/07
+$\boxed{\text{2026/05/21 第5回 線形代数の授業の補足}}$
+
+命題2.5.3の証明を再度紹介しておく. 使う事実は以下の通り. 
+\begin{itemize}
+\item (教科書 2.3.9) $n$次正方行列$A$が行簡約で$\mathrm{rank}A=n$ならば$A=E_n$
+\item (教科書 2.3.9) $n$次正方行列$A$が行簡約で$\mathrm{rank}A<n$ならば
+$$A=
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+\vdots & \vdots & & \vdots \\
+a_{n-1,1} & a_{n-1,2} & \cdots & a_{n-1,n} \\
+0& 0 & \cdots & 0
+\end{pmatrix}\\
+$$
+としたに0が並ぶ. 
+\item (教科書 2.2.8, 2.3.5) 
+$$
+A\overset{\text{行基本変形}}{\longrightarrow} B \text{行簡約行列}
+\Leftrightarrow 
+\text{ある基本行列の積$P$があって}
+PA=B
+$$
+\item (教科書 2.2.7) 基本行列は正則で, その逆行列も基本行列
+\end{itemize}
+
+\begin{prop}[教科書 命題 2.5.3]
+$A,B$ を $n$ 次正方行列とする. もし
+\(
+BA=\En
+\)
+ならば, $A$ と $B$ はともに正則行列であり,
+\(
+B=A^{-1}
+\)
+である.
+\end{prop}
+\begin{proof}
+$B$が正則であることを示す. 
+$$
+B\overset{\text{行基本変形}}{\longrightarrow} C \text{行簡約行列}
+$$
+と簡約化すると, ある基本行列の積でかける$P$があって
+$$
+PB=C
+$$
+である. 
+
+$\mathrm{rank}B=n$を背理法で示す. 
+$\mathrm{rank}B<n$ならば, $\mathrm{rank}C<n$より, 上の事実から
+$$
+C=
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+\vdots & \vdots & & \vdots \\
+a_{n-1,1} & a_{n-1,2} & \cdots & a_{n-1,n} \\
+0& 0 & \cdots & 0
+\end{pmatrix}\\
+$$
+としたに0が並ぶ. 
+すると
+$$
+P = P\underbrace{(BA)}_{=E_n \text{仮定}}
+=(PB)A
+=CA
+$$
+である. 
+よって行列の積を考えれば
+$$
+CA = \begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+\vdots & \vdots & & \vdots \\
+a_{n-1,1} & a_{n-1,2} & \cdots & a_{n-1,n} \\
+0& 0 & \cdots & 0
+\end{pmatrix}\\ A
+=
+\begin{pmatrix}
+d_{11} & d_{12} & \cdots & d_{1n} \\
+\vdots & \vdots & & \vdots \\
+d_{n-1,1} & d_{n-1,2} & \cdots & d_{n-1,n} \\
+0& 0 & \cdots & 0
+\end{pmatrix}\\ 
+$$
+としたに0が並ぶ. 教科書問題2.2.3より$P$は逆行列を持たない. 
+しかし$P$は基本行列の積より, 正則行列である. よって矛盾.
+
+よって$\mathrm{rank}B=n$である. 
+$\mathrm{rank}C=n$より, 上の事実から
+$$
+C=E_n 
+\Rightarrow
+B=P^{-1}C=P^{-1}
+$$
+$P$は基本行列の積より, $P^{-1}$もそうなる. よって正則である. 
+よって$B$正則である. 
+
+また
+$$
+BA = B^{-1}B=E_n 
+\underset{\text{教科書2.1.1}}{\Rightarrow}
+A=B^{-1}
+\Rightarrow
+\text{$A$は正則で}B=A^{-1}
+$$ 
+\end{proof}
+
+\begin{thm}
+$n$ 次正方行列 $A$ に対して, 次の条件はすべて同値である.
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item $\rank A=n$.
+\item $A$ は正則行列である.
+\item $A$ は基本行列の積で表される.
+\item 拡大行列 $[A\mid \En]$ は, 行基本変形によって $[\En\mid B]$ の形に変形できる.
+\item $A$ は行基本変形によって $\En$ に変形できる.
+\item 任意の $\bvec\in\R^n$ に対して, 連立一次方程式
+\(
+A\xvec=\bvec
+\)
+は解をもつ.
+\item 同次連立一次方程式
+\(
+A\xvec=\boldsymbol{0}
+\)
+の解は $\xvec=\boldsymbol{0}$ のみである.
+\end{enumerate}
+また, \textup{(4)} において
+\(
+[A\mid \En]\longrightarrow [\En\mid B]
+\)
+となったとき,
+\(
+B=A^{-1}
+\)
+である.
+\end{thm}
+\begin{proof}
+
+[$(1) \Rightarrow (3)$]
+$$
+A\overset{\text{行基本変形}}{\longrightarrow} C \text{行簡約行列}
+$$
+と簡約化すると, ある基本行列の積でかける$P$があって
+$$
+PA=C
+$$
+である. 
+$\mathrm{rank}A=\mathrm{rank}C=n$より, 上の事実から
+$$
+C=E_n 
+\Rightarrow
+A=P^{-1}C=P^{-1}
+$$
+$P$は基本行列の積より, $P^{-1}$もそうなる.
+
+[$(3) \Rightarrow (2)$]
+基本行列は正則で正則行列の積は正則なので. 
+
+[$(2) \Rightarrow (1)$]
+対偶を示す. 
+つまり
+$$
+\mathrm{rank}(A)<n \Rightarrow \text{$A$は正則でない}
+$$
+を示す. 
+
+$$
+A\overset{\text{行基本変形}}{\longrightarrow} C \text{行簡約行列}
+$$
+と簡約化すると, ある基本行列の積でかける$P$があって
+$$
+PA=C
+$$
+である. 
+$\mathrm{rank}A<n$ならば, $\mathrm{rank}C<n$より, 上の事実から
+$$
+C=
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+\vdots & \vdots & & \vdots \\
+a_{n-1,1} & a_{n-1,2} & \cdots & a_{n-1,n} \\
+0& 0 & \cdots & 0
+\end{pmatrix}\\
+$$
+としたに0が並ぶ. 
+よって教科書問題2.2.3より$C$は逆行列を持たず, 正則でない. 
+よって$A$は正則でない.\footnote{もし$A$が正則なら$C=PA$より$C$も正則になってしまう.}
+
+[$(3) \Rightarrow (4)$]
+$A=P$を基本行列の積でかくと, $P^{-1}$も基本行列の積であり
+$$
+P^{-1}[A:E_n]=[E_n : P^{-1}]
+\Leftrightarrow
+[A:E_n]\overset{\text{行基本変形}}{\longrightarrow} [E_n: P^{-1}] 
+$$
+よって$B=P^{-1}$とおけば良い
+
+[$(4) \Rightarrow (2)$]
+$$
+[A:E_n]\overset{\text{行基本変形}}{\longrightarrow} [E_n:B] 
+$$
+と簡約化すると, ある基本行列の積でかける$P$があって
+$$
+P[A:E_n]=[E_n:B]
+\Leftrightarrow
+PA=E_n, P=B
+$$
+となる. 
+よって$BA=E_n$なので, 命題2.5.3から$A$は正則で$B=A^{-1}$である. 
+
+[$(4) \Leftrightarrow (5)$]
+明らか. (もしわからない場合は示してみよう.)
+
+[$(1) \Leftrightarrow (6) \Leftrightarrow (7)$]
+定理2.4.6(2)および系2.4.8による.
+\end{proof}
+
+\newpage
+\begin{center}
+{\Large 中間レポート1 解答例}\par
+\vspace{0.5em}
+{\small 2026年度 線形代数}
+\end{center}
+ほとんどの解答をchatGPTに書いてもらいました.
+
+
+問題1. (第2回演習追加問題 1) 「$x$軸に関しての鏡映(折り返し)を行い, $\frac{3}{4}\pi$(=135度)反時計回りに回転する」1次変換求めよ.
+
+ 問題2. (第2回演習追加問題 2) 「$x$軸に関しての鏡映(折り返し)を行い, $\frac{3}{4}\pi$(=135度)反時計回りに回転し, さらに$x$軸に関しての鏡映(反転)を行う」1次変換を求めよ .またその変換は$\theta$反時計回りの変換に等しいが, その$\theta$を求めよ. 
+  ただし$0 \le \theta <2\pi$とする. 
+
+解答1.
+$x$ 軸に関する鏡映を
+\[
+\sigma_x(x,y)=(x,-y)
+\]
+とおく. また, 角度 $\alpha$ の反時計回りの回転を
+\[
+\rho_\alpha(x,y)
+=
+(x\cos\alpha-y\sin\alpha,\ x\sin\alpha+y\cos\alpha)
+\]
+とおく.
+
+問題の変換は, まず $x$ 軸に関する鏡映を行い, その後に
+$3\pi/4$ 反時計回りに回転する変換である. したがって, 求める変換は
+\[
+T_1=\rho_{3\pi/4}\circ \sigma_x
+\]
+である.
+
+実際に計算する. まず
+\[
+\sigma_x(x,y)=(x,-y)
+\]
+であるから,
+\[
+T_1(x,y)
+=
+\rho_{3\pi/4}(x,-y).
+\]
+ここで
+\[
+\cos\frac{3\pi}{4}=-\frac{\sqrt2}{2},
+\qquad
+\sin\frac{3\pi}{4}=\frac{\sqrt2}{2}
+\]
+である. よって
+\begin{align*}
+T_1(x,y)
+&=
+\left(
+x\cos\frac{3\pi}{4}-(-y)\sin\frac{3\pi}{4},
+x\sin\frac{3\pi}{4}+(-y)\cos\frac{3\pi}{4}
+\right)
+\\
+&=
+\left(
+x\cos\frac{3\pi}{4}+y\sin\frac{3\pi}{4},
+x\sin\frac{3\pi}{4}-y\cos\frac{3\pi}{4}
+\right)
+\\
+&=
+\left(
+-\frac{\sqrt2}{2}x+\frac{\sqrt2}{2}y,
+\frac{\sqrt2}{2}x+\frac{\sqrt2}{2}y
+\right).
+\end{align*}
+
+[別解]
+$x$軸に関する鏡映を
+\[
+S_x=
+\begin{pmatrix}
+1&0\\
+0&-1
+\end{pmatrix}
+\]
+とおく. また, $3\pi/4$ 反時計回りの回転を
+\[
+R_{3\pi/4}
+=
+\begin{pmatrix}
+\cos\frac{3\pi}{4}&-\sin\frac{3\pi}{4}\\
+\sin\frac{3\pi}{4}& \cos\frac{3\pi}{4}
+\end{pmatrix}
+=
+\begin{pmatrix}
+-\frac{\sqrt2}{2}&-\frac{\sqrt2}{2}\\
+\frac{\sqrt2}{2}&-\frac{\sqrt2}{2}
+\end{pmatrix}
+\]
+とおく. 先に $x$軸に関する鏡映を行い, その後に回転するので, 求める行列は
+\[
+R_{3\pi/4}S_x
+=
+\begin{pmatrix}
+-\frac{\sqrt2}{2}&-\frac{\sqrt2}{2}\\
+\frac{\sqrt2}{2}&-\frac{\sqrt2}{2}
+\end{pmatrix}
+\begin{pmatrix}
+1&0\\
+0&-1
+\end{pmatrix}
+=
+\begin{pmatrix}
+-\frac{\sqrt2}{2}&\frac{\sqrt2}{2}\\
+\frac{\sqrt2}{2}&\frac{\sqrt2}{2}
+\end{pmatrix}.
+\]
+したがって
+\[
+T(x,y)
+=
+\left(
+-\frac{x}{\sqrt2}+\frac{y}{\sqrt2},
+\frac{x}{\sqrt2}+\frac{y}{\sqrt2}
+\right)
+\]
+である.
+
+解答2. 
+
+問題の変換は, まず $x$ 軸に関する鏡映を行い, 次に
+$3\pi/4$ 反時計回りに回転し, 最後にもう一度 $x$ 軸に関する鏡映を行う変換である. したがって, 求める変換は
+\[
+T_2
+=
+\sigma_x\circ \rho_{3\pi/4}\circ \sigma_x
+\]
+である.
+
+問題1で
+\[
+\rho_{3\pi/4}\circ \sigma_x
+\]
+は
+\[
+(x,y)
+\longmapsto
+\left(
+-\frac{\sqrt2}{2}x+\frac{\sqrt2}{2}y,
+\frac{\sqrt2}{2}x+\frac{\sqrt2}{2}y
+\right)
+\]
+であった. これに最後の $\sigma_x$ を合成する. すなわち,
+\[
+\sigma_x(X,Y)=(X,-Y)
+\]
+であるから,
+\begin{align*}
+T_2(x,y)
+&=
+\sigma_x
+\left(
+-\frac{\sqrt2}{2}x+\frac{\sqrt2}{2}y,
+\frac{\sqrt2}{2}x+\frac{\sqrt2}{2}y
+\right)
+\\
+&=
+\left(
+-\frac{\sqrt2}{2}x+\frac{\sqrt2}{2}y,
+-\frac{\sqrt2}{2}x-\frac{\sqrt2}{2}y
+\right).
+\end{align*}
+したがって, 行列表示は
+\[
+T_2
+=
+\begin{pmatrix}
+-\frac{\sqrt2}{2}&\frac{\sqrt2}{2}\\
+-\frac{\sqrt2}{2}&-\frac{\sqrt2}{2}
+\end{pmatrix}.
+\]
+
+一方, 角度 $\theta$ の反時計回りの回転行列は
+\[
+R_\theta
+=
+\begin{pmatrix}
+\cos\theta&-\sin\theta\\
+\sin\theta&\cos\theta
+\end{pmatrix}
+\]
+である. 今,
+\[
+T_2
+=
+\begin{pmatrix}
+-\frac{\sqrt2}{2}&\frac{\sqrt2}{2}\\
+-\frac{\sqrt2}{2}&-\frac{\sqrt2}{2}
+\end{pmatrix}
+\]
+なので,
+\[
+\cos\theta=-\frac{\sqrt2}{2},
+\qquad
+\sin\theta=-\frac{\sqrt2}{2}
+\]
+である. よって
+\[
+\theta=\frac{5\pi}{4}
+\]
+である.
+
+したがって
+\[
+\boxed{
+T_2=R_{5\pi/4}
+}
+\]
+であり,
+\[
+\boxed{
+\theta=\frac{5\pi}{4}
+}
+\]
+である.
+
+[別解]
+$x$軸に関する鏡映を
+\[
+S_x=
+\begin{pmatrix}
+1&0\\
+0&-1
+\end{pmatrix}
+\]
+とおく. 変換は
+\[
+\text{$x$軸鏡映}
+\longrightarrow
+\text{$3\pi/4$回転}
+\longrightarrow
+\text{$x$軸鏡映}
+\]
+の順であるから, 求める行列は
+\[
+S_xR_{3\pi/4}S_x
+=
+\begin{pmatrix}
+1&0\\
+0&-1
+\end{pmatrix}
+\begin{pmatrix}
+-\frac{\sqrt2}{2}&\frac{\sqrt2}{2}\\
+\frac{\sqrt2}{2}&\frac{\sqrt2}{2}
+\end{pmatrix}
+=
+\begin{pmatrix}
+-\frac{\sqrt2}{2}&\frac{\sqrt2}{2}\\
+-\frac{\sqrt2}{2}&-\frac{\sqrt2}{2}
+\end{pmatrix}.
+\]
+これは
+\[
+\begin{pmatrix}
+\cos\theta&-\sin\theta\\
+\sin\theta&\cos\theta
+\end{pmatrix}
+\]
+の形で, $\cos\theta=\sin\theta=-\sqrt2/2$ である. よって
+\[
+\boxed{\theta=\frac{5\pi}{4}}
+\]
+である.
+
+問題3. (第2回演習追加問題 5) $\mathbb{F}_7=\{0,1 ,2, \ldots, 6\}$として, 
+  加法$+ $と乗法$\bullet$を次で定義する.
+  \begin{itemize}
+  \item $a, b \in \mathbb{F}_7$について$a+b:=\text{($a$たす$b$を$7$で割ったあまり)}$. 
+\item $a, b \in \mathbb{F}_7$について$a\bullet b:=\text{($a$かける $b$を$7$で割ったあまり)}$. 
+ \end{itemize}
+(これによって$\mathbb{F}_7$は体となる)
+$a=1,2, \ldots, 6$について$\mathbb{F}_7$での$-a, a^{-1}$をそれぞれ求めよ.
+
+解答. 
+$\F_7$ ではすべての計算を $7$ で割った余りで行う.
+
+まず $-a$ は
+\[
+a+(-a)\equiv 0 \pmod 7
+\]
+を満たす元である. よって
+\[
+\begin{array}{c|cccccc}
+a&1&2&3&4&5&6\\
+\hline
+-a&6&5&4&3&2&1
+\end{array}
+\]
+である.
+
+次に $a^{-1}$ は
+\[
+a\cdot a^{-1}\equiv 1 \pmod 7
+\]
+を満たす元である. 直接計算すると
+\[
+1\cdot1\equiv1,
+\quad
+2\cdot4\equiv1,
+\quad
+3\cdot5\equiv1,
+\quad
+4\cdot2\equiv1,
+\quad
+5\cdot3\equiv1,
+\quad
+6\cdot6\equiv1
+\pmod 7.
+\]
+したがって
+\[
+\begin{array}{c|cccccc}
+a&1&2&3&4&5&6\\
+\hline
+a^{-1}&1&4&5&2&3&6
+\end{array}
+\]
+である.
+
+問題4.(第3回演習 教科書2.1.2)
+\[
+A=
+\begin{bmatrix}
+1 & 2 & 0\\
+1 & -1 & 3
+\end{bmatrix},
+\quad
+B=
+\begin{bmatrix}
+-1 & 3\\
+0 & 2\\
+1 & 1
+\end{bmatrix},
+\quad
+C=
+\begin{bmatrix}
+1 & 2\\
+3 & 4
+\end{bmatrix}
+\]
+とする.
+
+(1) \(AB, BA, BC, CB, CA, AC\) の \(6\) 個のうち, 行列の積として定まらない
+ものをすべてあげよ.
+
+(2) \(AB, BA, BC, CB, CA, AC\) の \(6\) 個のうち, 行列の積として定まるもの
+すべてに対して積を計算せよ.
+
+解答.
+\[
+A=
+\begin{pmatrix}
+1&2&0\\
+1&-1&3
+\end{pmatrix},
+\quad
+B=
+\begin{pmatrix}
+-1&3\\
+0&2\\
+1&1
+\end{pmatrix},
+\quad
+C=
+\begin{pmatrix}
+1&2\\
+3&4
+\end{pmatrix}
+\]
+である. サイズは
+\[
+A:2\times3,
+\quad
+B:3\times2,
+\quad
+C:2\times2
+\]
+である.
+
+\begin{enumerate}[label=(\arabic*)]
+\item
+積が定まるかどうかは, 左の行列の列数と右の行列の行数が一致するかで決まる.
+\[
+AB,\ BA,\ BC,\ CA
+\]
+は定まるが,
+\[
+\boxed{CB,\ AC}
+\]
+は定まらない.
+
+\item
+定まる積を計算する.
+\[
+AB
+=
+\begin{pmatrix}
+1&2&0\\
+1&-1&3
+\end{pmatrix}
+\begin{pmatrix}
+-1&3\\
+0&2\\
+1&1
+\end{pmatrix}
+=
+\begin{pmatrix}
+-1&7\\
+2&4
+\end{pmatrix}.
+\]
+\[
+BA
+=
+\begin{pmatrix}
+-1&3\\
+0&2\\
+1&1
+\end{pmatrix}
+\begin{pmatrix}
+1&2&0\\
+1&-1&3
+\end{pmatrix}
+=
+\begin{pmatrix}
+2&-5&9\\
+2&-2&6\\
+2&1&3
+\end{pmatrix}.
+\]
+\[
+BC
+=
+\begin{pmatrix}
+-1&3\\
+0&2\\
+1&1
+\end{pmatrix}
+\begin{pmatrix}
+1&2\\
+3&4
+\end{pmatrix}
+=
+\begin{pmatrix}
+8&10\\
+6&8\\
+4&6
+\end{pmatrix}.
+\]
+\[
+CA
+=
+\begin{pmatrix}
+1&2\\
+3&4
+\end{pmatrix}
+\begin{pmatrix}
+1&2&0\\
+1&-1&3
+\end{pmatrix}
+=
+\begin{pmatrix}
+3&0&6\\
+7&2&12
+\end{pmatrix}.
+\]
+\end{enumerate}
+
+問題5. (第3回演習 教科書2.1.11) \(n\) 次正方行列 \(A=[a_{ij}]\) に対して, 対角成分の和
+\(
+a_{11}+a_{22}+\cdots+a_{nn}
+\)
+を \(A\) のトレースとよび, \(\operatorname{tr}(A)\) で記す. 任意の \(n\) 次正方行列 \(A,B\) に対して,
+\(
+\operatorname{tr}(AB)=\operatorname{tr}(BA)
+\)
+が成り立つことを示せ.
+
+解答. 
+$A=(a_{ij})$, $B=(b_{ij})$ とする. このとき
+\[
+(AB)_{ii}
+=
+\sum_{j=1}^{n}a_{ij}b_{ji}
+\]
+であるから,
+\[
+\tr(AB)
+=
+\sum_{i=1}^{n}(AB)_{ii}
+=
+\sum_{i=1}^{n}\sum_{j=1}^{n}a_{ij}b_{ji}.
+\]
+一方,
+\[
+(BA)_{jj}
+=
+\sum_{i=1}^{n}b_{ji}a_{ij}
+\]
+であるから,
+\[
+\tr(BA)
+=
+\sum_{j=1}^{n}(BA)_{jj}
+=
+\sum_{j=1}^{n}\sum_{i=1}^{n}b_{ji}a_{ij}.
+\]
+成分は数であるから $a_{ij}b_{ji}=b_{ji}a_{ij}$ であり, 和をとる順序も入れ替えられる. したがって
+\[
+\boxed{\tr(AB)=\tr(BA)}
+\]
+である.
+
+問題6. (第3回演習追加問題 8) $n$次正方行列$A$が正則行列であるとする.
+この時$n$次正方行列$B$について, 
+$AB=O_{n}$ならば$B=O_n$であることを示せ.
+(ヒント: 教科書p.23の(3)とp.22の$AE_n=E_nA=A$を使う.)
+
+解答. 
+$A$ は正則行列なので逆行列 $A^{-1}$ が存在する. $AB=O_n$ とする. 左から $A^{-1}$ をかけると
+\[
+A^{-1}AB=A^{-1}O_n.
+\]
+左辺は
+\[
+A^{-1}AB
+=
+(A^{-1}A)B
+=
+E_nB
+=
+B
+\]
+であり, 右辺は $O_n$ である. よって
+\[
+\boxed{B=O_n}
+\]
+である.
+
+問題7.(第4回演習 教科書2.2.3) 正方行列 \(A\) に何回かの行基本変形を施して
+\[
+\begin{bmatrix}
+A'\\
+0 \ \cdots \ 0
+\end{bmatrix}
+\]
+という最後の行が
+すべて \(0\) であるような行列に変換できるとする. このとき, \(A\) は逆行列をもたな
+いことを証明せよ.
+
+解答. 背理法. $A$が正則とする. 
+仮定より
+$$
+A \overset{\text{行基本変形}}{\longrightarrow} 
+\begin{bmatrix}
+A'\\
+0 \ \cdots \ 0
+\end{bmatrix}
+$$
+であるので, 
+ある基本行列の積でかける$P$があって
+$$
+PA=
+\begin{bmatrix}
+A'\\
+0 \ \cdots \ 0
+\end{bmatrix}
+$$
+となる. 
+今
+$$
+A^{-1}P^{-1}
+:=
+\begin{bmatrix}
+B & \mathbf{b}
+\end{bmatrix}
+$$
+とブロック分解する. $B$は$n \times (n-1)$行列で, 
+$\mathbf{b}$は$n \times 1$行列である.
+すると
+$$
+E_n
+=
+PA (A^{-1}P^{-1})
+=
+\begin{bmatrix}
+A'\\
+0 \ \cdots \ 0
+\end{bmatrix}
+\begin{bmatrix}
+B & \mathbf{b}
+\end{bmatrix}
+=
+\begin{bmatrix}
+A'B &\mathbf{b}\\
+0 \ \cdots \ 0 & 0
+\end{bmatrix}
+$$
+としたに0が続く. 
+これは$nn$成分が$1=0$となり矛盾. 
+よって $A$ は正則でなく逆行列をもたない.
+
+問題8 (第4回演習 教科書2.3.2)
+$
+C=
+\begin{bmatrix}
+4 & -7 & 6 & 1\\
+1 & 0 & 5 & 2\\
+-1 & 5 & 5 & 3\\
+0 & 1 & 2 & 1
+\end{bmatrix}
+ $
+ の行簡約化, 階数, 標準化を求めよ. 
+ 
+ 解答. 
+\[
+C=
+\begin{pmatrix}
+4&-7&6&1\\
+1&0&5&2\\
+-1&5&5&3\\
+0&1&2&1
+\end{pmatrix}
+\]
+である. 行基本変形を行うと
+\[
+\begin{pmatrix}
+4&-7&6&1\\
+1&0&5&2\\
+-1&5&5&3\\
+0&1&2&1
+\end{pmatrix}
+\to
+\begin{pmatrix}
+1&0&5&2\\
+4&-7&6&1\\
+-1&5&5&3\\
+0&1&2&1
+\end{pmatrix}
+\to
+\begin{pmatrix}
+1&0&5&2\\
+0&-7&-14&-7\\
+0&5&10&5\\
+0&1&2&1
+\end{pmatrix}
+\to
+\begin{pmatrix}
+1&0&5&2\\
+0&1&2&1\\
+0&5&10&5\\
+0&-7&-14&-7
+\end{pmatrix}
+\]
+\[
+\to
+\boxed{
+\begin{pmatrix}
+1&0&5&2\\
+0&1&2&1\\
+0&0&0&0\\
+0&0&0&0
+\end{pmatrix}}
+\]
+となる. よって階数は
+\[
+\boxed{\operatorname{rank}C=2}
+\]
+である.
+
+標準化は
+\[
+\boxed{
+\begin{pmatrix}
+1&0&0&0\\
+0&1&0&0\\
+0&0&0&0\\
+0&0&0&0
+\end{pmatrix}}
+\]
+となる.
+
+
+
+問題9.(第5回演習 教科書2.4.1(3))連立方程式を解け. 
+\[
+\left\{
+\begin{matrix}
+     &  & 3x_2 & + & 6x_3 & + & 3x_4 & = & 3\\
+-x_1 & + & x_2 & + & 3x_3 & + & 2x_4 & = & 2\\
+ x_1 & + & 2x_2 & + & 3x_3 & + & x_4 & = & 1\\
+-2x_1 & - & x_2 &  &  & + & x_4 & = & 1
+\end{matrix}
+\right.
+\]
+
+解答. 
+拡大係数行列を行簡約化する.
+\[
+[A: \mathbf{b}]
+=
+\left(
+\begin{array}{rrrr|r}
+0&3&6&3&3\\
+-1&1&3&2&2\\
+1&2&3&1&1\\
+-2&-1&0&1&1
+\end{array}
+\right)
+\to
+\left(
+\begin{array}{rrrr|r}
+1&0&-1&-1&-1\\
+0&1&2&1&1\\
+0&0&0&0&0\\
+0&0&0&0&0
+\end{array}
+\right)=
+[A': \mathbf{b}']
+\]
+したがって$A' \mathbf{x}=\mathbf{b}'$をとくと
+\[
+\begin{cases}
+x_1-x_3-x_4=-1,\\
+x_2+2x_3+x_4=1.
+\end{cases}
+\]
+$x_3=s$, $x_4=t$ とおくと,
+\[
+x_1=s+t-1,
+\quad
+x_2=-2s-t+1.
+\]
+よって解は
+\[
+\boxed{
+(x_1,x_2,x_3,x_4)
+=
+(s+t-1,-2s-t+1,s,t)
+\quad
+(s,t\text{は任意})
+}
+\]
+である.
+
+答えの書き方として
+$
+ \left\{ 
+\begin{matrix}
+x_1&=&-1+c_1+c_2\\
+x_2&=&1-2c_1-c_2\\
+x_3&=&c_1\\
+x_4&=&c_2 \\
+\end{matrix}
+\text{\,\, ($c_2, c_4$は任意)}
+\right.
+$
+でも良い
+
+
+問題10. (第5回演習 教科書2.5.2(2))
+  次で与えられた \(n\) 次正方行列 \(A\) に対して,
+\(
+\widetilde{A}=
+\begin{bmatrix}
+A & E_n
+\end{bmatrix}
+\)
+の行簡約化を計算
+することによって, \(A\) の逆行列 \(A^{-1}\) を求めよ.
+\[
+A=
+\begin{bmatrix}
+1 & 3 & 2\\
+-1 & 0 & 1\\
+2 & 1 & -2
+\end{bmatrix}
+\]
+解答. 
+
+\[
+A=
+\begin{pmatrix}
+1&3&2\\
+-1&0&1\\
+2&1&-2
+\end{pmatrix}
+\]
+である. 拡大行列 $\left[A\ E_3\right]$ を行簡約化する.
+\[
+\left(
+\begin{array}{rrr|rrr}
+1&3&2&1&0&0\\
+-1&0&1&0&1&0\\
+2&1&-2&0&0&1
+\end{array}
+\right)
+\to
+\left(
+\begin{array}{rrr|rrr}
+1&0&0&\frac13&-\frac83&-1\\
+0&1&0&0&2&1\\
+0&0&1&\frac13&-\frac53&-1
+\end{array}
+\right).
+\]
+したがって
+\[
+\boxed{
+A^{-1}
+=
+\begin{pmatrix}
+\frac13&-\frac83&-1\\
+0&2&1\\
+\frac13&-\frac53&-1
+\end{pmatrix}}
+\]
+である.
+
+
+問題11. (第5回演習 教科書2.5.3)
+\(A\) を$n$次正方行列とするとき, \(A\) が正則であるための必要十分条件は \(A\) が零因子で
+ないことである. このことを証明せよ.
+ここで$A$が零因子であるとは, あるゼロ行列でない$n$次正方行列$B$があって$AB$または$BA$がゼロ行列となることとする. 
+
+解答. 
+まず $A$ が正則であるとする. $AB=O_n$ なら, 左から $A^{-1}$ をかけて
+\[
+B=A^{-1}AB=O_n
+\]
+となる. また $BA=O_n$ なら, 右から $A^{-1}$ をかけて
+\[
+B=BAA^{-1}=O_n
+\]
+となる. よって, $A$ は零因子ではない.
+
+$A$が正則でなければ$A$が零因子を示す. 
+$A$を
+$$
+A\overset{\text{行基本変形}}{\longrightarrow} C \text{行簡約行列}
+$$
+と簡約化すると, ある基本行列の積でかける$P$があって
+$$
+PA=C
+$$
+である. 
+
+$A$が正則でないので, 定理から
+$\mathrm{rank}A<n$である. よって $\mathrm{rank}C<n$となり, 
+$$
+C=
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+\vdots & \vdots & & \vdots \\
+a_{n-1,1} & a_{n-1,2} & \cdots & a_{n-1,n} \\
+0& 0 & \cdots & 0
+\end{pmatrix}\\
+$$
+としたに0が並ぶ. 
+そこで
+$$
+B=
+\begin{pmatrix}
+0 & 0 & \cdots & 0  & 1 \\
+0& 0 & \cdots & 0 & 0 \\
+\vdots & \vdots & & \vdots  & \vdots \\
+0&0 & \cdots & 0 &0 \\
+\end{pmatrix}
+$$
+とする. (成分表示すれば$(1,n)$成分が1で他が0の行列)
+$B$は零行列ではない. 
+しかし
+$$
+CB
+=
+\begin{pmatrix}
+0 & 0 & \cdots & 0  & 1 \\
+0& 0 & \cdots & 0 & 0 \\
+\vdots & \vdots & & \vdots  & \vdots \\
+0&0 & \cdots & 0 &0 \\
+\end{pmatrix}
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+\vdots & \vdots & & \vdots \\
+a_{n-1,1} & a_{n-1,2} & \cdots & a_{n-1,n} \\
+0& 0 & \cdots & 0
+\end{pmatrix}\\
+=O
+$$
+となる. 
+よって$P$は正則なので, 
+ $$
+ AB=P^{-1}PAB=P^{-1}CB=P^{-1}O=O
+ $$
+であるので, $A$は定義から零因子である. 
+
+以上より, $A$ が正則であることと, $A$ が零因子でないことは同値である.
+
+[別解 chatGPTによる賢い方法] 
+「$A$ が正則でない$\Rightarrow $零因子でない」の証明
+
+逆に $A$ が正則でないとする. このとき同次連立一次方程式
+\[
+A\boldsymbol{x}=\boldsymbol{0}
+\]
+は零ベクトルでない解 $\boldsymbol{x}\neq\boldsymbol{0}$ をもつ. そこで, $\boldsymbol{x}$ を第 $1$ 列とし, それ以外の列をすべて $\boldsymbol{0}$ とする行列
+\[
+B=
+\begin{pmatrix}
+\boldsymbol{x}&\boldsymbol{0}&\cdots&\boldsymbol{0}
+\end{pmatrix}
+\]
+を考える. $\boldsymbol{x}\neq\boldsymbol{0}$ なので $B\neq O_n$ である. しかし
+\[
+AB
+=
+\begin{pmatrix}
+A\boldsymbol{x}&A\boldsymbol{0}&\cdots&A\boldsymbol{0}
+\end{pmatrix}
+=
+O_n.
+\]
+したがって $A$ は零因子である.
+
+
+
+問題12. (第5回演習 追加問題12)
+ 連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+x_1& +& x_2 &  -& x_3& + &2x_4&= & 2\\
+2x_1&+&3x_2& -&4x_3&-&x_4&= & 1\\
+	& &x_2& - &2x_3&-&5x_4&=&a \\
+\end{matrix}
+\right.
+ $
+ の解が存在するような$a$の値を全て求めよ.
+
+解答.
+拡大係数行列を考え簡約化すると
+\[
+\left(
+\begin{array}{rrrr|r}
+1&1&-1&2&2\\
+2&3&-4&-1&1\\
+0&1&-2&-5&a
+\end{array}
+\right).
+\to
+\left(
+\begin{array}{rrrr|r}
+1&1&-1&2&2\\
+0&1&-2&-5&-3\\
+0&1&-2&-5&a
+\end{array}
+\right)
+\to
+\left(
+\begin{array}{rrrr|r}
+1&1&-1&2&2\\
+0&1&-2&-5&-3\\
+0&0&0&0&a+3
+\end{array}
+\right)
+\]
+\[
+\to
+\left(
+\begin{array}{rrrr|r}
+1&0&-1&7&5\\
+0&1&-2&-5&-3\\
+0&0&0&0&a+3
+\end{array}
+\right)
+\]
+となる. 
+これを拡大係数行列になるような連立一次方程式は
+\[
+\left\{
+\begin{matrix}
+    x_1 &  &   & - & x_3 & + & 7x_4 & = & 5\\
+&  & x_2 & -& 2x_3 & - & 5x_4 & = & -3\\
+  &   &  &  &   &  &  0  & = & a+3\\
+\end{matrix}
+\right.
+\]
+となる. 
+解が存在するためには, 最後の行に関して
+\[
+a+3=0
+\]
+である必要がある. 
+実際$a=-3$の場合
+$$
+ \left\{ 
+\begin{matrix}
+x_1&=&5+c_1-7c_2\\
+x_2&=&-3+2c_1+5c_2\\
+x_3&=&c_1\\
+x_4&=&c_2 \\
+\end{matrix}
+\text{\,\, ($c_1, c_2$は任意)}
+\right.
+$$
+と解が存在し. 十分性も示された. 
+したがって
+\[
+\boxed{a=-3}
+\]
+である.
+
+
+ \newpage
+ $\boxed{\text{2026/06/11 第6回 線形代数 演義資料}}$
+ \begin{enumerate}[label=\textbf{問題}\arabic*.]
+ \setcounter{enumi}{12}
+ 
 \item
 $$
 (12)(34) = (132)(134) 
