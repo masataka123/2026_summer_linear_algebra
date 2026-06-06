@@ -34,7 +34,7 @@
 - 演義に関しても出席点はないですが. 出席した方がいいです. 
 - 単位を認定するくらいの成績が取れていない場合, 容赦無く不合格を出します. ただし追試験はするつもりです. 理由は「線形代数ができないとその後の数学の授業についていけない」からです. 
 
-詳しくは[ガイダンスの資料]()をご覧ください.
+詳しくは[ガイダンスの資料](https://masataka123.github.io/2026_summer_linear_algebra/material/0_線形代数_2026.pdf)をご覧ください.
 
 
 
@@ -86,6 +86,9 @@
 - 試験内容: 授業でやった範囲
 
 詳しくは[こちらのpdf](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間レポート1_2026_0521.pdf)をご覧ください. 
+
+中間試験の[問題](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間試験_20260604.pdf)と[解答と講評](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間試験_20260604_解答.pdf)をアップロードしました. 
+
 
 ## 期末試験に関して
 
@@ -155,10 +158,10 @@
 - 第4回 (2025/05/14)  [第4回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/4_授業板書.pdf) [第4回演義追加問題](https://masataka123.github.io/2026_summer_linear_algebra/material/4_演義板書.pdf)
 - 第5回 (2025/05/21) [第5回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/5_授業板書.pdf) [第5回演義追加問題](https://masataka123.github.io/2026_summer_linear_algebra/material/5_演義板書.pdf)
 - (2025/05/28) 休講 
-- 第6回 (2025/06/04) 中間試験(予定)
+- 第6回 (2025/06/04) 中間試験 [問題](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間試験_20260604.pdf)  [解答と講評](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間試験_20260604_解答.pdf)
 - 第7回 (2025/06/11)
 - 第8回 (2025/06/18) 
-- 第9回 (2025/06/25)  休講(予定)
+- 第9回 (2025/06/25)  休講
 - 第10回 (2025/07/02) 
 - 第11回(2025/07/09) 
 - 第12回 (2025/07/16) 

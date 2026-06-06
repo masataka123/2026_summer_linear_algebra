@@ -1,0 +1,1242 @@
+
+\documentclass[uplatex,dvipdfmx,a4paper,14pt]{jsarticle}
+
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{ascmac}
+\usepackage[most]{tcolorbox}
+\usepackage{url, hyperref}
+% ページレイアウト
+\geometry{
+  top=30mm,
+  bottom=25mm,
+  left=25mm,
+  right=25mm
+}
+
+% 段落設定
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+% 行間を少し広めにする
+\linespread{1.05}
+
+% enumerate, itemize の余白
+\setlist[itemize]{itemsep=0pt,parsep=0pt}
+\setlist[enumerate]{itemsep=0pt,parsep=0pt}
+
+% 表の行間
+\renewcommand{\arraystretch}{1.2}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\op}[1]{\xrightarrow{\ #1\ }}
+\newcommand{\E}{E}
+\newcommand{\zero}{0}
+\newcommand{\underalign}[2]{\quad \underset{\mathclap{\strut #1}}{#2}\quad}
+\newcommand{\J}[3]{\begin{pmatrix}E_{#1}&O_{#1,#3}\\ O_{#2,#1}&O_{#2,#3}\end{pmatrix}}
+
+\tcbset{
+  problemstyle/.style={
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=black!55,
+    coltitle=black,
+    fonttitle=\bfseries,
+    attach boxed title to top left={yshift=-2mm,xshift=3mm},
+    boxed title style={colback=white,colframe=black!55},
+    top=3mm
+  },
+  notestyle/.style={
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=black!35,
+    fonttitle=\bfseries,
+    top=2mm
+  }
+}
+
+\begin{document}
+
+
+
+\begin{center}
+{\Large 2026年度春夏学期 線形代数学・同演義 I 中間試験 講評}
+\end{center}
+
+
+{\large \underline{全体の講評}}
+
+レポート問題からの問題は第1$\sim$5問です.各問題の正答率は以下の通りです.\footnote{大問8の(2), (3)はほとんど誰も解いていませんでした. なのでデータに不要のため書いておりません. もちろん議論があっていれば加点をしております.}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccccccccc}
+\textbf{問} & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8(1)&表面& 裏面 \\
+\hline
+\textbf{正答率} & 85.4\% & 75.0\% & 84.4\% & 89.6\% & 85.4\% & 25.8\% & 26.0\% & 24.0\% & 85.0\% & 25.6\% 
+\end{tabular}
+\end{table}
+  
+ 見た感じ裏面を諦めた人が半分くらいいました. 
+この試験だけで成績をつけると仮定した場合, 裏面を正解しているかどうかで $B^{+}$と$A^{-}$の境目(80点)がはっきりついていました. ほとんどが$B^+, B$(70-79)と$A, A^{-}$(80-89)に固まっている感じです. \footnote{AやBはグレード・ポイント・アベレージ（ＧＰＡ）制度によるものです. \url{https://www.osaka-u.ac.jp/ja/education/academic_reform/gpa} 見ていてびっくりしたのですが, $S$が$A^{+}$に変更されてました. $S$のままでよかったと思うんだけど...}
+成績をつけるという観点からするとうまく機能していました. 
+ %裏面をそこそこ取れていれば上位10$\sim$20\%くらいに入ると思います. 
+  %表面を全部解けて裏面を半分くらい解けていれば上位10\%くらいに入ると思います. 裏面の問題で部分点をもらってても上位30$\sim$40\%くらいに入ると思います.  現時点で中間試験を受けていて不可(落単)になる人はいないですが, ちょっとやばい人は数名いました. 
+    \vspace{5pt}
+
+{\large  \underline{表面(第1$\sim$5問)の出来に関して}}
+
+\begin{itemize}
+\item 意外と2問目で計算ミスと思えないミスをしている人がいました. 
+%\item 表面だけでも成績の差がつく気がしてきました. BとAの境目(80点)は表面だけでもつけられる気がしてます.
+\item 表面の問題で(計算ミスを除いて)半分もできなかった人は要注意です. 単位に関わります. 復習しておいた方がいいです.
+\item 表面は減点法で採点しています. 
+\end{itemize}
+
+{\large  \underline{裏面(第6$\sim$8問)の出来に関して}}
+\begin{itemize}
+\item 半分くらいは諦めた感じでした. 難しそうな問題でもできそうな問題はあります. 大問6の(3)は難しそうに見えて簡単です. 
+\item 裏面は加点法で採点しています. ある程度ラフに採点していて, アイデアがあっていれば加点してます.\footnote{期末はどう採点するかは不明です. また教官によっては余計なことを書いていたらマイナスになる場合もあります. }
+\item 大問8は余計でした. ただ裏面の大問6,7,8(1)の難易度はこれで良さそうで, 期末試験もこの難易度で行きます.  
+\end{itemize}
+
+  \vspace{5pt}
+
+{\large  \underline{期末試験の予告}}
+
+期末試験に
+\begin{itemize}
+\item 中間試験の大問1から大問8(1)まで (大問8(2), 大問8(3)は除く)
+\item 中間レポート1(6/4 締切)
+\item 中間レポート2(7/30 締切)
+\end{itemize}
+の何問かを数値や表現など少し変えて出す予定です. 
+なので中間試験は復習するようにしてください. 中間試験の解答はCLEにアップロードされています. 
+
+期末前にはこの3つを先に勉強するといいと思います. 具体的なことは期末前に言います.
+
+\vspace{5pt}
+
+\newpage
+{\large  \underline{各問題の講評}}
+
+  \begin{enumerate}[label={\textbf{第}\arabic*\textbf{問}.}]
+\item ミスしてたら0点です. 意外とミスってました. 
+\item ミスしてたら0点です. 意外とミスってました. 他の学科だと$A,B,C,D$の4個で12通りの積を求める問題を出しているので, この問題は厳し目につけています. 
+\item ほぼできていました. 間違えている原因も計算ミスによるものです. なお計算の過程を全く書いていないもので計算ミスしているものは0点です. なぜなら加点できる要素がないからです. なので答えを導出する過程は書いておいた方がいいです. 
+\item ほぼできていました. 間違えている原因も計算ミスによるものです.  
+\item (1)はほぼできていました. (2)に関して具体例は簡単で構いません. 
+つまり
+$$
+A=\begin{pmatrix}
+0&4&2\\
+0&4&2\\
+0&4&2\\
+\end{pmatrix}
+\quad
+B=\begin{pmatrix}
+0&2&6\\
+0&2&6\\
+0&2&6\\
+\end{pmatrix}
+\quad
+C=\begin{pmatrix}
+32&0&0\\
+0&12&0\\
+0&0&21\\
+\end{pmatrix}
+$$
+よりも
+$$
+A=\begin{pmatrix}
+0&1\\
+0&0\\
+\end{pmatrix}
+\quad
+B=\begin{pmatrix}
+0&0\\
+1&0\\
+\end{pmatrix}
+\quad
+C=\begin{pmatrix}
+1&0\\
+0&0\\
+\end{pmatrix}
+$$
+の方がいいです. 2年の集合と位相で習うと思いますが, 反例は簡単であれば簡単な方がいいです. \footnote{集合と位相なら$\{ 0,1\}$の2点集合で反例を作るなどです. }
+まあでも皆さん若いので計算能力が高くていいなあと思いました. (歳をとると反例に0を入れがちなので.)
+\item (1)は"正則行列は基本行列の積"がないと点がないと思います. 基本変形によって簡約化は変わらないことがきいてきます. (2)は"簡約化"を使って行列計算するというものに加点を与えました. ただ実は(2)はよくない問題で, $A$を列簡約化もしくは標準化しないと完璧に証明できません. (行簡約化だけだと微妙に証明できない). 
+また(2)から(1)を示すことも可能です. 
+
+(3)は簡単です. $A=E_2$を単位行列にして$B$をランク1の行列を持ってくればいいです. 
+%またこの内容は授業範囲外の内容でも解くことができますが, その解答での正答は(かなり厳し目につけたため)いませんでした. 
+\item (1)は実は第3回演習問題と同じです. 設定が変わっただけですが, 半分もの人が解いていませんでした. 
+ "難しそうに見える問題の方が実は簡単"ってのが数学にありがちです. 難しそうに見える問題は定義とかが難しいだけで定義さえきちんと理解すれば, 一本道で証明できるというものが多いです. 
+
+(2)は数え上げです. びっくりしたのが大問7(2)を正答している人が思いの外多かったです. 
+\item (1)は逆行列$A^{-1}$をどのように計算すればいいかを気づけば簡単にわかる問題です. (2)以降はほぼ誰も解いていませんでした. (2)以降は要らなかったですね. 
+\end{enumerate}
+\newpage
+
+\begin{center}
+{\Large 2026年度春夏学期 線形代数学・同演義 I 中間試験 問題・解答例}\\[2mm]
+{\large 第2章までの行列計算・簡約化を中心にした解答}\\[1mm]
+\end{center}
+
+\begin{tcolorbox}[notestyle,title=方針]
+この解答例では, できるだけ第2章までの道具だけを用いる. とくに, 第6問・第8問では, 線型写像, 像, 核, 一次独立, 次元といった言葉を使わず, 行基本変形・列基本変形・標準形・階数だけで証明する. 各問について, 先に問題文を掲げ, その直後に解答例を書く.
+\end{tcolorbox}
+
+とchatGPTが言っていた. 
+今回表面の問題や裏面の問題をほとんどchatGPTに考えてもらった. 
+なので解答もchatGPTに書いてもらう. 
+一部分は岩井が修正した. 
+
+\section*{第1問}
+
+\begin{tcolorbox}[problemstyle,title=問題]
+
+「$x$軸に関しての鏡映(反転)を行い, $\frac{\pi}{4}$(=45度)反時計回りに回転し, $y$軸に関しての鏡映(反転)を行う1次変換」$f: \R^2 \to \R^2$を求めよ.
+
+\end{tcolorbox}
+
+\subsection*{解答例}
+
+$x$軸に関する鏡映の行列を
+\[
+X=\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+\]
+とする. $\pi/4$反時計回りの回転の行列は
+\[
+R=\begin{pmatrix}
+\cos\frac{\pi}{4}&-\sin\frac{\pi}{4}\\
+\sin\frac{\pi}{4}&\cos\frac{\pi}{4}
+\end{pmatrix}
+=
+\begin{pmatrix}
+\frac{\sqrt2}{2}&-\frac{\sqrt2}{2}\\
+\frac{\sqrt2}{2}&\frac{\sqrt2}{2}
+\end{pmatrix}
+\]
+である. また $y$軸に関する鏡映の行列を
+\[
+Y=\begin{pmatrix}-1&0\\0&1\end{pmatrix}
+\]
+とする.
+
+問題文の順番通りに, まず $x$軸に関する鏡映, 次に回転, 最後に $y$軸に関する鏡映を行うので, 求める行列は
+\[
+YRX
+=
+\begin{pmatrix}-1&0\\0&1\end{pmatrix}
+\begin{pmatrix}
+\frac{\sqrt2}{2}&-\frac{\sqrt2}{2}\\
+\frac{\sqrt2}{2}&\frac{\sqrt2}{2}
+\end{pmatrix}
+\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
+\]
+まず
+\[
+RX=
+\begin{pmatrix}
+\frac{\sqrt2}{2}&-\frac{\sqrt2}{2}\\
+\frac{\sqrt2}{2}&\frac{\sqrt2}{2}
+\end{pmatrix}
+\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+=
+\begin{pmatrix}
+\frac{\sqrt2}{2}&\frac{\sqrt2}{2}\\
+\frac{\sqrt2}{2}&-\frac{\sqrt2}{2}
+\end{pmatrix}.
+\]
+したがって
+\[
+YRX=
+\begin{pmatrix}-1&0\\0&1\end{pmatrix}
+\begin{pmatrix}
+\frac{\sqrt2}{2}&\frac{\sqrt2}{2}\\
+\frac{\sqrt2}{2}&-\frac{\sqrt2}{2}
+\end{pmatrix}
+=
+\begin{pmatrix}
+-\frac{\sqrt2}{2}&-\frac{\sqrt2}{2}\\
+\frac{\sqrt2}{2}&-\frac{\sqrt2}{2}
+\end{pmatrix}.
+\]
+よって
+\[
+\boxed{
+ f\begin{pmatrix}x\\y\end{pmatrix}
+ =
+\begin{pmatrix}
+-\frac{\sqrt2}{2}&-\frac{\sqrt2}{2}\\
+\frac{\sqrt2}{2}&-\frac{\sqrt2}{2}
+\end{pmatrix}
+\begin{pmatrix}x\\y\end{pmatrix}
+=
+\begin{pmatrix}
+-\frac{x+y}{\sqrt2}\\[1mm]
+\frac{x-y}{\sqrt2}
+\end{pmatrix}.}
+\]
+
+\section*{第2問}
+
+\begin{tcolorbox}[problemstyle,title=問題]
+
+\[
+A=
+\begin{pmatrix}
+2 & 1 & -5\\
+\end{pmatrix},
+\quad
+B=
+\begin{pmatrix}
+-1 \\
+0 \\
+4
+\end{pmatrix},
+\quad
+C=
+\begin{pmatrix}
+1 & 2 & 3\\
+0 & 2 & 3\\
+0 & 0 & 3\\
+\end{pmatrix}
+\]
+とする.
+ \(AB, BA, BC, CB, CA, AC\) の \(6\) 個のうち, 行列の積として定まるもの
+すべてに対して積を計算せよ. (なお行列の積として定まらないものに関しては言及しなくて良い.)
+
+\end{tcolorbox}
+
+\subsection*{解答例}
+
+\[
+A=\begin{pmatrix}2&1&-5\end{pmatrix},\quad
+B=\begin{pmatrix}-1\\0\\4\end{pmatrix},\quad
+C=\begin{pmatrix}1&2&3\\0&2&3\\0&0&3\end{pmatrix}
+\]
+である.
+
+型は
+\[
+A:1\times 3,\qquad B:3\times 1,\qquad C:3\times 3
+\]
+である. したがって定義される積は $AB,BA,CB,AC$ である.
+
+まず
+\[
+AB=\begin{pmatrix}2&1&-5\end{pmatrix}
+\begin{pmatrix}-1\\0\\4\end{pmatrix}
+=2(-1)+1\cdot 0+(-5)4=-22.
+\]
+したがって
+\[
+\boxed{AB=\begin{pmatrix}-22\end{pmatrix}.}
+\]
+
+次に
+\[
+BA=
+\begin{pmatrix}-1\\0\\4\end{pmatrix}
+\begin{pmatrix}2&1&-5\end{pmatrix}
+=
+\begin{pmatrix}
+-2&-1&5\\
+0&0&0\\
+8&4&-20
+\end{pmatrix}.
+\]
+したがって
+\[
+\boxed{BA=\begin{pmatrix}-2&-1&5\\0&0&0\\8&4&-20\end{pmatrix}.}
+\]
+
+また
+\[
+CB=
+\begin{pmatrix}1&2&3\\0&2&3\\0&0&3\end{pmatrix}
+\begin{pmatrix}-1\\0\\4\end{pmatrix}
+=
+\begin{pmatrix}
+1(-1)+2\cdot0+3\cdot4\\
+0(-1)+2\cdot0+3\cdot4\\
+0(-1)+0\cdot0+3\cdot4
+\end{pmatrix}
+=
+\begin{pmatrix}11\\12\\12\end{pmatrix}.
+\]
+したがって
+\[
+\boxed{CB=\begin{pmatrix}11\\12\\12\end{pmatrix}.}
+\]
+
+最後に
+\[
+AC=
+\begin{pmatrix}2&1&-5\end{pmatrix}
+\begin{pmatrix}1&2&3\\0&2&3\\0&0&3\end{pmatrix}.
+\]
+各成分を計算すると
+\[
+\begin{aligned}
+1\text{列目}&:2\cdot1+1\cdot0+(-5)\cdot0=2,\\
+2\text{列目}&:2\cdot2+1\cdot2+(-5)\cdot0=6,\\
+3\text{列目}&:2\cdot3+1\cdot3+(-5)\cdot3=6+3-15=-6.
+\end{aligned}
+\]
+よって
+\[
+\boxed{AC=\begin{pmatrix}2&6&-6\end{pmatrix}.}
+\]
+
+\section*{第3問}
+
+\begin{tcolorbox}[problemstyle,title=問題]
+
+連立1次方程式
+$
+ \left\{
+\begin{matrix}
+x_1& +& x_2 & + &x_3& + &x_4&= & 4\\
+x_1&+&2x_2& +&3x_3&+&4x_4&= & 5\\
+2x_1	&+ &3x_2& +&5x_3&+&7x_4&=&2 \\
+3x_1&+&5x_2& +&8x_3&+&11x_4&= & a\\
+\end{matrix}
+\right.
+ $
+ の解が存在するような$a$の値を全て求めよ.
+
+\end{tcolorbox}
+
+\subsection*{解答例}
+
+連立方程式の拡大係数行列は
+\[
+\left(
+\begin{array}{cccc|c}
+1&1&1&1&4\\
+1&2&3&4&5\\
+2&3&5&7&2\\
+3&5&8&11&a
+\end{array}
+\right)
+\]
+である. これを行基本変形で簡約化する.
+
+まず第1列を消去する.
+\[
+\left(
+\begin{array}{cccc|c}
+1&1&1&1&4\\
+1&2&3&4&5\\
+2&3&5&7&2\\
+3&5&8&11&a
+\end{array}
+\right)
+\op{\substack{R_2\leftarrow R_2-R_1\\ R_3\leftarrow R_3-2R_1\\ R_4\leftarrow R_4-3R_1}}
+\left(
+\begin{array}{cccc|c}
+1&1&1&1&4\\
+0&1&2&3&1\\
+0&1&3&5&-6\\
+0&2&5&8&a-12
+\end{array}
+\right).
+\]
+
+次に第2列を消去する.
+\[
+\left(
+\begin{array}{cccc|c}
+1&1&1&1&4\\
+0&1&2&3&1\\
+0&1&3&5&-6\\
+0&2&5&8&a-12
+\end{array}
+\right)
+\op{\substack{R_3\leftarrow R_3-R_2\\ R_4\leftarrow R_4-2R_2}}
+\left(
+\begin{array}{cccc|c}
+1&1&1&1&4\\
+0&1&2&3&1\\
+0&0&1&2&-7\\
+0&0&1&2&a-14
+\end{array}
+\right).
+\]
+
+さらに第3列を消去する.
+\[
+\left(
+\begin{array}{cccc|c}
+1&1&1&1&4\\
+0&1&2&3&1\\
+0&0&1&2&-7\\
+0&0&1&2&a-14
+\end{array}
+\right)
+\op{R_4\leftarrow R_4-R_3}
+\left(
+\begin{array}{cccc|c}
+1&1&1&1&4\\
+0&1&2&3&1\\
+0&0&1&2&-7\\
+0&0&0&0&a-7
+\end{array}
+\right).
+\]
+
+最後の行は
+\[
+0x_1+0x_2+0x_3+0x_4=a-7
+\]
+を表す. したがって, 解が存在するためには $a-7=0$ が必要であり, $a=7$ のときは最後の行は $0=0$ になるので解が存在する.
+
+よって
+\[
+\boxed{a=7.}
+\]
+
+\section*{第4問}
+
+\begin{tcolorbox}[problemstyle,title=問題]
+
+$
+ \begin{pmatrix}
+ 1&1&0\\
+ 1&2&1\\
+ 0&1&2
+ \end{pmatrix}
+ $の逆行列を求めよ.
+
+\end{tcolorbox}
+
+\subsection*{解答例}
+
+\[
+A=\begin{pmatrix}1&1&0\\1&2&1\\0&1&2\end{pmatrix}
+\]
+の逆行列を求める. 掃き出し法を用いる.
+\[
+\left(
+\begin{array}{ccc|ccc}
+1&1&0&1&0&0\\
+1&2&1&0&1&0\\
+0&1&2&0&0&1
+\end{array}
+\right)
+\op{R_2\leftarrow R_2-R_1}
+\left(
+\begin{array}{ccc|ccc}
+1&1&0&1&0&0\\
+0&1&1&-1&1&0\\
+0&1&2&0&0&1
+\end{array}
+\right).
+\]
+第2列を使って上と下を消去する.
+\[
+\left(
+\begin{array}{ccc|ccc}
+1&1&0&1&0&0\\
+0&1&1&-1&1&0\\
+0&1&2&0&0&1
+\end{array}
+\right)
+\op{\substack{R_1\leftarrow R_1-R_2\\ R_3\leftarrow R_3-R_2}}
+\left(
+\begin{array}{ccc|ccc}
+1&0&-1&2&-1&0\\
+0&1&1&-1&1&0\\
+0&0&1&1&-1&1
+\end{array}
+\right).
+\]
+最後に第3列を消去する.
+\[
+\left(
+\begin{array}{ccc|ccc}
+1&0&-1&2&-1&0\\
+0&1&1&-1&1&0\\
+0&0&1&1&-1&1
+\end{array}
+\right)
+\op{\substack{R_1\leftarrow R_1+R_3\\ R_2\leftarrow R_2-R_3}}
+\left(
+\begin{array}{ccc|ccc}
+1&0&0&3&-2&1\\
+0&1&0&-2&2&-1\\
+0&0&1&1&-1&1
+\end{array}
+\right).
+\]
+したがって
+\[
+\boxed{
+A^{-1}=
+\begin{pmatrix}
+3&-2&1\\
+-2&2&-1\\
+1&-1&1
+\end{pmatrix}.}
+\]
+
+\section*{第5問}
+
+\begin{tcolorbox}[problemstyle,title=問題]
+
+実数体$\R$上の \(n\) 次正方行列 \(A=[a_{ij}]\) に対して, 対角成分の和
+\(
+a_{11}+a_{22}+\cdots+a_{nn}
+\)を \(A\) のトレースとよび, \(\operatorname{tr}(A)\) で記す.
+次の問いに答えよ.
+ \begin{enumerate}[label=(\arabic*)]
+ \setlength{\parskip}{0cm}
+  \setlength{\itemsep}{0cm}
+  \item 任意の \(n\) 次正方行列 \(A,B\) に対して,
+\(
+\operatorname{tr}(AB)=\operatorname{tr}(BA)
+\)が成り立つことを示せ.
+\item
+ 任意の1以上の整数$n$と実数体$\R$上の任意の \(n\) 次正方行列 \(A,B ,C\) に対して,
+\[
+\operatorname{tr}(ABC)=\operatorname{tr}(BAC)
+\]は成り立つか? 成り立つ場合は証明し, 成り立たない場合は$\operatorname{tr}(ABC)\neq \operatorname{tr}(BAC)$となる"具体例"を一つ挙げよ. ただしその場合は$n$の値は自由に設定して良い.
+\end{enumerate}
+
+\end{tcolorbox}
+
+\subsection*{解答例}
+
+\subsection*{(1)}
+$A=(a_{ij})$, $B=(b_{ij})$ を $n$ 次正方行列とする. 行列の積の定義より
+\[
+(AB)_{ii}=\sum_{j=1}^n a_{ij}b_{ji}
+\]
+である. よって
+\[
+\tr(AB)=\sum_{i=1}^n (AB)_{ii}
+=\sum_{i=1}^n\sum_{j=1}^n a_{ij}b_{ji}.
+\]
+一方,
+\[
+\tr(BA)=\sum_{i=1}^n(BA)_{ii}
+=\sum_{i=1}^n\sum_{j=1}^n b_{ij}a_{ji}.
+\]
+ここで最後の二重和において, 添字の名前を $i$ と $j$ で入れ替えると
+\[
+\sum_{i=1}^n\sum_{j=1}^n b_{ij}a_{ji}
+=\sum_{j=1}^n\sum_{i=1}^n b_{ji}a_{ij}
+=\sum_{i=1}^n\sum_{j=1}^n a_{ij}b_{ji}.
+\]
+したがって
+\[
+\boxed{\tr(AB)=\tr(BA).}
+\]
+
+\subsection*{(2)}
+一般には成り立たない. 具体例を挙げる.
+\[
+A=\begin{pmatrix}0&1\\0&0\end{pmatrix},\quad
+B=\begin{pmatrix}0&0\\1&0\end{pmatrix},\quad
+C=\begin{pmatrix}1&0\\0&0\end{pmatrix}
+\]
+とする. このとき
+\[
+AB=
+\begin{pmatrix}0&1\\0&0\end{pmatrix}
+\begin{pmatrix}0&0\\1&0\end{pmatrix}
+=
+\begin{pmatrix}1&0\\0&0\end{pmatrix}.
+\]
+よって
+\[
+ABC=
+\begin{pmatrix}1&0\\0&0\end{pmatrix}
+\begin{pmatrix}1&0\\0&0\end{pmatrix}
+=
+\begin{pmatrix}1&0\\0&0\end{pmatrix},
+\quad
+\tr(ABC)=1.
+\]
+一方,
+\[
+BA=
+\begin{pmatrix}0&0\\1&0\end{pmatrix}
+\begin{pmatrix}0&1\\0&0\end{pmatrix}
+=
+\begin{pmatrix}0&0\\0&1\end{pmatrix}.
+\]
+したがって
+\[
+BAC=
+\begin{pmatrix}0&0\\0&1\end{pmatrix}
+\begin{pmatrix}1&0\\0&0\end{pmatrix}
+=
+\begin{pmatrix}0&0\\0&0\end{pmatrix},
+\quad
+\tr(BAC)=0.
+\]
+よって
+\[
+\boxed{\tr(ABC)\ne \tr(BAC)\text{ となることがある}.}
+\]
+
+\section*{第6問}
+
+\begin{tcolorbox}[problemstyle,title=問題]
+
+$m, n$を1以上の整数とし, $A$を実数体$\R$上の$m \times n$行列, $B$を実数体$\R$上の$m$次正方行列とする. 次の問いに答えよ.
+ \begin{enumerate}[label=(\arabic*)]
+ \setlength{\parskip}{0cm}
+  \setlength{\itemsep}{0cm}
+  \item $B$が正則行列ならば,  $\mathrm{rank}(BA) = \mathrm{rank}(A)$を示せ.
+    \item $B$が正則行列とは限らない場合でも, $\mathrm{rank}(BA) \le \mathrm{rank}(A)$が成り立つことを示せ.
+  \item $B$がゼロ行列でなく, $\mathrm{rank}(BA) <\mathrm{rank}(A)$となる行列$A, B$の例を一つあげよ. ただしその場合は$m,n$の値は自由に設定して良い.
+    \end{enumerate}
+
+\end{tcolorbox}
+
+\subsection*{解答例}
+
+この問題では, 階数を「行基本変形で行簡約化したときの, ゼロでない行の個数」として扱う.
+また, 正則行列を左から掛けることは, 行基本変形を何回か行うことと同じ型の操作であり, 階数を変えない. より具体的には, 行基本変形は左から基本行列を掛けることに対応し, 正則行列は基本行列の積として表せるので, 正則行列を左から掛けても階数は変わらない.
+
+\subsection*{(1)}
+解答の書き方は色々あると思う. 以下は解答例です. 
+
+(解答例)$B$ が正則であるとし, $A$が簡約行列$R$に行簡約化されたとする. 
+この時$BA$の行簡約化が$R$であることを示せば良い. 
+
+今行簡約化の性質から
+$$
+A \overset{\text{行基本変形}}{\longrightarrow }  R \text{ 行簡約化 }
+\quad
+\Leftrightarrow 
+\quad
+\text{基本行列の積でかける行列$P$があって, $PA=R$} 
+$$
+となる. 
+$B$は正則なので, $B^{-1}$も正則で, $B^{-1}$は基本行列の積でかける行列でかける. 
+
+よって
+\begin{align*}
+A \overset{\text{行基本変形}}{\longrightarrow }  R \text{ 行簡約化 }
+&\underalign{\text{上の性質}} {\Rightarrow}
+ \text{基本行列の積でかける行列$P$があって, $PA=R$} 
+\\
+&\underalign{\text{$B^{-1}$は基本行列の積でかける}} {\Rightarrow}
+ \text{基本行列の積でかける行列$P B^{-1}$があって, $(PB^{-1})(BA)=PA=R$} 
+\\
+&\underalign{\text{上の性質}} {\Rightarrow}
+BA \overset{\text{行基本変形}}{\longrightarrow }  R \text{ 行簡約化 }
+\end{align*}
+
+\subsection*{(2)}
+$A$ を $m\times n$ 行列とし, $\rank(A)=r$ とする. 行基本変形と列基本変形を繰り返すことで, $A$ は標準形
+\[
+J_r=
+\begin{pmatrix}
+E_r&O_{r,n-r}\\
+O_{m-r,r}&O_{m-r,n-r}
+\end{pmatrix}
+\]
+に変形できる. この操作は可逆なので, ある正則行列 $P,Q$ が存在して
+\[
+PAQ=J_r
+\]
+と書ける. したがって
+\[
+A=P^{-1}J_rQ^{-1}
+\]
+である.
+
+このとき
+\[
+BA=BP^{-1}J_rQ^{-1}.
+\]
+$Q^{-1}$ を右から掛けることは列基本変形を何回か行うことに対応し, 階数を変えないので\footnote{この部分は(1)と同様の議論. }
+\[
+\rank(BA)=\rank(BP^{-1}J_r)
+\]
+である. ここで $C=BP^{-1}$ とおくと
+\[
+CJ_r=
+C
+\begin{pmatrix}
+E_r&O_{r,n-r}\\
+O_{m-r,r}&O_{m-r,n-r}
+\end{pmatrix}
+\]
+である. この行列の第 $r+1$ 列以降はすべてゼロ列である. したがって, 行簡約化後のゼロでない行の個数は高々 $r$ である. よって
+\[
+\rank(CJ_r)\le r.
+\]
+したがって
+\[
+\rank(BA)\le r=\rank(A).
+\]
+以上より
+\[
+\boxed{\rank(BA)\le \rank(A).}
+\]
+
+\subsection*{(3)}
+例えば $m=n=2$ とし,
+\[
+A=E_2=\begin{pmatrix}1&0\\0&1\end{pmatrix},\quad
+B=\begin{pmatrix}1&0\\0&0\end{pmatrix}
+\]
+とする. $B$ はゼロ行列ではない. このとき
+\[
+BA=
+\begin{pmatrix}1&0\\0&0\end{pmatrix}
+\begin{pmatrix}1&0\\0&1\end{pmatrix}
+=
+\begin{pmatrix}1&0\\0&0\end{pmatrix}.
+\]
+したがって
+\[
+\rank(A)=2,\qquad \rank(BA)=1.
+\]
+よって
+\[
+\boxed{\rank(BA)<\rank(A)}
+\]
+となる.
+
+\section*{第7問}
+
+\begin{tcolorbox}[problemstyle,title=問題]
+
+$\mathbb{F}_7=\{0,1 ,2, \ldots, 6\}$として,
+  加法$+ $と乗法$\bullet$を次で定義する.
+  \begin{itemize}
+  \item $a, b \in \mathbb{F}_7$について$a+b:=\text{($a$たす$b$を$7$で割ったあまり)}$.
+\item $a, b \in \mathbb{F}_7$について$a\bullet b:=\text{($a$かける $b$を$7$で割ったあまり)}$.
+ \end{itemize}
+これによって$\mathbb{F}_7$は体となる. そこで$\mathbb{F}_7$上の2次正方行列の集合を
+ $$
+ M_2(\mathbb{F}_7)
+ :=\left\{ \begin{pmatrix}
+a & b\\
+c & d \\
+\end{pmatrix}
+\mid a,b,c,d \in \mathbb{F}_7 \right\}
+ $$
+ とおく. 次の問いに答えよ.
+  \begin{enumerate}[label=(\arabic*)]
+ \setlength{\parskip}{0cm}
+  \setlength{\itemsep}{0cm}
+  \item $A= \begin{pmatrix}
+a & b\\
+c & d \\
+\end{pmatrix} \in  M_2(\mathbb{F}_7)$とする. $A$が正則であることは, $\mathbb{F}_7$上で$ad-bc \neq 0$と同値であることを示せ.
+  ただし「$A$が正則である」の定義は「ある$B  \in  M_2(\mathbb{F}_7)$があって, $M_2(\mathbb{F}_7)$上で
+  $$
+  AB=BA=\begin{pmatrix}
+1& 0\\
+0 & 1 \\
+\end{pmatrix}
+  $$
+  が成り立つこと」とする. なおこの解答のみ, 行列式の一般論を用いた解答は不可とする.
+  \item
+  $$
+   \mathrm{GL}_2(\mathbb{F}_7 ):=
+   \{A \in  M_2(\mathbb{F}_7) \mid \text{$A$は正則}\}
+  $$
+  とする.
+  $   \mathrm{GL}_2(\mathbb{F}_7 )$の個数を求めよ.
+ただし (1)が未解答でも(1)を用いて(2)を正答していた場合は部分点を与える.
+  \end{enumerate}
+
+\end{tcolorbox}
+
+\subsection*{解答例}
+
+以下, すべての計算は $\F_7$ で行う. すなわち, 数は $7$ で割った余りとして考える.
+
+\subsection*{(1)}
+\[
+A=\begin{pmatrix}a&b\\c&d\end{pmatrix}
+\]
+とする.
+
+まず $ad-bc\ne0$ と仮定する. $\Delta=ad-bc$ とおくと, $\Delta\ne0$ なので $\F_7$ において $\Delta^{-1}$ が存在する. そこで
+\[
+B=\Delta^{-1}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}
+\]
+とおく. 直接計算すると
+\[
+AB=
+\Delta^{-1}
+\begin{pmatrix}a&b\\c&d\end{pmatrix}
+\begin{pmatrix}d&-b\\-c&a\end{pmatrix}
+=
+\Delta^{-1}
+\begin{pmatrix}
+ad-bc&-ab+ab\\
+cd-dc&-bc+ad
+\end{pmatrix}
+=
+\begin{pmatrix}1&0\\0&1\end{pmatrix}.
+\]
+また
+\[
+BA=
+\Delta^{-1}
+\begin{pmatrix}d&-b\\-c&a\end{pmatrix}
+\begin{pmatrix}a&b\\c&d\end{pmatrix}
+=
+\Delta^{-1}
+\begin{pmatrix}
+da-bc&db-bd\\
+-ca+ac&-cb+ad
+\end{pmatrix}
+=
+\begin{pmatrix}1&0\\0&1\end{pmatrix}.
+\]
+したがって $A$ は正則である.
+
+逆に $A$ が正則であるとする. するとある
+\[
+B=\begin{pmatrix}p&q\\r&s\end{pmatrix}
+\]
+が存在して
+\[
+AB=\begin{pmatrix}1&0\\0&1\end{pmatrix}
+\]
+である. すなわち
+\[
+ap+br=1,
+\qquad
+cp+dr=0,
+\qquad
+aq+bs=0,
+\qquad
+cq+ds=1
+\]
+である.
+ここで $\Delta=ad-bc$ とおく. もし $\Delta=0$ ならば, 上の等式から次が従う.
+まず
+\[
+\Delta p=(ad-bc)p=d(ap+br)-b(cp+dr)=d\cdot1-b\cdot0=d.
+\]
+したがって $\Delta=0$ なら $d=0$ である. また
+\[
+\Delta r=(ad-bc)r=-c(ap+br)+a(cp+dr)=-c\cdot1+a\cdot0=-c.
+\]
+したがって $c=0$ である. 次に
+\[
+\Delta q=(ad-bc)q=d(aq+bs)-b(cq+ds)=d\cdot0-b\cdot1=-b.
+\]
+したがって $b=0$ である. 最後に
+\[
+\Delta s=(ad-bc)s=-c(aq+bs)+a(cq+ds)=-c\cdot0+a\cdot1=a.
+\]
+したがって $a=0$ である. よって $a=b=c=d=0$ となり, $A$ はゼロ行列になる. しかしゼロ行列とどんな行列を掛けても単位行列にはならないので, これは $A$ が正則であることに矛盾する.
+
+したがって $\Delta\ne0$ である. 以上より
+\[
+\boxed{A\text{ が正則 }\Longleftrightarrow ad-bc\ne0.}
+\]
+
+(別解). 
+$ad-bc\neq0$ならば$A$が正則の証明は同じ. 
+
+$ad-bc=0$ならば$A$が正則でないを示す. 
+背理法. $A$が正則ならば, 2次正方行列$B$について
+$$
+AB=
+\begin{pmatrix}0&0\\0&0\end{pmatrix}
+\Rightarrow B=
+\begin{pmatrix}0&0\\0&0\end{pmatrix}
+$$
+を用いて矛盾を示す.
+
+$a=b=c=d=0$ならば
+$
+B=\begin{pmatrix}1&0\\0&0\end{pmatrix}
+$
+とすれば, $AB=\begin{pmatrix}0&0\\0&0\end{pmatrix}$だが$B \neq\begin{pmatrix}0&0\\0&0\end{pmatrix}$となり矛盾.
+
+$a\neq0$または$b\neq0$ならば
+$
+B=\begin{pmatrix}-b&0\\a&0\end{pmatrix}
+$とすれば, $AB=\begin{pmatrix}0&0\\0&0\end{pmatrix}$だが$B \neq\begin{pmatrix}0&0\\0&0\end{pmatrix}$となり矛盾.
+
+$c\neq0$または$d\neq0$ならば
+$
+B=\begin{pmatrix}d&0\\-c&0\end{pmatrix}
+$とすれば, $AB=\begin{pmatrix}0&0\\0&0\end{pmatrix}$だが$B \neq\begin{pmatrix}0&0\\0&0\end{pmatrix}$となり矛盾.
+ 
+以上より全てのケースにおいて矛盾を示せたので言えた. 
+
+\subsection*{(2)}
+(1) より, $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ が正則であることは
+\[
+ad-bc\ne0
+\]
+と同値である.
+
+第1列 $\begin{pmatrix}a\\c\end{pmatrix}$ がゼロ列ならば $ad-bc=0$ なので, 正則にはならない. したがって第1列はゼロ列でない必要がある. $\F_7^2$ には $7^2=49$ 個の列があり, ゼロ列を除くと
+\[
+49-1=48
+\]
+通りである.
+
+次に, ゼロでない第1列 $\begin{pmatrix}a\\c\end{pmatrix}$ を一つ固定する. 第2列 $\begin{pmatrix}b\\d\end{pmatrix}$ は $49$ 通りある. このうち $ad-bc=0$ となるものはちょうど $7$ 通りである. 実際,
+\begin{itemize}
+\item $a\ne0$ のとき, $ad-bc=0$ は $d=a^{-1}cb$ と同値であり, $b$ を $7$ 通りに選べば $d$ はただ一つに決まる.
+\item $a=0$ のとき, 第1列はゼロ列でないので $c\ne0$ である. このとき $ad-bc=0$ は $-bc=0$ と同値で, $c\ne0$ より $b=0$ である. $d$ は任意なので $7$ 通りである.
+\end{itemize}
+したがって, 第2列の選び方のうち $ad-bc\ne0$ となるものは
+\[
+49-7=42
+\]
+通りである. よって
+\[
+\#GL_2(\F_7)=48\cdot42=2016.
+\]
+ここで$\#GL_2(\F_7)$は$GL_2(\F_7)$という集合の個数を表す. したがって
+\[
+\boxed{\#GL_2(\F_7)=2016.}
+\]
+
+
+(別解) chatGPTの解答は偉い. 私は初め
+$$
+ad-bc=0
+$$
+の数を数えていた. 
+\begin{itemize}
+\item $a=0$の場合. $d$の選び方で7通りあり, 
+$$
+bc=0
+$$
+であるため$b=0$または$c=0$である. これは13通り.
+以上より$a=0$の場合は
+$$13 \times 7=91\text{通り}$$
+\item $a\neq0$の場合. まず$a$の選び方で6通りある. そして
+$$
+d = a^{-1}bc
+$$
+である. $b, c$を定めれば$d$が一通りに決まるので$7^2=49$通り.
+よって
+$$
+6 \times 49= 294
+\text{通り}
+$$
+\end{itemize}
+以上より$ad-bc=0$の個数は
+$$
+294+91=385
+\text{通り}
+$$
+である. 
+以上より$ad-bc \neq 0$の通り数は
+$$
+7^4 - 385=2401 - 385 =2016.
+$$
+
+
+
+\section*{第8問}
+
+\begin{tcolorbox}[problemstyle,title=問題]
+
+次の問題に答えよ. ただし以下$\ell, m, n, r$は1以上の整数とする.
+ \begin{enumerate}[label=(\arabic*)]
+ \setlength{\parskip}{0cm}
+  \setlength{\itemsep}{0cm}
+  \item $m$次正方行列$A$が正則であり, $A$のすべての成分が有理数であるとする. この時$A^{-1}$の全ての成分も有理数であることを示せ.
+ \item $A$を実数体$\R$上の$m \times n$行列とする.
+ $\mathrm{rank}(A)=r$ならば, ある
+ 実数体$\R$上の$m\times r$行列$B$と$r \times n$行列$C$があって, $A=BC$とできることを示せ.
+    \item 実数体$\R$上の$\ell \times m$行列$A$と$m \times n$行列$B$について, シルベスター不等式
+    $$\mathrm{rank}(AB) \ge \mathrm{rank}(A) + \mathrm{rank}(B) - m$$
+    を示せ.
+ \end{enumerate}
+
+\end{tcolorbox}
+
+\subsection*{解答例}
+
+\subsection*{(1)}
+$A$ は正則な $m$ 次正方行列で, すべての成分が有理数であるとする. 掃き出し法で逆行列を求めるには
+\[
+[A:E_m]
+\]
+を行基本変形して
+\[
+[E_m:A^{-1}]
+\]
+にする.
+
+ここで最初の行列 $[A:E_m]$ の成分はすべて有理数である. また, 行基本変形は次の3種類である.
+\begin{enumerate}
+\item ある行を $0$ でない数倍する.
+\item 2つの行を入れ替える.
+\item ある行の定数倍を別の行に加える.
+\end{enumerate}
+$A$ の成分が有理数なので, 掃き出し法で使うピボットも有理数である. 有理数でない数を使う必要はない. 実際, 有理数を足す, 引く, 掛ける, $0$ でない有理数で割る, という操作を繰り返しても, 得られる数はすべて有理数である.
+
+したがって, 掃き出し法の途中に現れる行列の成分はすべて有理数である. 最後に得られる右側の行列 $A^{-1}$ の成分もすべて有理数である.
+
+よって
+\[
+\boxed{A^{-1}\text{ のすべての成分は有理数である}.}
+\]
+
+\subsection*{(2)}
+$A$ を $m\times n$ 行列とし, $\rank(A)=r$ とする. 行基本変形と列基本変形を繰り返すことで, $A$ は標準形
+\[
+J_r=
+\begin{pmatrix}
+E_r&O_{r,n-r}\\
+O_{m-r,r}&O_{m-r,n-r}
+\end{pmatrix}
+\]
+に変形できる. したがって, ある正則行列 $P,Q$ が存在して
+\[
+PAQ=J_r
+\]
+と書ける. したがって
+\[
+A=P^{-1}J_rQ^{-1}
+\]
+である.
+
+ここで
+\[
+U=
+\begin{pmatrix}
+E_r\\
+O_{m-r,r}
+\end{pmatrix}
+\quad (m\times r\text{ 行列}),
+\qquad
+V=
+\begin{pmatrix}
+E_r&O_{r,n-r}
+\end{pmatrix}
+\quad (r\times n\text{ 行列})
+\]
+とおく. すると
+\[
+UV=
+\begin{pmatrix}
+E_r&O_{r,n-r}\\
+O_{m-r,r}&O_{m-r,n-r}
+\end{pmatrix}
+=J_r
+\]
+である. したがって
+\[
+A=P^{-1}UVQ^{-1}=(P^{-1}U)(VQ^{-1}).
+\]
+ここで
+\[
+B=P^{-1}U,
+\qquad
+C=VQ^{-1}
+\]
+とおけば, $B$ は $m\times r$ 行列, $C$ は $r\times n$ 行列であり,
+\[
+\boxed{A=BC}
+\]
+となる.
+
+\subsection*{(3)}
+$A$ を $\ell\times m$ 行列, $B$ を $m\times n$ 行列とする. 証明したい不等式は
+\[
+\rank(AB)\ge \rank(A)+\rank(B)-m
+\]
+である.
+
+まず
+\[
+p=\rank(A),\qquad q=\rank(B)
+\]
+とおく. $A$ を標準化すると, ある正則行列 $P,Q$ が存在して
+\[
+PAQ=
+\begin{pmatrix}
+E_p&O_{p,m-p}\\
+O_{\ell-p,p}&O_{\ell-p,m-p}
+\end{pmatrix}
+=:J_p
+\]
+となる.
+
+正則行列を左または右から掛けても階数は変わらないので,
+\[
+\rank(AB)=\rank(PAB).
+\]
+さらに
+\[
+PAB=(PAQ)(Q^{-1}B)=J_pC,
+\qquad C=Q^{-1}B
+\]
+とおく. $Q^{-1}$ は正則なので
+\[
+\rank(C)=\rank(B)=q
+\]
+である.
+
+次に, $C$ を上から $p$ 行と残り $m-p$ 行に分けて
+\[
+C=
+\begin{pmatrix}
+C_1\\C_2
+\end{pmatrix}
+\]
+と書く. ここで $C_1$ は $p\times n$ 行列, $C_2$ は $(m-p)\times n$ 行列である. $J_p$ を左から掛けると, $C$ の上から $p$ 行だけが残り, それより下はゼロ行になる. つまり
+\[
+J_pC=
+\begin{pmatrix}
+C_1\\
+O_{\ell-p,n}
+\end{pmatrix}
+\]
+である. したがって
+\[
+\rank(J_pC)=\rank(C_1).
+\]
+
+ここで, 行列に行を1本追加すると, 階数は高々1しか増えない. なぜなら, 追加前の行列を行簡約化したときのゼロでない行の個数を $s$ とすると, そこへ1本の行を追加してからさらに行簡約化しても, ゼロでない行の個数は高々 $s+1$ だからである. よって, $C_1$ に $m-p$ 本の行を追加して $C$ を作ると, 階数は高々 $m-p$ だけ増える. すなわち
+\[
+\rank(C)\le \rank(C_1)+(m-p).
+\]
+したがって
+\[
+\rank(C_1)
+\ge
+\rank(C)-(m-p)
+= q-m+p.
+\]
+以上より
+\[
+\rank(AB)=\rank(J_pC)=\rank(C_1)
+\ge p+q-m
+=\rank(A)+\rank(B)-m.
+\]
+したがって
+\[
+\boxed{\rank(AB)\ge \rank(A)+\rank(B)-m.}
+\]
+
+
+
+\end{document}
