@@ -160,7 +160,7 @@
 - (2025/05/28) 休講 
 - 第6回 (2025/06/04) 中間試験 [問題](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間試験_20260604.pdf)  [解答と講評](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間試験_20260604_解答.pdf)
 - 第7回 (2025/06/11)  [第6回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/6_授業板書.pdf) [第6回演義追加問題](https://masataka123.github.io/2026_summer_linear_algebra/material/6_演義板書.pdf)
-- 第8回 (2025/06/18) 
+- 第8回 (2025/06/18) [第7回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/7_授業板書.pdf) [第7回演義追加問題](https://masataka123.github.io/2026_summer_linear_algebra/material/7_演義板書.pdf)
 -  (2025/06/25)  休講
 - 第9回 (2025/07/02) 
 - 第10回(2025/07/09) 
