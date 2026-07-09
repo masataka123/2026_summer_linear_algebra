@@ -163,7 +163,7 @@
 - 第8回 (2025/06/18) [第7回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/7_授業板書.pdf) [第7回演義追加問題](https://masataka123.github.io/2026_summer_linear_algebra/material/7_演義板書.pdf)
 -  (2025/06/25)  休講
 - 第9回 (2025/07/02) [第8回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/8_授業板書.pdf) [第8回演義追加問題](https://masataka123.github.io/2026_summer_linear_algebra/material/8_演義板書.pdf)
-- 第10回(2025/07/09) 
+- 第10回(2025/07/09)  [第9回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/9_授業板書.pdf) [第9回演義追加問題](https://masataka123.github.io/2026_summer_linear_algebra/material/9_演義板書.pdf)
 - 第11回 (2025/07/16) 
 - 第12回 (2025/07/23) 
 - 第13回(2025/07/30) 期末試験(予定)
