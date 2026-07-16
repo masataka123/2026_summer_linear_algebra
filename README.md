@@ -73,7 +73,7 @@
 ## 中間レポート1に関して
 次の日時にレポートを配布します.
 - 内容: [中間レポート1](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間レポート1_2026_0521.pdf)
-- レポート締切: 2025年06月4日 23:59:00 (日本標準時刻, GMT+9)
+- レポート締切: 2026年06月4日 23:59:00 (日本標準時刻, GMT+9)
 - レポート提出方法: 配布したレポート問題に解答し, CLEにて提出する. 
 
 [中間レポート1の解答](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間レポート1_2026_0521_解答.pdf)
@@ -89,15 +89,25 @@
 
 中間試験の[問題](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間試験_20260604.pdf)と[解答と講評](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間試験_20260604_解答.pdf)をアップロードしました. 
 
+## 中間レポート2に関して
+次の日時にレポートを配布します.
+- 内容: [中間レポート2](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間レポート2_2026_0716.pdf)
+- レポート締切: 2026年07月30日 23:59:00 (日本標準時刻, GMT+9)
+- レポート提出方法: 配布したレポート問題に解答し, CLEにて提出する. 
+
+[中間レポート2の解答](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間レポート2_2026_0716_解答.pdf)
+
 
 ## 期末試験に関して
 
-- 日時: 2026年7月30日(予定) 木曜2限(10:30-12:00)  10:15までには着席してください.
+- 日時: 2026年7月30日 木曜2限(10:30-12:00)  10:25までには着席してください.
 - 場所: 共C206 (授業の部屋)
-- 持ち込みに関して:  無し
-- 試験内容: 授業でやった範囲
+- 持ち込みに関して:  筆記用具以外の持ち込みは不可. ただし暑いので飲み物の持ち込みは認
+める.
+- 試験内容: 授業全体の内容
 
-中間試験・期末試験は予定であるため, 変更の可能性があります.もし変更する場合はホームページやCLEで連絡します. 
+詳しくは[こちらのpdf]((https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間レポート2_2026_0716.pdf)をご覧ください. 
+
 正当な理由(病気・忌引き)などで欠席する場合は必ず岩井(masataka[at]math.sci.osaka-u.ac.jp)へ連絡してください. 代替手段で別途対応いたします.  
 
 
@@ -164,7 +174,7 @@
 -  (2026/06/25)  休講
 - 第9回 (2026/07/02) [第8回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/8_授業板書.pdf) [第8回演義追加問題](https://masataka123.github.io/2026_summer_linear_algebra/material/8_演義板書.pdf)
 - 第10回(2026/07/09)  [第9回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/9_授業板書.pdf) [第9回演義追加問題](https://masataka123.github.io/2026_summer_linear_algebra/material/9_演義板書.pdf)
-- 第11回 (2026/07/16) 
+- 第11回 (2026/07/16)   [第10回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/10_授業板書.pdf) 
 -  (2026/07/23) 休講
 - 第12回(2026/07/30) 期末試験
 - 第13回 (2026/08/06) 追試(もしあれば)

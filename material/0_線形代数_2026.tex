@@ -6915,9 +6915,114 @@ $$
 
  \newpage
  $\boxed{\text{2026/06/11 第6回 線形代数 演義資料}}$
- \begin{enumerate}[label=\textbf{問題}\arabic*.]
+  \begin{enumerate}[label=\textbf{問題}\arabic*.]
  \setcounter{enumi}{12}
- 
+ \item 5次置換$ \sigma, \tau$を
+ $$
+ \sigma
+ =
+\begin{pmatrix}
+1& 2& 3 & 4  & 5 \\
+4& 1& 5& 3& 2 \\
+\end{pmatrix}
+, 
+\tau 
+ =
+\begin{pmatrix}
+1& 2& 3 & 4  & 5 \\
+2& 1& 4& 5& 3 \\
+\end{pmatrix}
+$$
+とする. 
+次の問いに答えよ.
+\begin{enumerate}
+\item $\sigma \tau, \tau \sigma, \sigma^{-1}$を求めよ.
+\item $\sigma$と$\tau$の転倒数と符号を求めよ. 
+\item $\sigma \tau$の転倒数と符号を求め, $\mathrm{sgn}(\sigma \tau)=\mathrm{sgn}(\sigma) \mathrm{sgn}(\tau)$を確認せよ. 
+\end{enumerate}
+ \item 4次置換$\sigma$を
+ $$
+ \sigma
+ =
+\begin{pmatrix}
+1& 2& 3 & 4  \\
+4& 3& 1& 2\\
+\end{pmatrix}
+$$
+とする. 
+次の問いに答えよ.
+\begin{enumerate}
+\item $\sigma$の符号$\mathrm{\sgn}(\sigma)$を求めよ
+\item $f(x_1, x_2, x_3, x_4)=3x_1x_2 + x_{3}^{2}+ 4x_1x_2x_3$とする. 
+$f^{\sigma}(x_1, x_2, x_3, x_4)$を求めよ. 
+\item 差積$D(x_1, \ldots, x_4):=\prod_{1 \le i < j \le 4} (x_i - x_j)$を書き下せ. 
+\item $D^{\sigma}(x_1, \ldots, x_4)$を求めよ. また$D^{\sigma}(x_1, \ldots, x_4)
+=\mathrm{sgn}(\sigma)D(x_1, \ldots, x_4)$を確かめよ. 
+\item 判別式
+$$
+\Delta (x_1, \ldots, x_4):=\prod_{1 \le i < j \le 4} (x_i - x_j)^2
+$$
+とする. $\Delta^{\sigma}(x_1, \ldots, x_4)$を求めよ. 
+\end{enumerate}
+\item 異なる二つの整数$i,j$のみを入れ替え, 他の$k$を入れ替えない置換を互換といい$(i,j)$とかく. 
+例えば
+$$
+\begin{pmatrix}
+1& 2& 3 & 4  & 5 \\
+2& 1& 3& 4& 5 \\
+\end{pmatrix}
+=(1,2)
+\quad
+\begin{pmatrix}
+1& 2& 3 & 4  & 5 \\
+1& 2& 4& 3& 5 \\
+\end{pmatrix}
+=(3,4)
+\quad
+\begin{pmatrix}
+1& 2& 3 & 4  & 5 \\
+4& 2& 3& 1& 5 \\
+\end{pmatrix}
+=(1,4)
+$$
+は全て互換である.  次の問いに答えよ.
+\begin{enumerate}
+\item (定理3.1.9) 互換の符号を求めよ.
+\item (定理3.1.11) $r$個の互換の積で表される置換の符号を求めよ. 
+\end{enumerate}
+
+
+\item $n \ge 2$となる整数とする. 次の問いに答えよ.
+\begin{enumerate}
+\item $n$次対称群$S_n$の個数が$n!$個であることを示せ.
+\item $n$次交代群$A_n$の個数が$\frac{n!}{2}$個であることを示せ. ここで$n$次交代群$A_n$とは偶置換全体の集合である. 
+\item 偶置換と偶置換の積は偶置換であることを示せ. 
+\end{enumerate}
+
+\end{enumerate}
+\newpage
+
+このページの問題はとても難しいので解けなくても全く問題ないです.
+3年の授業で詳しく習うと思います. 
+  \begin{enumerate}[label=\textbf{問題}\arabic*.]
+ \setcounter{enumi}{16}
+\item 
+ある部屋に100人集められている. 別の部屋に100個のロッカーがあり, それぞれのロッカーには100人のうち1人の名前が書かれた紙が入れてある. 違うロッカーには違う名前の紙が入っている.
+
+順番を決め, 1人がロッカーの部屋に入り, 50個のロッカーを開ける. その中に自分の名前があれば, ロッカーを元の状態に戻し, 次の人がロッカー部屋に入り, 50個のロッカーを開ける. これを繰り返し, 100人が皆自分の名前を見つけられたらゲームは成功. 1人でも名前が見つけられなければゲームは失敗である.
+
+100人はゲームを始める前に議論し戦略を決めることができる. ただしゲームが始まったらお互いに話すこと・情報を伝えることはできない. 
+
+普通に戦略なしでやれば
+$$
+\left( \frac{1}{2}\right)^{100} \times 100 
+\sim
+7.88 \times 10^{-29}
+\%
+$$
+でクリア不可能に思われる. 
+しかしこのゲームにおいて, 30\%以上の確率で成功する戦略が存在する. 
+その戦略を考えよ. \footnote{えびまラボさんによる20人の囚人と12個の箱【ゆっくり解説】があります. \url{https://www.youtube.com/watch?v=gLHWaYhssXY}}
 \item
 $$
 (12)(34) = (132)(134) 
@@ -6941,24 +7046,1513 @@ $$
  \item 上の2問を用いて次の問いに答えよ. 
  \begin{enumerate}
 \item 
- $$
- [S_n, S_n]:= \{  [\sigma_1, \tau_1]\cdots [\sigma_l, \tau_l] \mid \sigma_1, \tau_1, \ldots, \sigma_l, \tau_l \in S_n, l \in \N\}
- $$
+ $[S_n, S_n]:= \{  [\sigma_1, \tau_1]\cdots [\sigma_l, \tau_l] \mid \sigma_1, \tau_1, \ldots, \sigma_l, \tau_l \in S_n, l \in \N\}
+ $
  と定義する. $n \ge 3$について, $[S_n, S_n]=A_{n}$を示せ.
 \item 
-$$
+$
 [A_n, A_n]:= \{  [\sigma_1, \tau_1]\cdots [\sigma_l, \tau_l] \mid \sigma_1, \tau_1, \ldots, \sigma_l, \tau_l \in A_n, l \in \N\}
-$$
+$
  と定義する. $n \ge 5$について, $[A_n, A_n]=A_{n}$を示せ.
 特にこれから$S_n, A_n$が$n \ge 5$について, 可解でないことがわかる. (詳しいことは学部3年で習う)
-\end{enumerate}
-
-\item $\varepsilon$を恒等置換とする. $[A_3, A_3]=\{\varepsilon\}$であることを示せ. また
-$$
+\item $\varepsilon$を恒等置換とする. $[A_3, A_3]=\{\varepsilon\}$であることを示せ. 
+\item 
+$
 [A_4, A_4]=\{ \varepsilon, (12)(34), (13)(24), (14)(23)\}
-$$
+$
 であることを示せ. また右辺の集合を$V$として$[V, V]$を上と同様に考えるとき, $[V, V]$を求めよ. 
 これから$S_3, A_3, S_4, A_4$が可解(solvable)であることがわかる (詳しいことは学部3年で習う).
+\end{enumerate}
+\end{enumerate}
+
+ \newpage
+ $\boxed{\text{2026/06/18 第7回 線形代数 演義資料}}$
+  
+  授業で行列式を定義した. しかし定義だけで行列式を計算するのは難しい.
+  そこで今日の演習では, とりあえず以下の定理を認めて行列式を計算できるようになることを目標とする. 
+  
+\begin{thm}\cite[定理 3.2.5, 3.2.9]{O}
+行基本変形と行列式は以下のように対応する. 
+   \begin{enumerate}
+ \item  第$i$行を$c$倍すると, 行列式も$c$倍される.
+ \item $i \neq j$について. 第$i$行と第$j$行入れ替えると, 行列式は$-1$倍になる. 
+ \item $i \neq j$について. 第$i$行に第$j$行の$c$倍を足しても, 行列式は不変である. 
+ \end{enumerate}
+ また"行"の部分を"列"に変えても同様のことが成り立つ. 
+  \end{thm}
+  \vspace{-6pt}
+  \begin{thm}\cite[定理 3.3.2]{O}
+  $A$を$n-1$次正方行列とするとき, $a \in K$について次が成り立つ.
+  $$
+  \begin{vmatrix}
+a & 0\\
+\ast &   A\\
+\end{vmatrix}
+=
+  \begin{vmatrix}
+a & \ast \\
+0 &   A\\
+\end{vmatrix}
+=
+  \begin{vmatrix}
+A & \ast \\
+0 &   a\\
+\end{vmatrix}
+=
+  \begin{vmatrix}
+A & 0 \\
+\ast &   a\\
+\end{vmatrix}
+=a |A|
+$$
+  \end{thm}
+    \vspace{-6pt}
+   \begin{thm}\cite[定理 3.2.8]{O}
+$\det({}^t A)  = \det (A)$
+\end{thm}
+
+これを使うと行列式が計算できるようになる. 
+ \begin{tcolorbox}[mybox]
+    \begin{suma}[行列式の計算方法1.]
+    \text{}
+    
+    
+\begin{enumerate}[label=\textbf{操作}\arabic*.]
+ \item  次の行基本変形を繰り返して操作2の左辺の形にする. 
+\begin{enumerate}
+\item[(I)] ある行を$\lambda$倍すると, 行列式も$\lambda$倍される.
+ \item[(II)] 二つの行を入れ替えると, 行列式は$-1$倍になる. 
+ \item[(III)] ある行のスカラー倍を他の行に加えても行列式は不変である. 
+\end{enumerate}
+ なお必要ならば, 行列の転置をとってもいい.転置をとっても行列式は不変である. 
+(もちろん列基本変形を用いても良い).
+ \item \cite[定理 3.3.2]{O}を用いる.
+ $$
+\begin{vmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+0 & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & & \vdots \\
+0& a_{n2} & \cdots & a_{nn}
+\end{vmatrix}\\
+=
+a_{11} 
+\begin{vmatrix}
+a_{22} & \cdots & a_{2n} \\
+\vdots & & \vdots \\
+a_{n2} & \cdots & a_{nn}
+\end{vmatrix}
+ $$
+ \item 行列のサイズが2の場合は操作4に, そうでない場合は行列のサイズが2になるまで操作1と2を繰り返す. 
+ \item 行列の2の場合の行列式の公式
+ $\begin{vmatrix}
+a& b\\
+c&d\\
+ \end{vmatrix} 
+=ad-bc$を用いる. 
+ \end{enumerate}
+ \end{suma}
+  \end{tcolorbox}
+  ただし操作3, 4に関しては$3 \times 3$行列の行列式の公式(サラスの公式)を用いても良い. 
+ \begin{exa}
+ $
+ \begin{pmatrix}
+ 2&-4&-5&3\\
+ -6&13&14&1\\
+ 1&-2&-2&-8\\
+ 2&-5&0&5\\
+ \end{pmatrix}
+$
+の行列式は次のように求められる. 
+
+\begin{align*}
+ &\begin{vmatrix}
+ 2&-4&-5&3\\
+ -6&13&14&1\\
+ 1&-2&-2&-8\\
+ 2&-5&0&5\\
+ \end{vmatrix}
+ \overset{\text{操作1 (I)}} {=}
+ (-1)
+  \begin{vmatrix}
+   1&-2&-2&-8\\
+ -6&13&14&1\\
+ 2&-4&-5&3\\
+ 2&-5&0&5\\
+ \end{vmatrix}
+  \overset{\text{操作1 (III)}}  {=}
+ (-1)
+  \begin{vmatrix}
+   1&-2&-2&-8\\
+ 0&1 &2  &-47\\
+ 0& 0&-1&19\\
+ 0&-1&4&21\\
+ \end{vmatrix}
+\\ %%%
+& \overset{\text{操作2}} {=}
+ (-1)
+  \begin{vmatrix}
+1 &2  &-47\\
+ 0&-1&19\\
+-1&4&21\\
+ \end{vmatrix}
+  \overset{\text{操作1 (III)}} {=}
+   (-1)
+  \begin{vmatrix}
+1 &2  &-47\\
+ 0&-1&19\\
+ 0&6&-26\\
+ \end{vmatrix}
+ \overset{\text{操作2}} {=}
+  (-1)
+    \begin{vmatrix}
+-1&19\\
+6&-26\\
+ \end{vmatrix}
+ \\ %%
+ & \overset{\text{操作4} } {=}
+ (-1)\left\{(-1)\times (-26) - 6\times 19\right\} = 88.
+\end{align*}
+ \end{exa}
+ 
+ \begin{exa}\cite[例 3.1.13]{O}
+上三角行列の行列式は対角成分の積である.
+$$
+\begin{vmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+0 & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & & \vdots \\
+0& 0 & \cdots & a_{nn}
+\end{vmatrix}\\
+=a_{11}a_{22}\cdots a_{nn}
+$$
+下三角行列も同様である. 
+授業で示したが,上を用いてもわかる. 
+特に単位行列の行列式は1. 
+\end{exa}
+
+
+演習問題3.3.2を解く上では必要であり, かつ下の性質は重要なので書いておく.  
+ 
+ \begin{thm}\cite[定理 3.3.4]{O}
+$\det(AB)=\det(A) \det(B)$
+\end{thm}
+
+\begin{rem}
+演習問題3.2.3によって基本変形での振る舞いと$\det E_n=1$という条件があれば$\det$はただ一つに定まる.
+他にも交代性(基本変形の2つ目)と多重線形性(基本変形の1つ目と\cite[定理 3.2.1]{O}), そして$\det(E_n)=1$という条件があれば$\det$はただ一つに定まる.
+%厳密にいうと次の通り.
+%\begin{thm}[行列式の唯一性]
+  %  $n$次正方行列の集合から体$K$への関数
+  %$f: \{\text{$n$次正方行列} \} \rightarrow  K$
+%が交代性と多重線形性を満たすならば$f(A)=f(E_n)\det A$となる. 
+%特に$f(E_n)=1$ならば$f(A)=\det(A)$である. 
+%\end{thm}
+
+なので$\det$の形が理解できなくてもそこまで問題ない. 実際上の唯一性を用いて$\det$を定義している教科書もある. 
+\end{rem}
+
+
+
+
+
+
+
+ \newpage
+ $\boxed{\text{2026/07/02 第8回 線形代数 演義資料}}$
+ 
+ 
+ 教科書の定理 2.3.9, 2.4.8, 2.5.1, 2.5.4, 3.3.5をまとめると以下のことが言える. 
+ これは正則行列の特徴づけともいえ重要である. 
+\begin{thm}
+体$K$上の$n$ 次正方行列 $A$ に対して, 次の条件はすべて同値である.
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item $\rank A=n$.
+\item $A$ は正則行列である. つまり逆行列$A^{-1}$が存在する.
+\item $A$ は有限個の基本行列の積で表される.
+\item 拡大行列 $[A\mid \En]$ は, 行基本変形によって $[\En\mid B]$ の形に変形できる.
+\item $A$ は行基本変形によって $\En$ に変形できる.
+\item 任意の $\bvec\in K^n$ に対して, 連立一次方程式
+\(
+A\xvec=\bvec
+\)
+はただ一つの解をもつ.
+\item 同次連立一次方程式
+\(
+A\xvec=\boldsymbol{0}
+\)
+の解は $\xvec=\boldsymbol{0}$ のみである.
+\item $\det A \neq 0$
+\end{enumerate}
+また, \textup{(4)} において
+\(
+[A\mid \En]\longrightarrow [\En\mid B]
+\)
+となったとき,
+\(
+B=A^{-1}
+\)
+である.
+\end{thm}
+
+また行列式の次の性質は重要である.
+\begin{thm}\cite[定理 3.3.4]{O}
+体$K$上の$n$ 次正方行列 $A, B$ に対して,
+$$\det(AB)=\det(A) \det(B)$$
+\end{thm}
+
+
+ \begin{enumerate}[label=\textbf{問題}\arabic*.]
+ \setcounter{enumi}{20}
+ \item 以下の問題は他学科の期末試験で出した証明問題である. 
+ 次の問題に答えよ. 
+ \begin{enumerate}[label=(\arabic*)]
+ \setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm}
+   \item $n\times n$行列$A, B, C$について, $\det(ABC) = \det(BAC)$であることを示せ.
+    \item  $n\times n$行列$A, B$について, $A$と$B$が正則ならば, $AB$もまた正則行列であることを示せ. 
+    \item $n\times n$行列$A, B$について, $AB$が正則行列であるならば, $A$も$B$も正則であることを示せ. 
+ \item  実数係数の$n\times n$行列$A$について, $^{t}A A=E_n$ならば, $\det (A) = \pm 1$であることを示せ.  ここで$^{t}A A$は$^{t}A $と$A$の積のことである. 
+     \item  実数係数の$n\times n$行列$A$について, $A^7=E_n$ならば, $\det (A) = 1$であることを示せ. 
+    \item  実数係数の$2\times 2$行列$A$について, $A^7=\begin{pmatrix}  1&  0 \\  0 &1 \end{pmatrix}$かつ$A \neq \begin{pmatrix}  1&  0 \\  0 &1 \end{pmatrix}$となるものの例を一つあげよ. 
+ \end{enumerate} 
+
+ \end{enumerate}
+
+ \newpage
+ $\boxed{\text{2026/07/09 第9回 線形代数 演義資料}}$
+ 
+ 
+ 
+
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{suma}[行列式の計算方法2.]
+    行列に0が多めにある場合は余因子展開を用いても良い.
+    \begin{align*}
+\begin{split}
+&\begin{vmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & & \vdots \\
+a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{vmatrix}\\
+&=
+a_{11} 
+\begin{vmatrix}
+a_{22} & \cdots & a_{2n} \\
+\vdots & & \vdots \\
+a_{n2} & \cdots & a_{nn}
+\end{vmatrix}
+- a_{21}
+\begin{vmatrix}
+a_{12} & \cdots & a_{1n} \\
+a_{32} & \cdots & a_{3n} \\
+\vdots & & \vdots \\
+a_{n2} & \cdots & a_{nn}
+\end{vmatrix}
++ \cdots + (-1)^{n+1} a_{n1}
+\begin{vmatrix}
+a_{12} & \cdots & a_{1n} \\
+a_{22} & \cdots & a_{2n} \\
+\vdots & & \vdots \\
+a_{n-1,2} & \cdots & a_{n-1,n}
+\end{vmatrix}
+\end{split}
+\end{align*}
+\end{suma}
+\end{tcolorbox}
+
+
+
+\begin{exa}行列
+$A=
+\begin{pmatrix}
+2 & 7&13 & 5\\
+5 & 3&8 & 2\\
+0 & 0 & 9  & 4\\
+0 & 0&-2 & 1\\
+\end{pmatrix}
+$の行列式は次のように求められる. 
+
+\begin{align*}
+\det(A) 
+&= 
+(-1)^{1+1}a_{11}\det(A_{11}) + (-1)^{2+1}a_{21}\det(A_{21}) + (-1)^{3+1}a_{31}\det(A_{31}) + (-1)^{4+1}a_{41}\det(A_{41}) 
+\\ %%
+&=
+2 
+\begin{vmatrix}
+ 3&8 & 2\\
+0 & 9  & 4\\
+0&-2 & 1\\
+\end{vmatrix}
+- 5 
+\begin{vmatrix}
+ 7&13 & 5\\
+0 & 9  & 4\\
+0&-2 & 1\\
+\end{vmatrix}
++0
+\begin{vmatrix}
+ 7&13 & 5\\
+ 3&8 & 2\\
+0&-2 & 1\\
+\end{vmatrix}
+-0
+\begin{vmatrix}
+ 7&13 & 5\\
+ 3&8 & 2\\
+0 & 9  & 4\\
+\end{vmatrix}
+\\ %%
+&=2 
+\begin{vmatrix}
+ 3&8 & 2\\
+0 & 9  & 4\\
+0&-2 & 1\\
+\end{vmatrix}
+- 5 
+\begin{vmatrix}
+ 7&13 & 5\\
+0 & 9  & 4\\
+0&-2 & 1\\
+\end{vmatrix}
+\\%%
+&=2 \times 3
+\begin{vmatrix}
+9  & 4\\
+-2 & 1\\
+\end{vmatrix}
+-5 \times 7
+\begin{vmatrix}
+9  & 4\\
+-2 & 1\\
+\end{vmatrix}
+=(2 \times 3 - 5 \times 7) \times (9 \times 1 - 4 \times (-2)) = -493.
+\end{align*}
+\end{exa}
+
+
+
+  \begin{enumerate}[label=\textbf{問題}\arabic*.]
+ \setcounter{enumi}{21}
+
+ \item 実数係数の連立1次方程式
+ $$
+ \left\{ 
+\begin{matrix}
+x_1&  &  &  -& x_3&= & 0\\
+2x_1&+&\lambda x_2& -&x_3&= & 0\\
+(\lambda + 1)x_1& +&x_2& + &\lambda x_3&=&0\\
+\end{matrix}
+\right.
+ $$
+ が$x_1=x_2=x_3=0$以外の解を持つような$\lambda$の値を全て求めよ.
+ (ヒント:  前回の演習追加プリントにある行列の正則性の特徴づけを用いる.)
+ 
+ 
+ \item  次の行列の行列式をそれぞれ求めよ. 
+   (1). 
+$
+ \begin{pmatrix}
+2&3 &1&0\\
+3&0 &1&0\\
+2&0 & 4 & -1\\
+1&0 &1 &2
+ \end{pmatrix}
+ $
+   (2). 
+ $
+ \begin{pmatrix}
+  3& 5& 7& 0&-1\\
+  2& 1& 0  & 1&0\\
+  1& 0& 7 & 2&2\\
+  0& 0& 3 & 0&5\\
+  0& 0& 5& 1&-1\\
+ \end{pmatrix}
+ $
+
+
+ \item $a_0, \ldots, a_n \in K$かつ$x$を変数とする. 
+ 以下の等式を示せ. 
+ $$
+ \begin{vmatrix}
+a_0   &   -1   &0 &0 & \cdots &  0 \\
+a_1   &   x    &-1  &0 & \cdots &  0 \\
+a_2   &   0    & x   &-1 & \cdots &  0 \\
+\vdots  &    \vdots   &   &\ddots & \ddots &  0 \\
+a_{n-1}&   0    & 0   &                  & x&  -1\\
+a_n   &   0   & 0   &0 & \cdots &  x\\
+\end{vmatrix}
+=a_0 x^{n} +  a_1 x^{n-1} +  \cdots +  a_{n-1} x + a_{n}.
+$$
+(ヒント: 余因子展開と帰納法を用いる.)
+
+ \item 整数からなる$n$次正方行列$A$について, $\det A=1$ならば, 逆行列$A^{-1}$のどの成分も整数であることを示せ. (ヒント: 余因子行列を用いる.)
+ 
+ \end{enumerate}
+ 授業の最後に行っていた内容は次の定理のことである. 
+  \begin{thm}[行列式の唯一性]
+    \label{thm-det}
+    $n$次正方行列の集合から体$K$への関数
+    $$
+\begin{array}{ccccc}
+f: &\{\text{$n$次正方行列} \}& \rightarrow & K& \\
+&
+A
+=
+    \begin{pmatrix}
+    \bm{a}_1&\bm{a}_2&\cdots&\bm{a}_n
+    \end{pmatrix}
+ & 
+ \longmapsto & 
+ f(A)=f\begin{pmatrix}
+    \bm{a}_1&\bm{a}_2&\cdots&\bm{a}_n
+    \end{pmatrix}
+ &
+\end{array}
+$$
+で次を満たすとする.
+       \begin{enumerate}
+    \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+\item (多重線形性)$\bm{b}_{i} \in K^n$と$\lambda, \mu \in K$について
+\begin{align*}
+\begin{split}
+&f\begin{pmatrix}
+    \bm{a}_1&\cdots&\lambda\bm{a}_i+\mu\bm{b}_i&\cdots&\bm{a}_n
+    \end{pmatrix} \\
+&=
+\lambda f\begin{pmatrix}
+    \bm{a}_1&\cdots&\bm{a}_i&\cdots&\bm{a}_n
+    \end{pmatrix}
++
+\mu f\begin{pmatrix}
+    \bm{a}_1&\cdots&\bm{b_i}&\cdots&\bm{a}_n
+    \end{pmatrix}
+    \end{split}.
+\end{align*}
+\item (交代性) $1\le i< j \le n$なる$i,j$について, $i$番目と$j$番目を入れ替えると符号が変わる. 
+$$
+f(
+    \bm{a}_1, \cdots, \underbrace{\bm{a}_j}_{i}, \cdots , \underbrace{\bm{a}_i}_{j}, \cdots, \bm{a}_n
+)
+=
+-f(
+    \bm{a}_1, \cdots, \underbrace{\bm{a}_i}_{i}, \cdots , \underbrace{\bm{a}_j}_{j}, \cdots, \bm{a}_n.
+)
+$$
+  \end{enumerate}
+ このとき$ f(A) = f(E_n) \det A$
+ となる.
+ 特に1,2を満たす$f$で$f(E_n)=1$となるものは行列式$\det$のみに限る. 
+     \end{thm}
+ 
+
+ 
+\newpage
+
+\begin{center}
+{\LARGE 期末試験の情報 } \\
+2026年度春夏学期 大阪大学 全学共通教育科目 線形代数学・同演義Ⅰ (理（数）)
+\end{center}
+
+期末試験の情報は次のとおりです. 
+\begin{itemize}
+  \setlength{\parskip}{0cm} 
+  \setlength{\itemsep}{0cm}
+\item 日時: 2026年 7月30日 木曜2限 (10:30-12:00) 10:25までには着席してください.
+\item 場所: 共C206 (授業の部屋)
+\item 持ち込みに関して: 筆記用具以外の持ち込みは不可. 
+ただし暑いので飲み物の持ち込みは認める. 
+\item 試験内容: 授業全体の内容
+\end{itemize}
+以下は注意事項です.
+\begin{itemize}
+  \setlength{\parskip}{0cm} 
+ \setlength{\itemsep}{0cm}
+ \item \underline{解答に関して, 答えのみならず, 答えを導出する過程をきちんと記してください.} きちんと記していない場合は大幅に減点する場合がある.
+ \item 
+期末試験に
+\begin{itemize}
+\item 中間レポート2 (7/30 締切)
+\item 中間試験の大問1から大問8(1)まで (大問8(2), 大問8(3)は除く)
+\end{itemize}
+の何問かを数値や表現など少し変えて出す予定です. なので優先的にこの2つを先に勉強するといいと思います. 
+
+中間レポート1(6/4 締切)の内容を出す可能性もあります. ただし現時点で問題を作っていないので, どうなるか分かりません.
+% \item 期末試験には「普通の問題」と「おまけの問題」があります. 普通の問題はしっかり勉強すれば解ける問題です. おまけの問題は解けることを想定していない問題です. 面白いので出しました. 
+ %\item \underline{演習問題(11/6と1/8)の何問かを数値や表現など少し変えて出す予定です.} そのため何をやればいいかわからない人は, 最低限として演習問題を解けるようにしてください. また単位を認定するくらいの成績が取れていない場合, 容赦無く不可を出します. 
+% \item 問題は全部で7問です. 第1-4問は基本的な問題,  第5-7問は応用問題です. そして満点は100点とは限りません. また全て解けることを想定していません. 
+\item 途中退出は11:00-11:45までとします. 試験が早く解けたものや諦めたものはこの時間に試験を提出し, その後退出してください. 
+\end{itemize}
+
+演習問題及び授業の資料・板書内容はCLEや授業ページ(\url{https://masataka123.github.io/2026_summer_linear_algebra/})にもあります. 
+中間レポート2・中間試験・中間レポート1に関してもCLEや授業ページに問題と解答があります. 
+
+
+\underline{試験の欠席対応について } 
+
+正当な理由での欠席と認められれば別途対応をいたします. ここで正当な理由とはインフルエンザなどの病気または忌引き等です. その場合は岩井に連絡し, 教務課に授業・試験欠席届(下記URL参照)を提出してください.
+\begin{center}
+\url{https://www.celas.osaka-u.ac.jp/education/absence/}
+\end{center}
+
+\underline{追試験に関して} 
+
+中間試験・期末試験でよくない成績を取った人が受けることになります. 
+7/30の試験が終了した後に, 岩井からのメールを受け取った人のみがこの試験を受けることになります. 
+そのためCLEやメールを確認できる状態にしておいてください.
+
+\newpage
+
+
+  \begin{center}
+ {\Large 中間レポート2 問題}
+% {\Large 演習問題の解答用紙 2024年1月11日(木) } \\
+%\end{center}
+%\vspace{5pt}
+
+{ \large \underline{提出締め切り 2026年7月30日(木) 23時59分59秒 (日本標準時刻)}}
+\end{center}
+
+%\vspace{2pt}
+%\begin{flushleft}
+%{ \large \underline{学籍番号: \hspace{4cm} 名前  \hspace{9cm}   }  }
+%\end{flushleft}
+
+%\vspace{2pt}
+%\begin{flushleft}
+%{ \Large 提出方法}
+%\end{flushleft}
+\begin{itemize}
+ \setlength{\parskip}{0cm}
+  \setlength{\itemsep}{0pt} 
+  \item 2026年7月30日(木) 23時59分59秒までにCLEにて提出してください.  
+  \item \underline{レポート問題に関しては提出すれば点数を与えるつもりなので, 必ず提出してください.} なおレポートは期末試験の練習も兼ねています. 
+  \item \underline{レポート問題は全て演習で取り扱ったため, 演習での解答を再利用して良い.} 例えば, 演習で問題を解いたノートを撮影し, それを組み合わせてpdfファイルを作って提出しても良い. その場合多少字が汚くても良い. 
+\item 解答に関しては答えのみならず, 答えを導出する過程をきちんと記すこと. 
+\item レポート問題に関しては, 演習で取り扱ったため, CLEや教科書に解答が全てあります. 
+%\item レポート問題に関してはCLEに解答があるのでそれを活用してよい. ただし意味もなく丸写ししても時間の無駄なので, 使う際はなぜその解答になるのか考えながら活用すること. 
+%\item 定義に関しては原則的に"松本先生の講義"および"松本幸夫著 多様体の基礎 (東京大学出版会)"のものを採用する. 
+%\item レポート問題の解答を5月日前後にCLEに公開する予定です. 
+\end{itemize}
+
+%\vspace{5pt}
+%\begin{flushleft}
+%{\Large レポート問題}
+%\end{flushleft}
+\begin{enumerate}[label=\textbf{問題}\arabic*.]
+\item (第6回演習追加問題 13) 5次置換$ \sigma, \tau$を
+ $$
+ \sigma
+ =
+\begin{pmatrix}
+1& 2& 3 & 4  & 5 \\
+4& 1& 5& 3& 2 \\
+\end{pmatrix}
+, 
+\tau 
+ =
+\begin{pmatrix}
+1& 2& 3 & 4  & 5 \\
+2& 1& 4& 5& 3 \\
+\end{pmatrix}
+$$
+とする. 
+次の問いに答えよ.
+ \begin{enumerate}[label=(\arabic*)]
+\item $\sigma \tau, \tau \sigma, \sigma^{-1}$を求めよ.
+\item $\sigma$と$\tau$の転倒数と符号を求めよ. 
+\item $\sigma \tau$の転倒数と符号を求め, $\mathrm{sgn}(\sigma \tau)=\mathrm{sgn}(\sigma) \mathrm{sgn}(\tau)$を確認せよ. 
+\end{enumerate}
+%\item (第6回演習追加問題 16) $n \ge 2$となる整数とする. 次の問いに答えよ.
+%\begin{enumerate}
+%\item $n$次対称群$S_n$の個数が$n!$個であることを示せ.
+%\item $n$次交代群$A_n$の個数が$\frac{n!}{2}$個であることを示せ. ここで$n$次交代群$A_n$とは偶置換全体の集合である. 
+%\item 偶置換と偶置換の積は偶置換であることを示せ. 
+%\end{enumerate}
+
+
+ \item (第7回演習 教科書3.2.1 (8), 教科書3.3.1) 
+ 次の行列式を求めよ.
+\[
+(1).
+\begin{vmatrix}
+1&0&0&0&0\\
+3&7&0&0&0\\
+1&4&1&1&1\\
+2&3&-4&5&-4\\
+8&6&2&-7&0
+\end{vmatrix}
+\quad
+(2).
+\begin{vmatrix}
+1&2&0&0&0\\
+3&7&0&0&0\\
+1&4&1&-1&1\\
+2&3&-4&5&5\\
+8&6&0&2&2
+\end{vmatrix}
+\quad
+(3).
+\begin{vmatrix}
+0&0&3&0&1\\
+0&0&0&1&2\\
+0&0&1&-1&1\\
+3&-1&4&-2&7\\
+-6&7&8&2&5
+\end{vmatrix}
+\]
+
+
+
+ 
+%\item (第3回演習 教科書3.3.5)  次は正しいか.正しいものには証明をつけ, 正しくない場合はその理由を答えよ.
+%\begin{enumerate}
+%\item $A$ を $n$ 次正方行列とするとき, 
+%\(
+%\det(-A)=-\det(A)
+%\)
+%が成り立つ.
+%\item $A$ が零でない正方行列のとき, 
+%\(
+%\det(A)\neq 0
+%\)
+%である.
+
+%\item $A,B$ を $n$ 次正方行列とするとき, 
+%\(
+%\det(A+B)=\det(A)+\det(B)
+%\)
+%が成り立つ.
+%\end{enumerate}
+
+\item (第8回演習追加問題 21)  以下の問題は他学科の期末試験で出した証明問題である. 
+ 次の問題に答えよ. 
+ \begin{enumerate}[label=(\arabic*)]
+ \setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm}
+   \item $n\times n$行列$A, B, C$について, $\det(ABC) = \det(BAC)$であることを示せ.
+    \item  $n\times n$行列$A, B$について, $A$と$B$が正則ならば, $AB$もまた正則行列であることを示せ. 
+    \item $n\times n$行列$A, B$について, $AB$が正則行列であるならば, $A$も$B$も正則であることを示せ. 
+ \item  実数係数の$n\times n$行列$A$について, $^{t}A A=E_n$ならば, $\det (A) = \pm 1$であることを示せ.  ここで$^{t}A A$は$^{t}A $と$A$の積のことである. 
+     \item  実数係数の$n\times n$行列$A$について, $A^7=E_n$ならば, $\det (A) = 1$であることを示せ. 
+    \item  実数係数の$2\times 2$行列$A$について, $A^7=\begin{pmatrix}  1&  0 \\  0 &1 \end{pmatrix}$かつ$A \neq \begin{pmatrix}  1&  0 \\  0 &1 \end{pmatrix}$となるものの例を一つあげよ. 
+ \end{enumerate} 
+ 
+   
+\item (第8回演習 教科書3.3.3 (2)) $A$を$n$ 次正方行列, $k$ を正の整数とする. 
+$A$ の階数が $n$ であることと $A^k$ の階数が $n$ であることは, 同値であることを示せ.
+
+ \item (第9回演習追加問題 22) 実数係数の連立1次方程式
+ $$
+ \left\{ 
+\begin{matrix}
+x_1&  &  &  -& x_3&= & 0\\
+2x_1&+&\lambda x_2& -&x_3&= & 0\\
+(\lambda + 1)x_1& +&x_2& + &\lambda x_3&=&0\\
+\end{matrix}
+\right.
+ $$
+ が$x_1=x_2=x_3=0$以外の解を持つような$\lambda$の値を全て求めよ.
+ (ヒント:  前回の演習追加プリントにある行列の正則性の特徴づけを用いる.)
+ \item (第9回演習追加問題 24) $a_0, \ldots, a_n \in K$かつ$x$を変数とする. 
+ 以下の等式を示せ. 
+ $$
+ \begin{vmatrix}
+a_0   &   -1   &0 &0 & \cdots &  0 \\
+a_1   &   x    &-1  &0 & \cdots &  0 \\
+a_2   &   0    & x   &-1 & \cdots &  0 \\
+\vdots  &    \vdots   &   &\ddots & \ddots &  0 \\
+a_{n-1}&   0    & 0   &                  & x&  -1\\
+a_n   &   0   & 0   &0 & \cdots &  x\\
+\end{vmatrix}
+=a_0 x^{n} +  a_1 x^{n-1} +  \cdots +  a_{n-1} x + a_{n}.
+$$
+(ヒント: 余因子展開と帰納法を用いる.)
+
+ \item (第9回演習追加問題25)  整数からなる$n$次正方行列$A$について, $\det A=1$ならば, 逆行列$A^{-1}$のどの成分も整数であることを示せ. (ヒント: 余因子行列を用いる.)
+ 
+% \item (第3回演習 教科書3.1.6) $n$ 次置換 $\sigma,\tau$ について, \[(\sigma\tau\sigma^{-1})^k=\sigma\tau^k\sigma^{-1}\]であることを示せ.
+
+\item (第9回演習 教科書3.4.4) $n\geq 2$ とする.$n$ 次正方行列 $A$ の余因子行列を $\widetilde A$ とする.また$A$は正則であると仮定する. 
+ \begin{enumerate}[label=(\arabic*)]
+\item
+\(
+A\widetilde A=(\det A)E
+\)
+であることを利用して, 
+\(
+\det (\widetilde A)
+\)
+を求めよ.
+
+\item $\widetilde A$ の余因子行列は, 
+\(
+(\det A)^{n-2}A
+\)
+であることを示せ.
+\end{enumerate}
+
+\item (第10回授業 教科書 例題 3.5.3) 
+$a_1,a_2,\ldots,a_n\in K$ を相異なる数, $b_1,b_2,\ldots,b_n\in K$ を任意の数（同じものがあってもよい）とする.このとき, $K$ 係数の $n-1$ 次以下の多項式 $f(x)$ であって
+\[
+f(a_i)=b_i
+\qquad
+(i=1,2,\ldots,n)
+\]
+を満たすものがただ $1$ つ存在することを, ヴァンデルモンドの行列式を用いて示せ.
+\end{enumerate}
+
+\newpage
+\begin{center}
+{\Large 中間レポート2 解答例}\par
+\vspace{0.5em}
+{\small 2026年度 線形代数}
+\end{center}
+ほとんどの解答をchatGPTに書いてもらいました.
+
+
+\begin{enumerate}[label=\textbf{問題}\arabic*.]
+
+\item (第6回演習追加問題 13) 5次置換$ \sigma, \tau$を
+ $$
+ \sigma
+ =
+\begin{pmatrix}
+1& 2& 3 & 4  & 5 \\
+4& 1& 5& 3& 2 \\
+\end{pmatrix}
+, 
+\tau 
+ =
+\begin{pmatrix}
+1& 2& 3 & 4  & 5 \\
+2& 1& 4& 5& 3 \\
+\end{pmatrix}
+$$
+とする. 
+次の問いに答えよ.
+ \begin{enumerate}[label=(\arabic*)]
+\item $\sigma \tau, \tau \sigma, \sigma^{-1}$を求めよ.
+\item $\sigma$と$\tau$の転倒数と符号を求めよ. 
+\item $\sigma \tau$の転倒数と符号を求め, $\mathrm{sgn}(\sigma \tau)=\mathrm{sgn}(\sigma) \mathrm{sgn}(\tau)$を確認せよ. 
+\end{enumerate}
+
+解答(1).
+まず、各 $i=1,\ldots,5$ に対して $\sigma(\tau(i))$ を計算すると、
+\[
+\begin{array}{c|ccccc}
+i&1&2&3&4&5\\ \hline
+\tau(i)&2&1&4&5&3\\
+\sigma(\tau(i))&1&4&3&2&5
+\end{array}
+\]
+となる。したがって
+\[
+\sigma\tau=
+\begin{pmatrix}
+1&2&3&4&5\\
+1&4&3&2&5
+\end{pmatrix}.
+\]
+同様に、
+\[
+\begin{array}{c|ccccc}
+i&1&2&3&4&5\\ \hline
+\sigma(i)&4&1&5&3&2\\
+\tau(\sigma(i))&5&2&3&4&1
+\end{array}
+\]
+より
+\[
+\tau\sigma=
+\begin{pmatrix}
+1&2&3&4&5\\
+5&2&3&4&1
+\end{pmatrix}.
+\]
+また、
+\[
+\sigma(2)=1,\quad
+\sigma(5)=2,\quad
+\sigma(4)=3,\quad
+\sigma(1)=4,\quad
+\sigma(3)=5
+\]
+であるから、
+\[
+\sigma^{-1}=
+\begin{pmatrix}
+1&2&3&4&5\\
+2&5&4&1&3
+\end{pmatrix}.
+\]
+
+解答(2).
+$\sigma$ の下段は $(4,1,5,3,2)$ である。その転倒は
+\[
+(1,2),\ (1,4),\ (1,5),\ (3,4),\ (3,5),\ (4,5)
+\]
+の $6$ 個である。したがって、$\sigma$ の転倒数は $6$ であり、
+\(
+\sgn(\sigma)=(-1)^6=1
+\)
+である。
+
+一方、$\tau$ の下段は $(2,1,4,5,3)$ である。その転倒は
+\[
+(1,2),\ (3,5),\ (4,5)
+\]
+の $3$ 個である。したがって、$\tau$ の転倒数は $3$ であり、
+\(
+\sgn(\tau)=(-1)^3=-1
+\)
+である。
+
+$\sigma\tau$ の下段は $(1,4,3,2,5)$ である。その転倒は
+\[
+(2,3),\ (2,4),\ (3,4)
+\]
+の $3$ 個である。したがって、$\sigma\tau$ の転倒数は $3$ であり、
+\(
+\sgn(\sigma\tau)=(-1)^3=-1.
+\)
+
+解答(3).
+また、前問より
+\[
+\sgn(\sigma)\sgn(\tau)=1\cdot(-1)=-1
+\]
+であるから、
+\(
+\sgn(\sigma\tau)=\sgn(\sigma)\sgn(\tau)
+\)
+が確認できる。
+
+
+
+ \item (第7回演習 教科書3.2.1 (8), 教科書3.3.1) 
+ 次の行列式を求めよ.
+\[
+(1).
+\begin{vmatrix}
+1&0&0&0&0\\
+3&7&0&0&0\\
+1&4&1&1&1\\
+2&3&-4&5&-4\\
+8&6&2&-7&0
+\end{vmatrix}
+\quad
+(2).
+\begin{vmatrix}
+1&2&0&0&0\\
+3&7&0&0&0\\
+1&4&1&-1&1\\
+2&3&-4&5&5\\
+8&6&0&2&2
+\end{vmatrix}
+\quad
+(3).
+\begin{vmatrix}
+0&0&3&0&1\\
+0&0&0&1&2\\
+0&0&1&-1&1\\
+3&-1&4&-2&7\\
+-6&7&8&2&5
+\end{vmatrix}
+\]
+
+解答. 
+
+解答 (1).
+第1行について余因子展開し, さらに行基本変形を行うと,
+\[
+\begin{aligned}
+\begin{vmatrix}
+1&0&0&0&0\\
+3&7&0&0&0\\
+1&4&1&1&1\\
+2&3&-4&5&-4\\
+8&6&2&-7&0
+\end{vmatrix}
+&=
+\begin{vmatrix}
+7&0&0&0\\
+4&1&1&1\\
+3&-4&5&-4\\
+6&2&-7&0
+\end{vmatrix}
+=
+7
+\begin{vmatrix}
+1&1&1\\
+-4&5&-4\\
+2&-7&0
+\end{vmatrix}
+=
+7
+\begin{vmatrix}
+1&1&1\\
+0&9&0\\
+0&-9&-2
+\end{vmatrix}\\
+&=
+7\cdot 9
+\begin{vmatrix}
+1&1\\
+0&-2
+\end{vmatrix}
+=
+7\cdot 9\cdot(-2)
+=
+-126.
+\end{aligned}
+\]
+
+(1)の別解. 
+教科書定理3.3.1を使って
+\begin{align*}
+&\begin{vmatrix}
+1&0&0&0&0\\
+3&7&0&0&0\\
+1&4&1&1&1\\
+2&3&-4&5&-4\\
+8&6&2&-7&0
+\end{vmatrix}
+=
+\begin{vmatrix}
+1&0\\
+3&7
+\end{vmatrix}
+\begin{vmatrix}
+1&1&1\\
+-4&5&-4\\
+2&-7&0
+\end{vmatrix}.
+\end{align*}
+ここで
+\[
+\begin{vmatrix}
+1&0\\
+3&7
+\end{vmatrix}=7
+\quad
+\begin{vmatrix}
+1&1&1\\
+-4&5&-4\\
+2&-7&0
+\end{vmatrix}
+=1\begin{vmatrix}5&-4\\-7&0\end{vmatrix}
+-1\begin{vmatrix}-4&-4\\2&0\end{vmatrix}
++1\begin{vmatrix}-4&5\\2&-7\end{vmatrix}
+=-28-8+18
+=-18.
+\]
+したがって$-126$
+である。
+
+解答 (2).
+行列式の値を変えない行基本変形を行うと,
+\[
+\begin{aligned}
+\begin{vmatrix}
+1&2&0&0&0\\
+3&7&0&0&0\\
+1&4&1&-1&1\\
+2&3&-4&5&5\\
+8&6&0&2&2
+\end{vmatrix}
+&=
+\begin{vmatrix}
+1&2&0&0&0\\
+0&1&0&0&0\\
+0&2&1&-1&1\\
+0&-1&-4&5&5\\
+0&-10&0&2&2
+\end{vmatrix}
+=
+\begin{vmatrix}
+1&2&0&0&0\\
+0&1&0&0&0\\
+0&0&1&-1&1\\
+0&0&-4&5&5\\
+0&0&0&2&2
+\end{vmatrix}
+=
+\begin{vmatrix}
+1&-1&1\\
+-4&5&5\\
+0&2&2
+\end{vmatrix}\\
+&=
+\begin{vmatrix}
+1&-1&1\\
+0&1&9\\
+0&2&2
+\end{vmatrix}
+=
+\begin{vmatrix}
+1&-1&1\\
+0&1&9\\
+0&0&-16
+\end{vmatrix}
+=
+1\cdot 1\cdot(-16)
+=-16
+\end{aligned}
+\]
+他にも余因子展開を用いたり教科書定理3.3.1を用いても良い. 
+
+解答 (3).
+第1列と第2列を第5列の後ろに移す.
+この操作は合計6回の列の入れ替えに当たるので,
+行列式の符号は変わらない. したがって, 教科書定理3.3.1を用いて
+\[
+\begin{aligned}
+\begin{vmatrix}
+0&0&3&0&1\\
+0&0&0&1&2\\
+0&0&1&-1&1\\
+3&-1&4&-2&7\\
+-6&7&8&2&5
+\end{vmatrix}
+&=
+\begin{vmatrix}
+3&0&1&0&0\\
+0&1&2&0&0\\
+1&-1&1&0&0\\
+4&-2&7&3&-1\\
+8&2&5&-6&7
+\end{vmatrix}
+=
+\begin{vmatrix}
+3&0&1\\
+0&1&2\\
+1&-1&1
+\end{vmatrix}
+\begin{vmatrix}
+3&-1\\
+-6&7
+\end{vmatrix}\\
+&=
+\left(
+3
+\begin{vmatrix}
+1&2\\
+-1&1
+\end{vmatrix}
++
+\begin{vmatrix}
+0&1\\
+1&-1
+\end{vmatrix}
+\right)
+\left(3\cdot 7-(-1)(-6)\right)\\
+&=
+\left(3(1+2)-1\right)(21-6)
+=
+8\cdot 15
+=
+120.
+\end{aligned}
+\]
+
+
+\item (第8回演習追加問題 21)  以下の問題は他学科の期末試験で出した証明問題である. 
+ 次の問題に答えよ. 
+ \begin{enumerate}[label=(\arabic*)]
+ \setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm}
+   \item $n\times n$行列$A, B, C$について, $\det(ABC) = \det(BAC)$であることを示せ.
+    \item  $n\times n$行列$A, B$について, $A$と$B$が正則ならば, $AB$もまた正則行列であることを示せ. 
+    \item $n\times n$行列$A, B$について, $AB$が正則行列であるならば, $A$も$B$も正則であることを示せ. 
+ \item  実数係数の$n\times n$行列$A$について, $^{t}A A=E_n$ならば, $\det (A) = \pm 1$であることを示せ.  ここで$^{t}A A$は$^{t}A $と$A$の積のことである. 
+     \item  実数係数の$n\times n$行列$A$について, $A^7=E_n$ならば, $\det (A) = 1$であることを示せ. 
+    \item  実数係数の$2\times 2$行列$A$について, $A^7=\begin{pmatrix}  1&  0 \\  0 &1 \end{pmatrix}$かつ$A \neq \begin{pmatrix}  1&  0 \\  0 &1 \end{pmatrix}$となるものの例を一つあげよ. 
+ \end{enumerate} 
+ 
+
+解答(1).
+行列式の積に関する公式より、
+\begin{align*}
+\det(ABC)
+&=\det(A)\det(B)\det(C)\\
+&=\det(B)\det(A)\det(C)\\
+&=\det(BAC).
+\end{align*}
+ここで、$\det(A),\det(B),\det(C)$ は数であるため積の順序を入れ替えられることを用いた。
+
+解答(2).
+$A,B$ は正則であるから、逆行列 $A^{-1},B^{-1}$ が存在する。このとき
+\[
+(AB)(B^{-1}A^{-1})=A(BB^{-1})A^{-1}=AE_nA^{-1}=E_n
+\]
+かつ
+\[
+(B^{-1}A^{-1})(AB)=B^{-1}(A^{-1}A)B=B^{-1}E_nB=E_n.
+\]
+したがって、$AB$ は正則であり、
+\[
+(AB)^{-1}=B^{-1}A^{-1}
+\]
+である。
+
+解答(2)の別解. 
+$A,B$ は正則であるから、
+\[
+\det(A)\neq0,
+\qquad
+\det(B)\neq0.
+\]
+一方、
+\[
+\det(A)\det(B)=\det(AB)
+\]
+である。よって
+\[
+\det(AB)\neq0.
+\]
+したがって、$AB$ も正則である。
+
+
+
+解答(3).
+$AB$ が正則であるから
+\[
+\det(AB)\neq0.
+\]
+一方、
+\[
+\det(AB)=\det(A)\det(B)
+\]
+である。積が $0$ でないので
+\[
+\det(A)\neq0,
+\qquad
+\det(B)\neq0.
+\]
+したがって、$A$ も $B$ も正則である。
+
+解答(4).
+両辺の行列式を取ると、
+\begin{align*}
+1
+&=\det(E_n)\\
+&=\det({}^{t}AA)\\
+&=\det({}^{t}A)\det(A)\\
+&=\det(A)\det(A)\\
+&=(\det A)^2.
+\end{align*}
+ここで $\det({}^{t}A)=\det(A)$ を用いた。$\det(A)$ は実数であるから、
+\[
+\boxed{\det(A)=\pm1}
+\]
+である。
+
+解答(5).
+両辺の行列式を取ると、
+\[
+(\det A)^7=\det(A^7)=\det(E_n)=1.
+\]
+$\det(A)$ は実数であり、実数 $t$ に対して $t^7=1$ ならば $t=1$ である。したがって
+\[
+\boxed{\det(A)=1}
+\]
+である。
+
+解答(6).
+$\theta=\dfrac{2\pi}{7}$ とし、
+\[
+A=
+\begin{pmatrix}
+\cos\theta&-\sin\theta\\
+\sin\theta&\cos\theta
+\end{pmatrix}
+\]
+とおく。これは角度 $\theta$ の回転を表す行列であるから、$A^7$ は角度 $7\theta=2\pi$ の回転を表す。したがって
+\[
+A^7=E_2.
+\]
+一方、$0<\theta<2\pi$ であるから $A\neq E_2$ である。よって一例は
+\[
+\boxed{
+A=
+\begin{pmatrix}
+\cos\dfrac{2\pi}{7}&-\sin\dfrac{2\pi}{7}\\[4pt]
+\sin\dfrac{2\pi}{7}&\cos\dfrac{2\pi}{7}
+\end{pmatrix}}
+\]
+である。
+
+
+\item (第8回演習 教科書3.3.3 (2)) $A$を$n$ 次正方行列, $k$ を正の整数とする. 
+$A$ の階数が $n$ であることと $A^k$ の階数が $n$ であることは, 同値であることを示せ.
+
+解答. $n$ 次正方行列について、階数が $n$ であることと行列式が $0$ でないことは同値である。
+\(
+\det(A^k)=(\det A)^k
+\)
+であるので, 
+\begin{align*}
+\operatorname{rank}(A)=n
+&\Longleftrightarrow \det(A)\neq0\\
+&\Longleftrightarrow (\det A)^k\neq0\\
+&\Longleftrightarrow \det(A^k)\neq0\\
+&\Longleftrightarrow \operatorname{rank}(A^k)=n.
+\end{align*}
+したがって、$A$ の階数が $n$ であることと $A^k$ の階数が $n$ であることは同値である。
+
+\item (第9回演習追加問題 22) 実数係数の連立1次方程式
+ $$
+ \left\{ 
+\begin{matrix}
+x_1&  &  &  -& x_3&= & 0\\
+2x_1&+&\lambda x_2& -&x_3&= & 0\\
+(\lambda + 1)x_1& +&x_2& + &\lambda x_3&=&0\\
+\end{matrix}
+\right.
+ $$
+ が$x_1=x_2=x_3=0$以外の解を持つような$\lambda$の値を全て求めよ.
+ (ヒント:  前回の演習追加プリントにある行列の正則性の特徴づけを用いる.)
+
+解答. 係数行列を
+\[
+M(\lambda)=
+\begin{pmatrix}
+1&0&-1\\
+2&\lambda&-1\\
+\lambda+1&1&\lambda
+\end{pmatrix}
+\]
+とおく。斉次連立一次方程式が自明でない解を持つことと、係数行列が正則でないことは同値である。したがって、求める条件は
+\[
+\det M(\lambda)=0
+\]
+である。
+
+第 $1$ 行で展開すると、
+\begin{align*}
+\det M(\lambda)
+&=
+\begin{vmatrix}
+\lambda&-1\\
+1&\lambda
+\end{vmatrix}
+-
+\begin{vmatrix}
+2&\lambda\\
+\lambda+1&1
+\end{vmatrix}\\
+&=(\lambda^2+1)-\{2-\lambda(\lambda+1)\}\\
+&=2\lambda^2+\lambda-1\\
+&=(\lambda+1)(2\lambda-1).
+\end{align*}
+よって
+\[
+(\lambda+1)(2\lambda-1)=0
+\]
+であり、
+\[
+\boxed{\lambda=-1,\ \frac12}
+\]
+である。
+
+\item (第9回演習追加問題 24) $a_0, \ldots, a_n \in K$かつ$x$を変数とする. 
+ 以下の等式を示せ. 
+ $$
+ \begin{vmatrix}
+a_0   &   -1   &0 &0 & \cdots &  0 \\
+a_1   &   x    &-1  &0 & \cdots &  0 \\
+a_2   &   0    & x   &-1 & \cdots &  0 \\
+\vdots  &    \vdots   &   &\ddots & \ddots &  0 \\
+a_{n-1}&   0    & 0   &                  & x&  -1\\
+a_n   &   0   & 0   &0 & \cdots &  x\\
+\end{vmatrix}
+=a_0 x^{n} +  a_1 x^{n-1} +  \cdots +  a_{n-1} x + a_{n}.
+$$
+(ヒント: 余因子展開と帰納法を用いる.)
+
+解答. 左辺の行列式を $D_n(a_0,\ldots,a_n)$ と書く。すなわち
+\[
+D_n(a_0,\ldots,a_n)
+=
+\begin{vmatrix}
+a_0&-1&0&\cdots&0\\
+a_1&x&-1&\cdots&0\\
+a_2&0&x&\ddots&\vdots\\
+\vdots&\vdots&\ddots&\ddots&-1\\
+a_n&0&\cdots&0&x
+\end{vmatrix}.
+\]
+第 $1$ 行に沿って余因子展開すると、第 $(1,1)$ 成分に対応する小行列は対角成分がすべて $x$ の上三角行列であり、その行列式は $x^n$ である。また、第 $(1,2)$ 成分から生じる小行列は $D_{n-1}(a_1,\ldots,a_n)$ である。したがって
+\[
+D_n(a_0,\ldots,a_n)
+=a_0x^n+D_{n-1}(a_1,\ldots,a_n).
+\]
+
+$n=1$ のとき、
+\[
+D_1(a_0,a_1)
+=\begin{vmatrix}a_0&-1\\a_1&x\end{vmatrix}
+=a_0x+a_1
+\]
+であり、主張は成り立つ。
+
+帰納法の仮定として
+\[
+D_{n-1}(a_1,\ldots,a_n)
+=a_1x^{n-1}+a_2x^{n-2}+\cdots+a_{n-1}x+a_n
+\]
+とする。このとき
+\begin{align*}
+D_n(a_0,\ldots,a_n)
+&=a_0x^n+D_{n-1}(a_1,\ldots,a_n)\\
+&=a_0x^n+a_1x^{n-1}+\cdots+a_{n-1}x+a_n.
+\end{align*}
+よって数学的帰納法により
+\[
+\boxed{
+D_n(a_0,\ldots,a_n)
+=a_0x^n+a_1x^{n-1}+\cdots+a_{n-1}x+a_n}
+\]
+が成り立つ。
+
+ \item (第9回演習追加問題25)  整数からなる$n$次正方行列$A$について, $\det A=1$ならば, 逆行列$A^{-1}$のどの成分も整数であることを示せ. (ヒント: 余因子行列を用いる.)
+
+解答. $A=(a_{ij})$ とし、$A$ の余因子行列を $\widetilde A$ とする。逆行列の公式より
+\[
+A^{-1}=\frac{1}{\det A}\widetilde A.
+\]
+仮定 $\det A=1$ より
+\[
+A^{-1}=\widetilde A.
+\]
+$A$ の各成分は整数であるため、各余因子は整数からなる行列の行列式であり、整数である。したがって、$\widetilde A$ のすべての成分は整数である。ゆえに $A^{-1}$ のすべての成分も整数である。
+
+\item (第9回演習 教科書3.4.4) $n\geq 2$ とする.$n$ 次正方行列 $A$ の余因子行列を $\widetilde A$ とする.また$A$は正則であると仮定する. 
+ \begin{enumerate}[label=(\arabic*)]
+\item
+\(
+A\widetilde A=(\det A)E
+\)
+であることを利用して, 
+\(
+\det (\widetilde A)
+\)
+を求めよ.
+
+\item $\widetilde A$ の余因子行列は, 
+\(
+(\det A)^{n-2}A
+\)
+であることを示せ.
+\end{enumerate}
+
+解答 (1). 
+等式
+\[
+A\widetilde A=(\det A)E_n
+\]
+の両辺の行列式を取ると、
+\begin{align*}
+\det(A)\det(\widetilde A)
+&=\det\bigl((\det A)E_n\bigr)\\
+&=(\det A)^n.
+\end{align*}
+$A$ は正則であるから $\det A\neq0$ である。したがって両辺を $\det A$ で割ることができ、
+\[
+\boxed{\det(\widetilde A)=(\det A)^{n-1}}
+\]
+を得る。
+
+解答 (2). 
+$A$ は正則であるから、
+\[
+\widetilde A=(\det A)A^{-1}
+\]
+も正則である。$\widetilde A$ の余因子行列を $\widetilde{\widetilde A}$ と書く。正則行列に対する逆行列の公式より
+\[
+\widetilde{\widetilde A}
+=\det(\widetilde A)(\widetilde A)^{-1}.
+\]
+前問の結果と
+\[
+(\widetilde A)^{-1}
+=\bigl((\det A)A^{-1}\bigr)^{-1}
+=\frac{1}{\det A}A
+\]
+を用いると、
+\begin{align*}
+\widetilde{\widetilde A}
+&=(\det A)^{n-1}\cdot\frac{1}{\det A}A\\
+&=(\det A)^{n-2}A.
+\end{align*}
+したがって、$\widetilde A$ の余因子行列は
+\[
+\boxed{(\det A)^{n-2}A}
+\]
+である。
+
+
+\item (第10回授業 教科書 例題 3.5.3) 
+$a_1,a_2,\ldots,a_n\in K$ を相異なる数, $b_1,b_2,\ldots,b_n\in K$ を任意の数（同じものがあってもよい）とする.このとき, $K$ 係数の $n-1$ 次以下の多項式 $f(x)$ であって
+\[
+f(a_i)=b_i
+\qquad
+(i=1,2,\ldots,n)
+\]
+を満たすものがただ $1$ つ存在することを, ヴァンデルモンドの行列式を用いて示せ.
+
+解答.
+求める多項式を
+\[
+f(x)=c_0+c_1x+\cdots+c_{n-1}x^{n-1}
+\]
+とおく。条件 $f(a_i)=b_i$ $(i=1,\ldots,n)$ は、係数 $c_0,\ldots,c_{n-1}$ に関する連立一次方程式
+\[
+\begin{pmatrix}
+1&a_1&a_1^2&\cdots&a_1^{n-1}\\
+1&a_2&a_2^2&\cdots&a_2^{n-1}\\
+\vdots&\vdots&\vdots&&\vdots\\
+1&a_n&a_n^2&\cdots&a_n^{n-1}
+\end{pmatrix}
+\begin{pmatrix}
+c_0\\c_1\\\vdots\\c_{n-1}
+\end{pmatrix}
+=
+\begin{pmatrix}
+b_1\\b_2\\\vdots\\b_n
+\end{pmatrix}
+\]
+と同値である。
+
+左辺の係数行列を $V$ とすると、$V$ はヴァンデルモンド行列であり、
+\[
+\det V
+=\prod_{1\leq i<j\leq n}(a_j-a_i)
+\]
+である。$a_1,\ldots,a_n$ は互いに異なるので、すべての $i<j$ に対して $a_j-a_i\neq0$ である。$K$ は体であるから
+\[
+\det V\neq0.
+\]
+したがって $V$ は正則であり、任意の $b_1,\ldots,b_n$ に対して係数ベクトル
+\[
+\begin{pmatrix}
+c_0&c_1&\cdots&c_{n-1}
+\end{pmatrix}^{t}
+\]
+はただ一つに定まる。よって、条件
+\[
+f(a_i)=b_i\qquad(i=1,\ldots,n)
+\]
+を満たす $K$ 係数の $n-1$ 次以下の多項式 $f(x)$ はただ一つ存在する。
+
 \end{enumerate}
 
 
