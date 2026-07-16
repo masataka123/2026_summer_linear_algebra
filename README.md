@@ -106,7 +106,7 @@
 める.
 - 試験内容: 授業全体の内容
 
-詳しくは[こちらのpdf]((https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間レポート2_2026_0716.pdf)をご覧ください. 
+詳しくは[こちらのpdf](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間レポート2_2026_0716.pdf)をご覧ください. 
 
 正当な理由(病気・忌引き)などで欠席する場合は必ず岩井(masataka[at]math.sci.osaka-u.ac.jp)へ連絡してください. 代替手段で別途対応いたします.  
 
