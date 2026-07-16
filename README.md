@@ -91,11 +91,11 @@
 
 ## 中間レポート2に関して
 次の日時にレポートを配布します.
-- 内容: [中間レポート2](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間レポート2_2026_0716.pdf)
+- 内容: [中間レポート2](https://masataka123.github.io/2026_summer_linear_algebra/material/0_%E4%B8%AD%E9%96%93%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%882_2026_0716.pdf)
 - レポート締切: 2026年07月30日 23:59:00 (日本標準時刻, GMT+9)
 - レポート提出方法: 配布したレポート問題に解答し, CLEにて提出する. 
 
-[中間レポート2の解答](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間レポート2_2026_0716_解答.pdf)
+[中間レポート2の解答](https://masataka123.github.io/2026_summer_linear_algebra/material/0_%E4%B8%AD%E9%96%93%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%882_2026_0716_%E8%A7%A3%E7%AD%94.pdf)
 
 
 ## 期末試験に関して
@@ -106,7 +106,7 @@
 める.
 - 試験内容: 授業全体の内容
 
-詳しくは[こちらのpdf](https://masataka123.github.io/2026_summer_linear_algebra/material/0_中間レポート2_2026_0716.pdf)をご覧ください. 
+詳しくは[こちらのpdf](https://masataka123.github.io/2026_summer_linear_algebra/material/0_%E4%B8%AD%E9%96%93%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%882_2026_0716.pdf)をご覧ください. 
 
 正当な理由(病気・忌引き)などで欠席する場合は必ず岩井(masataka[at]math.sci.osaka-u.ac.jp)へ連絡してください. 代替手段で別途対応いたします.  
 
