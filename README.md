@@ -11,6 +11,7 @@
 - 2025/06/02 中間レポート1を配布しました. 
 -->
 
+- 2026/08/03 成績を確定しました. 試験を受けたもの全員に単位を認定しました. 半年間ありがとうごございました.
 - 2026/03/24 授業ページを作りました.
 
 # 基本的事項
@@ -108,7 +109,8 @@
 
 詳しくは[こちらのpdf](https://masataka123.github.io/2026_summer_linear_algebra/material/0_%E4%B8%AD%E9%96%93%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%882_2026_0716.pdf)をご覧ください. 
 
-正当な理由(病気・忌引き)などで欠席する場合は必ず岩井(masataka[at]math.sci.osaka-u.ac.jp)へ連絡してください. 代替手段で別途対応いたします.  
+
+期末試験の[問題](https://masataka123.github.io/2026_summer_linear_algebra/material/0_期末試験_20260730.pdf)と[解答と講評](https://masataka123.github.io/2026_summer_linear_algebra/material/0_期末試験_20260730_解答.pdf)をアップロードしました. 
 
 
 <!--
@@ -176,9 +178,7 @@
 - 第10回(2026/07/09)  [第9回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/9_授業板書.pdf) [第9回演義追加問題](https://masataka123.github.io/2026_summer_linear_algebra/material/9_演義板書.pdf)
 - 第11回 (2026/07/16)   [第10回授業板書](https://masataka123.github.io/2026_summer_linear_algebra/material/10_授業板書.pdf) 
 -  (2026/07/23) 休講
-- 第12回(2026/07/30) 期末試験
-- 第13回 (2026/08/06) 追試(もしあれば)
-
+- 第12回(2026/07/30) 期末試験 [問題](https://masataka123.github.io/2026_summer_linear_algebra/material/0_期末試験_20260730.pdf)と[解答と講評](https://masataka123.github.io/2026_summer_linear_algebra/material/0_期末試験_20260730_解答.pdf)
 
 
 # 資料に関して
